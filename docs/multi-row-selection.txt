@@ -1,0 +1,183 @@
+Single Row Selection
+
+angular logoAngular
+Enable users to select a single row within a grid.
+
+Enabling Single Row Selection
+Copy Link
+To enable single row selection set rowSelection.mode to 'singleRow'.
+
+<ag-grid-angular
+    [rowSelection]="rowSelection"
+    /* other grid options ... */ />
+
+this.rowSelection = {
+    mode: 'singleRow'
+};
+The example below uses this configuration to restrict selection to a single row
+
+
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Deselect a row by clicking its checkbox. Alternatively, you can do this via the keyboard by focusing the row and pressing the ␣ Space key.
+
+Removing Selection Checkboxes
+Copy Link
+To prevent any row selection checkboxes from being rendered, set rowSelection.checkboxes to false. You will also need to enable click selection by setting enableClickSelection: true.
+
+<ag-grid-angular
+    [rowSelection]="rowSelection"
+    /* other grid options ... */ />
+
+this.rowSelection = {
+    mode: 'singleRow',
+    checkboxes: false,
+    enableClickSelection: true,
+};
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+You may also pass a function to rowSelection.checkboxes to dynamically enable or disable checkboxes for given rows.
+
+Configure Selectable Rows
+Copy Link
+It is possible to specify which rows can be selected via the rowSelection.isRowSelectable callback function.
+
+For instance if we only wanted to allow selection for rows where the 'year' property is less than 2007, we could implement the following:
+
+<ag-grid-angular
+    [rowSelection]="rowSelection"
+    /* other grid options ... */ />
+
+this.rowSelection = {
+    mode: 'singleRow',
+    isRowSelectable: (rowNode) => rowNode.data ? rowNode.data.year < 2007 : false,
+    hideDisabledCheckboxes: true
+};
+Rows for which isRowSelectable returns false cannot be selected at all, whether using the UI or the API.
+
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Note this example uses hideDisabledCheckboxes to hide disabled checkboxes, which can be toggled on or off.
+
+Customising the Checkbox Column
+Copy Link
+The checkbox column may be customised in a similar way to any other column, by specifying its column definition in the selectionColumnDef grid option.
+
+selectionColumnDef
+Copy Link
+
+SelectionColumnDef
+Configure the selection column, used for displaying checkboxes. Note that due to the nature of this column, this type is a subset of ColDef, which does not support several normal column features such as editing, pivoting and grouping.
+The SelectionColumnDef allows for a great deal of customisation, including custom renderers, sorting, tooltips and more. The example below demonstrates the following configuration:
+
+allowing sorting using the default sort order (selected first) via the header menu
+changing the default width of the column
+allowing resizing
+adding some header tooltip text
+<ag-grid-angular
+    [selectionColumnDef]="selectionColumnDef"
+    /* other grid options ... */ />
+
+this.selectionColumnDef = {
+    sortable: true,
+    resizable: true,
+    width: 100,
+    suppressHeaderMenuButton: false,
+    headerTooltip: 'Checkboxes indicate selection',
+};
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+When sorting by the checkbox column, selecting a new row will not automatically update the row order, see Change Detection for more information.
+
+The checkbox column is sized statically, and is therefore not affected by Auto-Sizing.
+
+Enable Click Selection & Deselection
+Copy Link
+The rowSelection.enableClickSelection property configures whether a row's selection state will be impacted when the row is clicked.
+
+enableClickSelection
+Copy Link
+boolean | 'enableDeselection' | 'enableSelection'
+default: false
+Modifies the selection behaviour when clicking a row. Choosing 'enableSelection' allows selection of a row by clicking the row itself. Choosing 'enableDeselection' allows deselection of a row by CTRL-clicking the row itself. Choosing true allows both selection of a row by clicking and deselection of a row by CTRL-clicking. Choosing false prevents rows from being selected or deselected by clicking.
+This is typically used when Checkbox Selection is disabled, though both can be enabled simultaneously if desired. Click-selection and deselection can be enabled by setting enableClickSelection to true, otherwise they may be enabled separately using the values 'enableSelection' and 'enableDeselection'.
+
+<ag-grid-angular
+    [rowSelection]="rowSelection"
+    /* other grid options ... */ />
+
+this.rowSelection = {
+    mode: 'singleRow',
+    enableClickSelection: true,
+};
+The example below demonstrates the three possible configurations for this property, as well as the behaviour when it is disabled. Click a row to select it, or ^ Ctrl-click a row to deselect it. Use the select element to switch between modes.
+
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Note that deselection is still possible using the ␣ Space key or when checkboxes are enabled by clicking a selected checkbox.
+
+API Reference
+Copy Link
+See the full list of configuration options available in 'singleRow' mode.
+
+mode
+Copy Link
+'singleRow'
+'singleRow'
+enableClickSelection
+Copy Link
+boolean | 'enableDeselection' | 'enableSelection'
+default: false
+Modifies the selection behaviour when clicking a row. Choosing 'enableSelection' allows selection of a row by clicking the row itself. Choosing 'enableDeselection' allows deselection of a row by CTRL-clicking the row itself. Choosing true allows both selection of a row by clicking and deselection of a row by CTRL-clicking. Choosing false prevents rows from being selected or deselected by clicking.
+checkboxes
+Copy Link
+
+boolean | CheckboxSelectionCallback
+default: true
+Set to true or return true from the callback to render a selection checkbox.
+checkboxLocation
+Copy Link
+
+CheckboxLocation
+default: 'selectionColumn'
+Configure where checkboxes are displayed. Choosing 'selectionColumn' displays checkboxes in a dedicated selection column. Choosing 'autoGroupColumn' displays checkboxes in the autoGroupColumn. This applies to row checkboxes and header checkboxes.
+hideDisabledCheckboxes
+Copy Link
+boolean
+default: false
+Set to true to hide a disabled checkbox when row is not selectable and checkboxes are enabled.
+isRowSelectable
+Copy Link
+
+IsRowSelectable
+Callback to be used to determine which rows are selectable. By default rows are selectable, so return false to make a row non-selectable.
+copySelectedRows
+Copy Link
+boolean
+default: false
+When enabled and a row is selected, the copy action should copy the entire row, rather than just the focused cell
+enableSelectionWithoutKeys
+Copy Link
+boolean
+default: false
+Set to true to allow (possibly multiple) rows to be selected and deselected using single click or touch.
+masterSelects
+Copy Link
+'self' | 'detail'
+default: 'self'
+Determines the selection behaviour of master rows with respect to their detail cells. When set to 'self', selecting the master row has no effect on the selection state of the detail row. When set to 'detail', selecting the master row behaves the same as the header checkbox of the detail grid.
