@@ -23,7 +23,6 @@ import com.jwebmp.core.plugins.ComponentInformation;
 // Import references
 @NgImportReference(value = "ICellRendererAngularComp", reference = "ag-grid-angular")
 @NgImportReference(value = "ICellRendererParams", reference = "ag-grid-community")
-@NgImportModule("CommonModule")
 
 // Fields for the full width cell renderer
 @NgField("data: any = null;")
@@ -63,18 +62,6 @@ public class FullWidthCellRenderer<J extends FullWidthCellRenderer<J>> extends D
     {
         if (!isInitialized())
         {
-            // Default initialization - can be overridden by subclasses
-            add("""
-                <div class="full-width-container">
-                    <div class="full-width-details">
-                        <h3>Full Width Row</h3>
-                        <p>Row ID: {{ rowId }}</p>
-                        <p *ngIf="data">Data: {{ data | json }}</p>
-                        <p *ngIf="pinned">Pinned: {{ pinned }}</p>
-                    </div>
-                </div>
-            """);
-            
             // Add some basic styling
             addStyle("padding", "10px");
             addStyle("background-color", "#f5f5f5");

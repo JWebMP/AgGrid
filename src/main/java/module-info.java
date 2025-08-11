@@ -5,7 +5,9 @@ module com.jwebmp.plugins.aggrid {
 
     exports com.jwebmp.plugins.aggrid;
     exports com.jwebmp.plugins.aggrid.cellrenderers;
+    exports com.jwebmp.plugins.aggrid.headers;
     exports com.jwebmp.plugins.aggrid.options;
+    exports com.jwebmp.plugins.aggrid.options.enums;
 
     requires com.jwebmp.core;
     requires com.jwebmp.client;
@@ -25,5 +27,7 @@ module com.jwebmp.plugins.aggrid {
 
     opens com.jwebmp.plugins.aggrid to com.fasterxml.jackson.databind, com.jwebmp.core;
     opens com.jwebmp.plugins.aggrid.options to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice;
+    opens com.jwebmp.plugins.aggrid.headers to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice;
+    opens com.jwebmp.plugins.aggrid.cellrenderers to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice;
     opens com.jwebmp.plugins.aggrid.implementations to com.google.guice;
 }

@@ -34,6 +34,14 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     private List<Object> rowData;
 
     /**
+     * Optional raw rowData binding expression (TypeScript/Angular expression).
+     * When provided, the grid will bind [rowData] to this expression directly,
+     * instead of using the serialized Java list above.
+     */
+    @JsonProperty("rowDataRaw")
+    private String rowDataRaw;
+
+    /**
      * Whether to enable pagination
      */
     @JsonProperty("pagination")
@@ -50,6 +58,12 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      */
     @JsonProperty("rowSelection")
     private RowSelectionOptions<?> rowSelection;
+
+    /**
+     * Default column definition applied to all columns
+     */
+    @JsonProperty("defaultColDef")
+    private AgGridColumnDef<?> defaultColDef;
 
     /**
      * Whether to enable column resizing
@@ -264,6 +278,29 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     }
 
     /**
+     * Gets the raw rowData binding expression.
+     * When non-null/non-empty, this expression will be used for [rowData] binding.
+     */
+    public String getRowDataRaw()
+    {
+        return rowDataRaw;
+    }
+
+    /**
+     * Sets the raw rowData binding expression.
+     * Provide a valid TypeScript expression (e.g., myRows, this.dataRows, someMethod()).
+     * If set, the grid will bind [rowData] to this expression and will not emit a local rowData array.
+     *
+     * @param rowDataRaw The raw expression to bind.
+     * @return This object
+     */
+    public J setRowDataRaw(String rowDataRaw)
+    {
+        this.rowDataRaw = rowDataRaw;
+        return (J) this;
+    }
+
+    /**
      * Gets whether pagination is enabled
      *
      * @return Whether pagination is enabled
@@ -315,6 +352,17 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     public RowSelectionOptions<?> getRowSelection()
     {
         return rowSelection;
+    }
+
+    public AgGridColumnDef<?> getDefaultColDef()
+    {
+        return defaultColDef;
+    }
+
+    public J setDefaultColDef(AgGridColumnDef<?> defaultColDef)
+    {
+        this.defaultColDef = defaultColDef;
+        return (J) this;
     }
 
     /**

@@ -42,7 +42,7 @@ import jakarta.validation.constraints.NotNull;
 
 
 /*@NgScript(name = "AG Grid", value = "node_modules/ag-grid-community/dist/ag-grid-community.min.js")*/
-@NgStyleSheet(name = "AG Grid", value = "node_modules/ag-grid-community/styles/ag-grid.css")
+//@NgStyleSheet(name = "AG Grid", value = "node_modules/ag-grid-community/styles/ag-grid.css")
 //@NgStyleSheet(name = "AG Grid Theme", value = "node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css")
 
 @NgBootImportReference(value = "AllCommunityModule", reference = "ag-grid-community")
@@ -50,7 +50,7 @@ import jakarta.validation.constraints.NotNull;
 @NgBootConstructorBody("ModuleRegistry.registerModules([AllCommunityModule]);")
 
 public class AgGridPageConfigurator
-        implements IPageConfigurator<AgGridPageConfigurator>
+        implements IPageConfigurator<AgGridPageConfigurator>, com.jwebmp.core.base.angular.client.services.TypescriptIndexPageConfigurator<AgGridPageConfigurator>
 {
     /**
      * If this configurator is enabled

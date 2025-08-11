@@ -11,6 +11,7 @@ import com.jwebmp.core.base.angular.client.services.interfaces.AnnotationUtils;
 import com.jwebmp.core.base.angular.client.services.interfaces.INgComponent;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.plugins.aggrid.cellrenderers.DefaultCellRenderer;
+import com.jwebmp.plugins.aggrid.headers.DefaultHeaderComponent;
 
 import java.util.List;
 
@@ -95,6 +96,18 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      */
     @JsonProperty("headerTooltip")
     private String headerTooltip;
+
+    /**
+     * Custom Header Component (fully replaces the provided header component)
+     */
+    @JsonProperty("headerComponent")
+    private DefaultHeaderComponent<?> headerComponent;
+
+    /**
+     * Parameters for the Provided Header Component, allowing template and inner header customization
+     */
+    @JsonProperty("headerComponentParams")
+    private HeaderComponentParams headerComponentParams;
 
     /**
      * Whether to automatically adjust header height based on content
@@ -495,6 +508,64 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     public String getHeaderTooltip()
     {
         return headerTooltip;
+    }
+
+    /**
+     * Gets the custom header component
+     *
+     * @return The custom header component
+     */
+    public String getHeaderComponent()
+    {
+        if (headerComponent == null)
+        {
+            return null;
+        }
+        return headerComponent.toString();
+    }
+
+    /**
+     * Gets the custom header component (raw type)
+     *
+     * @return The custom header component instance
+     */
+    public DefaultHeaderComponent<?> getHeaderComponent(boolean raw)
+    {
+        return headerComponent;
+    }
+
+    /**
+     * Sets the custom header component
+     *
+     * @param headerComponent The custom header component
+     * @return This object
+     */
+    public J setHeaderComponent(DefaultHeaderComponent<?> headerComponent)
+    {
+        this.headerComponent = headerComponent;
+        return (J) this;
+    }
+
+    /**
+     * Gets the headerComponentParams
+     *
+     * @return The headerComponentParams
+     */
+    public HeaderComponentParams getHeaderComponentParams()
+    {
+        return headerComponentParams;
+    }
+
+    /**
+     * Sets the headerComponentParams
+     *
+     * @param headerComponentParams The params object
+     * @return This object
+     */
+    public J setHeaderComponentParams(HeaderComponentParams headerComponentParams)
+    {
+        this.headerComponentParams = headerComponentParams;
+        return (J) this;
     }
 
     /**

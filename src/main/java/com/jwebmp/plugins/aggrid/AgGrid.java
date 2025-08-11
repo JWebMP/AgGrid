@@ -66,7 +66,7 @@ import java.util.List;
 // @NgViewChild("agGrid", "{ static: false }")
 @NgImportReference(value = "ViewChild", reference = "@angular/core")
 //@NgImportReference(value = "viewChild", reference = "@angular/core")
-@NgField("@ViewChild('agGrid') agGrid? : AgGridAngular;")
+
 
 @NgAfterViewInit("""
         this.eventBusService.send(this.listenerName, {
@@ -100,6 +100,7 @@ import java.util.List;
                   next: (message: any) => {
                       if (message) {
                           if (Array.isArray(message)) {
+                          alert('array instructions table : ' + JSON.stringify(message));
                           /*    for (let m of message) {
                                   if (typeof m == 'string')
                                       this.chartConfiguration.set(JSON.parse(m));
@@ -108,6 +109,7 @@ import java.util.List;
                               }*/
                           }
                       }else {
+                        alert('normal instructions table : ' + JSON.stringify(message));
                         /*  if (typeof message == 'string')
                               this.chartConfiguration.set(JSON.parse(message));
                           else
@@ -168,7 +170,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
         setTag("ag-grid-angular");
         //addAttribute("class", "ag-theme-alpine");
         addAttribute("style", "width: 100%; height: 500px;");
-        addAttribute("#agGrid", "");
+
         // addAttribute("(gridReady)", "onGridReady($event)");
         //  addAttribute("(cellValueChanged)", "onCellValueChanged($event)");
         options = new AgGridOptions<>();
@@ -258,10 +260,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @return This object
      */
     @NotNull
-    public AgGrid setOptions(AgGridOptions<?> options)
+    public J setOptions(AgGridOptions<?> options)
     {
         this.options = options;
-        return this;
+        return (J) this;
     }
 
     /**
@@ -455,7 +457,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
 
             registerWebSocketListeners();
 
-
+            addAttribute("#" + getID(), "");
             // Initialize the grid with options
             if (options != null)
             {
@@ -466,7 +468,22 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                         if (columnDef.getCellRenderer() != null)
                         {
                             addConfiguration(AnnotationUtils.getNgComponentReference((Class<? extends IComponent<?>>) columnDef.getCellRenderer(true)
-                                                                                                                               .getClass()));
+                                                                                                                               .getClass())
+                                                            .setReferenceOnly(true));
+                        }
+                        if (columnDef.getHeaderComponent() != null)
+                        {
+                            addConfiguration(AnnotationUtils.getNgComponentReference((Class<? extends IComponent<?>>) columnDef.getHeaderComponent(true)
+                                                                                                                               .getClass())
+                                                            .setReferenceOnly(true));
+                        }
+                        if (columnDef.getHeaderComponentParams() != null && columnDef.getHeaderComponentParams()
+                                                                                     .getInnerHeaderComponent() != null)
+                        {
+                            addConfiguration(AnnotationUtils.getNgComponentReference((Class<? extends IComponent<?>>) columnDef.getHeaderComponentParams()
+                                                                                                                               .getInnerHeaderComponent()
+                                                                                                                               .getClass())
+                                                            .setReferenceOnly(true));
                         }
                     }
                 }
@@ -478,8 +495,12 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                     addAttribute("[columnDefs]", "columnDefs");
                 }
 
-                if (options.getRowData() != null && !options.getRowData()
-                                                            .isEmpty())
+                if (!Strings.isNullOrEmpty(options.getRowDataRaw()))
+                {
+                    addAttribute("[rowData]", options.getRowDataRaw());
+                }
+                else if (options.getRowData() != null && !options.getRowData()
+                                                                 .isEmpty())
                 {
                     addAttribute("[rowData]", "rowData");
                 }
@@ -497,6 +518,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                 if (options.getRowSelection() != null)
                 {
                     addAttribute("[rowSelection]", "'" + options.getRowSelection() + "'");
+                }
+                if (options.getDefaultColDef() != null)
+                {
+                    addAttribute("[defaultColDef]", "'defaultColDef'");
                 }
 
                 if (!Strings.isNullOrEmpty(getRowIdFieldName()))
@@ -560,19 +585,33 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                                                           .toString() + ";");
         }
 
-        // Add row data field if needed
-        if (options != null && options.getRowData() != null && !options.getRowData()
-                                                                       .isEmpty())
+        // Add row data field if needed (only when not using raw binding)
+        if (options != null && Strings.isNullOrEmpty(options.getRowDataRaw()) && options.getRowData() != null && !options.getRowData()
+                                                                                                                         .isEmpty())
         {
-            fields.add("rowData: any[] = " + options.getRowData()
-                                                    .toString() + ";");
+            addAttribute("[rowData]", options.getRowDataRaw());
+            addAttribute("*ngIf", options.getRowDataRaw());
+            //fields.add("rowData: any[] = " + options.getRowData()
+            //                                        .toString() + ";");
         }
 
         fields.add("getRowId: GetRowIdFunc = (params: GetRowIdParams) => String(params.data." + getRowIdFieldName() + ");");
 
         // Add default column definition field
-        fields.add("defaultColDef: ColDef = { sortable: true, filter: true, resizable: true };");
+        if (options != null && options.getDefaultColDef() != null)
+        {
+            fields.add("defaultColDef: ColDef = " + options.getDefaultColDef()
+                                                           .toString() + ";");
+        }
+        else
+        {
+            fields.add("defaultColDef: ColDef = { sortable: true, filter: true, resizable: true };");
+            addAttribute("[defaultColDef]", "defaultColDef");
+        }
+
+        fields.add("@ViewChild('" + getID() + "') " + getID() + "? : AgGridAngular;");
 
         return fields;
     }
+
 }

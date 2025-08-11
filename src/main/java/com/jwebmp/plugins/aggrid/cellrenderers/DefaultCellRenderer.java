@@ -64,7 +64,7 @@ public class DefaultCellRenderer<J extends DefaultCellRenderer<J>> extends DivSi
         if (!isInitialized())
         {
             // Default initialization - can be overridden by subclasses
-            add("{{ value }}");
+            //add("{{ value }}");
         }
         super.init();
     }
@@ -75,10 +75,9 @@ public class DefaultCellRenderer<J extends DefaultCellRenderer<J>> extends DivSi
         return true; // This component will be generated as a standalone component
     }
 
-    @Override
     @JsonRawValue
     @JsonValue
-    public String toString()
+    public String jsonRenderValue()
     {
         return AnnotationUtils.getTsFilename(getClass());
     }
