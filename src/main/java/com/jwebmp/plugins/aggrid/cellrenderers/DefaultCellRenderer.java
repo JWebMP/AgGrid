@@ -30,20 +30,23 @@ import com.jwebmp.core.plugins.ComponentInformation;
 
 // Field for the cell value
 @NgField("value: any = '';")
+@NgField("params :any;")
 
 @NgInterface("ICellRendererAngularComp")
 
 // Method to initialize the cell renderer
 @NgMethod("""
             agInit(params: ICellRendererParams): void {
-                this.value = params.value;
+                this.value = params.data;
+                this.params = params;
             }
         """)
 
 // Method to refresh the cell renderer
 @NgMethod("""
             refresh(params: ICellRendererParams): boolean {
-                this.value = params.value;
+                this.value = params.data;
+                this.params = params;
                 return true;
             }
         """)

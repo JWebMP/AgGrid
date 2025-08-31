@@ -54,6 +54,12 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     private Integer paginationPageSize;
 
     /**
+     * Row height in pixels for all rows
+     */
+    @JsonProperty("rowHeight")
+    private Integer rowHeight;
+
+    /**
      * Row selection options
      */
     @JsonProperty("rowSelection")
@@ -341,6 +347,28 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     public J setPaginationPageSize(Integer paginationPageSize)
     {
         this.paginationPageSize = paginationPageSize;
+        return (J) this;
+    }
+
+    /**
+     * Gets the row height in pixels for all rows
+     *
+     * @return The row height in pixels
+     */
+    public Integer getRowHeight()
+    {
+        return rowHeight;
+    }
+
+    /**
+     * Sets the row height in pixels for all rows
+     *
+     * @param rowHeight The row height in pixels (e.g., 50)
+     * @return This object
+     */
+    public J setRowHeight(Integer rowHeight)
+    {
+        this.rowHeight = rowHeight;
         return (J) this;
     }
 

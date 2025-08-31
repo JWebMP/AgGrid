@@ -50,6 +50,8 @@ import java.util.List;
 @NgImportReference(value = "AgGridAngular", reference = "ag-grid-angular")
 @NgImportModule("AgGridAngular")
 @NgImportReference(value = "ColDef", reference = "ag-grid-community")
+@NgImportReference(value = "ColGroupDef", reference = "ag-grid-community")
+@NgImportReference(value = "RowSelectedEvent", reference = "ag-grid-community")
 @NgImportReference(value = "GetRowIdFunc", reference = "ag-grid-community")
 @NgImportReference(value = "GetRowIdParams", reference = "ag-grid-community")
 
@@ -124,8 +126,9 @@ import java.util.List;
 
 
 // Fields for grid API and column API
-//@NgField("gridApi: GridApi | undefined;")
-//@NgField("columnApi: ColumnApi | undefined;")
+@NgImportReference(value = "GridApi", reference = "ag-grid-community")
+@NgImportReference(value = "GridReadyEvent", reference = "ag-grid-community")
+@NgField("gridApi?: GridApi;")
 
 // Constructor for HTTP client
 //@NgConstructorParameter("private http: HttpClient")
@@ -136,10 +139,10 @@ import java.util.List;
             onGridReady(params: GridReadyEvent) {
                 this.gridApi = params.api;
                 this.columnApi = params.columnApi;
-        
+
                 // Emit the grid ready event
                 this.gridReady.emit(params);
-        
+
                 // Auto-size columns if needed
                 if (this.gridApi) {
                     this.gridApi.sizeColumnsToFit();
@@ -272,10 +275,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param variableName The variable name to bind to
      * @return This object
      */
-    public AgGrid bindRowData(String variableName)
+    public J bindRowData(String variableName)
     {
         addAttribute("[rowData]", variableName);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -284,10 +287,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param variableName The variable name to bind to
      * @return This object
      */
-    public AgGrid bindColumnDefs(String variableName)
+    public J bindColumnDefs(String variableName)
     {
         addAttribute("[columnDefs]", variableName);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -295,10 +298,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      *
      * @return This object
      */
-    public AgGrid enablePagination()
+    public J enablePagination()
     {
         addAttribute("[pagination]", "true");
-        return this;
+        return (J) this;
     }
 
     /**
@@ -307,10 +310,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param variableName The variable name to bind to
      * @return This object
      */
-    public AgGrid bindPaginationPageSize(String variableName)
+    public J bindPaginationPageSize(String variableName)
     {
         addAttribute("[paginationPageSize]", variableName);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -319,10 +322,31 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param selectionMode The selection mode ("single" or "multiple")
      * @return This object
      */
-    public AgGrid enableRowSelection(String selectionMode)
+    public J enableRowSelection(String selectionMode)
     {
-        addAttribute("[rowSelection]", "'" + selectionMode + "'");
-        return this;
+        if (selectionMode != null)
+        {
+            // Map common strings to the enum where necessary
+            // 'single' -> SINGLE (serializes to 'singleRow'), 'multiple' -> MULTIPLE
+            com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode mode;
+            if ("single".equalsIgnoreCase(selectionMode) || "singlerow".equalsIgnoreCase(selectionMode))
+            {
+                mode = com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode.SINGLE;
+            }
+            else if ("multiple".equalsIgnoreCase(selectionMode))
+            {
+                mode = com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode.MULTIPLE;
+            }
+            else
+            {
+                // Try to resolve using enum helper, falls back to MULTIPLE if unrecognized
+                com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode resolved = com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode.fromString(selectionMode);
+                mode = resolved != null ? resolved : com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode.MULTIPLE;
+            }
+            getOptions().setRowSelectionMode(mode);
+        }
+        // Attribute binding will be handled in init() using a component field instead of inlining
+        return (J) this;
     }
 
     /**
@@ -331,10 +355,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param variableName The variable name to bind to
      * @return This object
      */
-    public AgGrid bindDefaultColDef(String variableName)
+    public J bindDefaultColDef(String variableName)
     {
         addAttribute("[defaultColDef]", variableName);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -343,10 +367,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param height The height value (e.g., "500px", "100%")
      * @return This object
      */
-    public AgGrid setHeight(String height)
+    public J setHeight(String height)
     {
         addAttribute("style", "width: 100%; height: " + height + ";");
-        return this;
+        return (J) this;
     }
 
     /**
@@ -355,7 +379,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param width The width value (e.g., "500px", "100%")
      * @return This object
      */
-    public AgGrid setWidth(String width)
+    public J setWidth(String width)
     {
         String currentStyle = getAttribute("style");
         if (currentStyle != null && currentStyle.contains("height"))
@@ -368,7 +392,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
         {
             addAttribute("style", "width: " + width + "; height: 500px;");
         }
-        return this;
+        return (J) this;
     }
 
     /**
@@ -377,10 +401,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param theme The theme name (e.g., "ag-theme-alpine", "ag-theme-balham")
      * @return This object
      */
-    public AgGrid setTheme(String theme)
+    public J setTheme(String theme)
     {
         addAttribute("class", theme);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -401,11 +425,11 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param columnDef The column definition to add
      * @return This object
      */
-    public AgGrid addColumnDef(AgGridColumnDef<?> columnDef)
+    public J addColumnDef(AgGridColumnDef<?> columnDef)
     {
         getOptions().getColumnDefs()
                     .add(columnDef);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -414,11 +438,11 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param columnDefs The column definitions to add
      * @return This object
      */
-    public AgGrid addColumnDefs(List<AgGridColumnDef<?>> columnDefs)
+    public J addColumnDefs(List<AgGridColumnDef<?>> columnDefs)
     {
         getOptions().getColumnDefs()
                     .addAll(columnDefs);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -427,11 +451,11 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param rowData The row data to add
      * @return This object
      */
-    public AgGrid addRowData(Object rowData)
+    public J addRowData(Object rowData)
     {
         getOptions().getRowData()
                     .add(rowData);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -440,11 +464,11 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param rowData The row data items to add
      * @return This object
      */
-    public AgGrid addRowData(List<Object> rowData)
+    public J addRowData(List<Object> rowData)
     {
         getOptions().getRowData()
                     .addAll(rowData);
-        return this;
+        return (J) this;
     }
 
     @Override
@@ -515,13 +539,20 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                     addAttribute("[paginationPageSize]", options.getPaginationPageSize()
                                                                 .toString());
                 }
+
+                if (options.getRowHeight() != null)
+                {
+                    addAttribute("[rowHeight]", "rowHeight");
+                }
+
                 if (options.getRowSelection() != null)
                 {
-                    addAttribute("[rowSelection]", "'" + options.getRowSelection() + "'");
+                    // Bind to a component field rather than inlining the object to avoid breaking HTML
+                    addAttribute("[rowSelection]", "rowSelection");
                 }
                 if (options.getDefaultColDef() != null)
                 {
-                    addAttribute("[defaultColDef]", "'defaultColDef'");
+                    addAttribute("[defaultColDef]", "defaultColDef");
                 }
 
                 if (!Strings.isNullOrEmpty(getRowIdFieldName()))
@@ -581,8 +612,8 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
         if (options != null && options.getColumnDefs() != null && !options.getColumnDefs()
                                                                           .isEmpty())
         {
-            fields.add("columnDefs: ColDef[] = " + options.getColumnDefs()
-                                                          .toString() + ";");
+            fields.add("columnDefs: (ColDef | ColGroupDef)[] = " + options.getColumnDefs()
+                                                                          .toString() + ";");
         }
 
         // Add row data field if needed (only when not using raw binding)
@@ -609,9 +640,41 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
             addAttribute("[defaultColDef]", "defaultColDef");
         }
 
+        // Add row height field if provided, and bind to it in the template
+        if (options != null && options.getRowHeight() != null)
+        {
+            fields.add("rowHeight: number = " + options.getRowHeight()
+                                                       .toString() + ";");
+        }
+
+        // Add row selection field if provided, and bind to it in the template
+        if (options != null && options.getRowSelection() != null)
+        {
+            fields.add("rowSelection: any = " + options.getRowSelection()
+                                                       .toString() + ";");
+        }
+
         fields.add("@ViewChild('" + getID() + "') " + getID() + "? : AgGridAngular;");
 
         return fields;
     }
 
+    @Override
+    public List<String> methods()
+    {
+        var s = INgComponent.super.methods();
+        var strings = onRowSelectJS();
+
+        s.add("""
+                rowSelected($event: RowSelectedEvent<any>) {
+                    this.%s?.api.refreshHeader();
+                    %s
+                }""".formatted(getID(), String.join("\n\t\t", strings)));
+        return s;
+    }
+
+    public List<String> onRowSelectJS()
+    {
+        return new ArrayList<>();
+    }
 }

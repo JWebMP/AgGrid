@@ -12,6 +12,8 @@ import com.jwebmp.core.base.angular.client.services.interfaces.INgComponent;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.plugins.aggrid.cellrenderers.DefaultCellRenderer;
 import com.jwebmp.plugins.aggrid.headers.DefaultHeaderComponent;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -133,6 +135,13 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      */
     @JsonProperty("columnGroupShow")
     private String columnGroupShow;
+    /**
+     * Determines when to show the column within a group
+     * Values: 'open', 'closed', or null (always show)
+     */
+    @JsonProperty("cellClass")
+    @Getter
+    private String cellClass;
 
     /**
      * If true, child columns will always move together in the column order
@@ -952,6 +961,12 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     public J setColSpan(Object colSpan)
     {
         this.colSpan = colSpan;
+        return (J) this;
+    }
+
+    public J setCellClass(String cellClass)
+    {
+        this.cellClass = cellClass;
         return (J) this;
     }
 }

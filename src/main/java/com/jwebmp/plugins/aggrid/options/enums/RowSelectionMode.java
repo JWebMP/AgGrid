@@ -14,19 +14,19 @@ public enum RowSelectionMode
      * Single row selection mode
      */
     SINGLE("singleRow"),
-    
+
     /**
      * Multiple row selection mode
      */
-    MULTIPLE("multiple");
-    
+    MULTIPLE("multiRow");
+
     private final String value;
-    
+
     RowSelectionMode(String value)
     {
         this.value = value;
     }
-    
+
     /**
      * Gets the string value for JSON serialization
      *
@@ -37,7 +37,7 @@ public enum RowSelectionMode
     {
         return value;
     }
-    
+
     /**
      * Converts a string value to the enum
      *
@@ -54,5 +54,11 @@ public enum RowSelectionMode
             }
         }
         return null;
+    }
+
+    @Override
+    public String toString()
+    {
+        return value;
     }
 }

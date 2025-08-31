@@ -21,6 +21,7 @@ module com.jwebmp.plugins.aggrid {
     requires com.guicedee.jsonrepresentation;
     requires com.jwebmp.core.angular;
     requires com.fasterxml.jackson.core;
+    requires static lombok;
 
     provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.plugins.aggrid.AgGridPageConfigurator;
     provides IGuiceScanModuleInclusions with AgGridInclusionsModule;
