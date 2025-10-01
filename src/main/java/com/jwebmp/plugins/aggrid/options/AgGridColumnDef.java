@@ -46,10 +46,20 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     private Boolean sortable;
 
     /**
-     * Whether the column is filterable
+     * Filter setting.
+     * Accepts:
+     * - Boolean (enable default filter behavior),
+     * - String filter key (e.g., "agTextColumnFilter", "agSetColumnFilter", "agMultiColumnFilter").
      */
     @JsonProperty("filter")
-    private Boolean filter;
+    private Object filter;
+
+    /**
+     * Filter parameters for this column's filter. Type is a generic CRTP interface to avoid coupling
+     * community module to specific Enterprise implementations.
+     */
+    @JsonProperty("filterParams")
+    private com.jwebmp.plugins.aggrid.options.filters.IFilterParams<?> filterParams;
 
     /**
      * Whether the column is resizable
@@ -223,6 +233,53 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     private Object colSpan;
 
     /**
+     * Enterprise: set to true to group by this column.
+     */
+    @JsonProperty("rowGroup")
+    private Boolean rowGroup;
+
+    /**
+     * Enterprise: order to group by when grouping by multiple columns.
+     */
+    @JsonProperty("rowGroupIndex")
+    private Integer rowGroupIndex;
+
+    /**
+     * Enterprise: function returning a string key for grouping / set filter.
+     * Use raw JavaScript string. Serialized without quotes.
+     */
+    @JsonProperty("keyCreator")
+    @JsonRawValue
+    private String keyCreator;
+
+    /**
+     * Formats values for display. Use raw JavaScript function string.
+     */
+    @JsonProperty("valueFormatter")
+    @JsonRawValue
+    private String valueFormatter;
+
+    /**
+     * Find: optional raw JavaScript callback to provide text to search within this cell.
+     * Signature: params => string | null
+     */
+    @JsonProperty("getFindText")
+    @JsonRawValue
+    private String findTextFunc;
+
+    /**
+     * Enterprise: define grouping hierarchy parts (e.g., ['year','month'] or ColDef objects).
+     */
+    @JsonProperty("rowGroupingHierarchy")
+    private List<Object> rowGroupingHierarchy;
+
+    /**
+     * Disable the Fill Handle for this column when using Cell Selection.
+     */
+    @JsonProperty("suppressFillHandle")
+    private Boolean suppressFillHandle;
+
+    /**
      * Default constructor
      */
     public AgGridColumnDef()
@@ -326,7 +383,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      */
     public Boolean getFilter()
     {
-        return filter;
+        return (filter instanceof Boolean) ? (Boolean) filter : null;
     }
 
     /**
@@ -338,6 +395,42 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     public J setFilter(Boolean filter)
     {
         this.filter = filter;
+        return (J) this;
+    }
+
+    /**
+     * Sets the filter type by key (e.g., "agTextColumnFilter", "agSetColumnFilter", "agMultiColumnFilter").
+     */
+    public J setFilter(String filterKey)
+    {
+        this.filter = filterKey;
+        return (J) this;
+    }
+
+    /**
+     * Convenience: use the Multi Filter on this column.
+     */
+    public J useMultiFilter()
+    {
+        this.filter = "agMultiColumnFilter";
+        return (J) this;
+    }
+
+    /**
+     * @return filter params for this column's filter
+     */
+    public com.jwebmp.plugins.aggrid.options.filters.IFilterParams<?> getFilterParams()
+    {
+        return filterParams;
+    }
+
+    /**
+     * Set filter params (typed CRTP interface). Use Set Filter params from the Enterprise module or appropriate
+     * params for other filter types.
+     */
+    public J setFilterParams(com.jwebmp.plugins.aggrid.options.filters.IFilterParams<?> filterParams)
+    {
+        this.filterParams = filterParams;
         return (J) this;
     }
 
@@ -967,6 +1060,223 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     public J setCellClass(String cellClass)
     {
         this.cellClass = cellClass;
+        return (J) this;
+    }
+
+    // --- Enterprise Row Grouping API ---
+
+    /**
+     * @return whether this column is a row group
+     */
+    public Boolean getRowGroup()
+    {
+        return rowGroup;
+    }
+
+    /**
+     * Enable/disable grouping by this column.
+     */
+    public J setRowGroup(Boolean rowGroup)
+    {
+        this.rowGroup = rowGroup;
+        return (J) this;
+    }
+
+    /**
+     * @return the index used when grouping by multiple columns
+     */
+    public Integer getRowGroupIndex()
+    {
+        return rowGroupIndex;
+    }
+
+    /**
+     * Set the order to group by when grouping by multiple columns.
+     */
+    public J setRowGroupIndex(Integer rowGroupIndex)
+    {
+        this.rowGroupIndex = rowGroupIndex;
+        return (J) this;
+    }
+
+    /**
+     * @return raw JavaScript function used to compute the grouping key
+     */
+    public String getKeyCreator()
+    {
+        return keyCreator;
+    }
+
+    /**
+     * Set a raw JavaScript function for keyCreator, e.g. "params => params.value.id".
+     * The value is serialized without quotes.
+     */
+    public J setKeyCreator(String keyCreatorRaw)
+    {
+        this.keyCreator = keyCreatorRaw;
+        return (J) this;
+    }
+
+    /**
+     * @return raw JavaScript function used to format values
+     */
+    public String getValueFormatter()
+    {
+        return valueFormatter;
+    }
+
+    /**
+     * Set a raw JavaScript function for valueFormatter, e.g. "params => params.value.name".
+     * The value is serialized without quotes.
+     */
+    public J setValueFormatter(String valueFormatterRaw)
+    {
+        this.valueFormatter = valueFormatterRaw;
+        return (J) this;
+    }
+
+    /**
+     * @return raw JavaScript callback for getFindText
+     */
+    public String getFindTextFunc()
+    {
+        return findTextFunc;
+    }
+
+    /**
+     * Set a raw JavaScript function for getFindText, e.g. "params => `Year is ${params.value}`".
+     * The value is serialized without quotes.
+     */
+    public J setGetFindText(String getFindTextRaw)
+    {
+        this.findTextFunc = getFindTextRaw;
+        return (J) this;
+    }
+
+    /**
+     * @return row grouping hierarchy parts
+     */
+    public List<Object> getRowGroupingHierarchy()
+    {
+        return rowGroupingHierarchy;
+    }
+
+    /**
+     * Define grouping by parts for date/time or custom hierarchy.
+     */
+    public J setRowGroupingHierarchy(List<Object> rowGroupingHierarchy)
+    {
+        this.rowGroupingHierarchy = rowGroupingHierarchy;
+        return (J) this;
+    }
+
+    /**
+     * @return whether Fill Handle is suppressed for this column
+     */
+    public Boolean getSuppressFillHandle()
+    {
+        return suppressFillHandle;
+    }
+
+    /**
+     * Set to true to disable the Fill Handle for this column.
+     */
+    public J setSuppressFillHandle(Boolean suppressFillHandle)
+    {
+        this.suppressFillHandle = suppressFillHandle;
+        return (J) this;
+    }
+
+    /**
+     * valueGetter as a field selector (string expression or raw JS via implementations).
+     */
+    @JsonProperty("valueGetter")
+    private com.jwebmp.plugins.aggrid.options.selectors.FieldSelector valueGetter;
+
+    public com.jwebmp.plugins.aggrid.options.selectors.FieldSelector getValueGetter()
+    {
+        return valueGetter;
+    }
+
+    /**
+     * Sets the valueGetter using a typed FieldSelector implementation.
+     */
+    public J setValueGetter(com.jwebmp.plugins.aggrid.options.selectors.FieldSelector valueGetter)
+    {
+        this.valueGetter = valueGetter;
+        return (J) this;
+    }
+
+    /**
+     * Backward-compatible setter accepting Object; adapts known types.
+     * Deprecated: prefer {@link #setValueGetter(com.jwebmp.plugins.aggrid.options.selectors.FieldSelector)}.
+     */
+    @Deprecated
+    public J setValueGetter(Object valueGetter)
+    {
+        if (valueGetter == null)
+        {
+            this.valueGetter = null;
+        }
+        else if (valueGetter instanceof com.jwebmp.plugins.aggrid.options.selectors.FieldSelector)
+        {
+            this.valueGetter = (com.jwebmp.plugins.aggrid.options.selectors.FieldSelector) valueGetter;
+        }
+        else if (valueGetter instanceof String)
+        {
+            this.valueGetter = new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorExpression((String) valueGetter);
+        }
+        else
+        {
+            this.valueGetter = new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorExpression(String.valueOf(valueGetter));
+        }
+        return (J) this;
+    }
+
+    /**
+     * Convenience setter for string expressions, e.g. "node.rowIndex + 1"
+     */
+    public J setValueGetterExpression(String expression)
+    {
+        this.valueGetter = expression == null ? null : new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorExpression(expression);
+        return (J) this;
+    }
+
+    /**
+     * Convenience setter for raw JavaScript (function or arrow function). Will be serialized without quotes.
+     */
+    public J setValueGetterRaw(String rawJsFunction)
+    {
+        this.valueGetter = rawJsFunction == null ? null : new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorRaw(rawJsFunction);
+        return (J) this;
+    }
+
+    /**
+     * filterValueGetter: specific getter for filtering, separate from valueGetter.
+     */
+    @JsonProperty("filterValueGetter")
+    private com.jwebmp.plugins.aggrid.options.selectors.FieldSelector filterValueGetter;
+
+    public com.jwebmp.plugins.aggrid.options.selectors.FieldSelector getFilterValueGetter()
+    {
+        return filterValueGetter;
+    }
+
+    public J setFilterValueGetter(com.jwebmp.plugins.aggrid.options.selectors.FieldSelector filterValueGetter)
+    {
+        this.filterValueGetter = filterValueGetter;
+        return (J) this;
+    }
+
+    public J setFilterValueGetterExpression(String expression)
+    {
+        this.filterValueGetter = expression == null ? null : new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorExpression(expression);
+        return (J) this;
+    }
+
+    public J setFilterValueGetterRaw(String rawJsFunction)
+    {
+        this.filterValueGetter = rawJsFunction == null ? null : new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorRaw(rawJsFunction);
         return (J) this;
     }
 }

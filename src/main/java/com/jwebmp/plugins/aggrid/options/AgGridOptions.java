@@ -3,6 +3,7 @@ package com.jwebmp.plugins.aggrid.options;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.base.angular.client.services.interfaces.INgComponent;
 import com.jwebmp.plugins.aggrid.options.enums.AutoSizeStrategy;
@@ -224,11 +225,165 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     private Boolean embedFullWidthRows;
 
     /**
+     * Raw JavaScript callback invoked after a cell's value changes.
+     * Signature: params => void
+     * Common usage: re-apply filtering after edits: params.api.onFilterChanged();
+     */
+    @JsonProperty("onCellValueChanged")
+    @JsonRawValue
+    private String onCellValueChanged;
+
+    /**
+     * Enable Tree Data mode so rows form hierarchies with parent/child relationships.
+     */
+    @JsonProperty("treeData")
+    private Boolean treeData;
+
+    /**
+     * Raw JavaScript function used by Tree Data to extract the path for each row.
+     * Signature: (data) => string[]
+     */
+    @JsonProperty("getDataPath")
+    @JsonRawValue
+    private String getDataPath;
+
+    /**
+     * Auto Group Column Definition used when grouping/tree data is enabled. Allows applying filters (incl. Set Filter) on the group column.
+     */
+    @JsonProperty("autoGroupColumnDef")
+    private AgGridColumnDef<?> autoGroupColumnDef;
+
+    /**
+     * Locale text customisations for grid UI (e.g., searchOoo, noMatches).
+     */
+    @JsonProperty("localeText")
+    private com.jwebmp.plugins.aggrid.options.locale.ILocaleText<?> localeText;
+
+    /**
+     * Enable Filter Handlers so Multi Filter buttons control child filters.
+     */
+    @JsonProperty("enableFilterHandlers")
+    private Boolean enableFilterHandlers;
+
+    /**
+     * Fired before a Fill Handle operation starts.
+     * Signature: (event) => void
+     */
+    @JsonProperty("onFillStart")
+    @JsonRawValue
+    private String onFillStart;
+
+    /**
+     * Fired after a Fill Handle operation ends.
+     * Signature: (event) => void
+     */
+    @JsonProperty("onFillEnd")
+    @JsonRawValue
+    private String onFillEnd;
+
+    /**
      * Default constructor
      */
     public AgGridOptions()
     {
         // Default constructor
+    }
+
+    /**
+     * Get locale text customisations object.
+     */
+    public com.jwebmp.plugins.aggrid.options.locale.ILocaleText<?> getLocaleText()
+    {
+        return localeText;
+    }
+
+    /**
+     * Set locale text customisations object.
+     */
+    public J setLocaleText(com.jwebmp.plugins.aggrid.options.locale.ILocaleText<?> localeText)
+    {
+        this.localeText = localeText;
+        return (J) this;
+    }
+
+    /**
+     * Get whether Filter Handlers are enabled.
+     */
+    public Boolean getEnableFilterHandlers()
+    {
+        return enableFilterHandlers;
+    }
+
+    /**
+     * Enable/disable Filter Handlers so Multi Filter buttons control child filters.
+     */
+    public J setEnableFilterHandlers(Boolean enableFilterHandlers)
+    {
+        this.enableFilterHandlers = enableFilterHandlers;
+        return (J) this;
+    }
+
+    /**
+     * Get raw JavaScript onFillStart callback.
+     */
+    public String getOnFillStart()
+    {
+        return onFillStart;
+    }
+
+    /**
+     * Set the onFillStart callback as raw JavaScript.
+     * Example: "e => console.log('fill start', e)".
+     */
+    public J setOnFillStartRaw(String onFillStartRawJs)
+    {
+        this.onFillStart = onFillStartRawJs;
+        return (J) this;
+    }
+
+    /**
+     * Get raw JavaScript onFillEnd callback.
+     */
+    public String getOnFillEnd()
+    {
+        return onFillEnd;
+    }
+
+    /**
+     * Set the onFillEnd callback as raw JavaScript.
+     * Example: "e => console.log('fill end', e)".
+     */
+    public J setOnFillEndRaw(String onFillEndRawJs)
+    {
+        this.onFillEnd = onFillEndRawJs;
+        return (J) this;
+    }
+
+    /**
+     * Convenience: set Mini Filter placeholder text (searchOoo). Creates LocaleText if needed.
+     */
+    public J setLocaleSearchOoo(String searchOoo)
+    {
+        if (this.localeText == null)
+        {
+            this.localeText = new com.jwebmp.plugins.aggrid.options.locale.LocaleText();
+        }
+        // Safe cast because we only need to call the interface method
+        this.localeText.setSearchOoo(searchOoo);
+        return (J) this;
+    }
+
+    /**
+     * Convenience: set Mini Filter no matches message. Creates LocaleText if needed.
+     */
+    public J setLocaleNoMatches(String noMatches)
+    {
+        if (this.localeText == null)
+        {
+            this.localeText = new com.jwebmp.plugins.aggrid.options.locale.LocaleText();
+        }
+        this.localeText.setNoMatches(noMatches);
+        return (J) this;
     }
 
     /**
@@ -993,6 +1148,87 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     public J setEmbedFullWidthRows(Boolean embedFullWidthRows)
     {
         this.embedFullWidthRows = embedFullWidthRows;
+        return (J) this;
+    }
+
+    /**
+     * Get the raw JavaScript onCellValueChanged callback.
+     */
+    public String getOnCellValueChanged()
+    {
+        return onCellValueChanged;
+    }
+
+    /**
+     * Set the onCellValueChanged callback using a raw JavaScript function or arrow function.
+     * Example: "params => { params.api.onFilterChanged(); }"
+     * The value is serialized without quotes.
+     */
+    public J setOnCellValueChangedRaw(String onCellValueChangedRawJs)
+    {
+        this.onCellValueChanged = onCellValueChangedRawJs;
+        return (J) this;
+    }
+
+    /**
+     * Convenience: enable re-applying filters automatically after cell edits.
+     * This sets onCellValueChanged to call params.api.onFilterChanged().
+     */
+    public J enableReapplyFiltersOnCellValueChanged()
+    {
+        this.onCellValueChanged = "params => { params.api.onFilterChanged(); }";
+        return (J) this;
+    }
+
+    /**
+     * Get whether Tree Data mode is enabled.
+     */
+    public Boolean getTreeData()
+    {
+        return treeData;
+    }
+
+    /**
+     * Enable/disable Tree Data mode.
+     */
+    public J setTreeData(Boolean treeData)
+    {
+        this.treeData = treeData;
+        return (J) this;
+    }
+
+    /**
+     * Get the raw JavaScript getDataPath callback used by Tree Data.
+     */
+    public String getGetDataPath()
+    {
+        return getDataPath;
+    }
+
+    /**
+     * Set the getDataPath callback using a raw JavaScript function or arrow function.
+     * Example: "(data) => data.path"
+     */
+    public J setGetDataPathRaw(String getDataPathRawJs)
+    {
+        this.getDataPath = getDataPathRawJs;
+        return (J) this;
+    }
+
+    /**
+     * Get the auto group column definition.
+     */
+    public AgGridColumnDef<?> getAutoGroupColumnDef()
+    {
+        return autoGroupColumnDef;
+    }
+
+    /**
+     * Set the auto group column definition used when grouping/tree data is enabled.
+     */
+    public J setAutoGroupColumnDef(AgGridColumnDef<?> autoGroupColumnDef)
+    {
+        this.autoGroupColumnDef = autoGroupColumnDef;
         return (J) this;
     }
 }

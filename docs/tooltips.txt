@@ -1,0 +1,186 @@
+Tooltips
+
+angular logoAngular
+Tooltips can be set for Cells and Column Headers.
+
+
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+The following Column Definition properties set Tooltips:
+
+tooltipField
+Copy Link
+
+ColDefField
+The field of the tooltip to apply to the cell. @agModule TooltipModule
+tooltipValueGetter
+Copy Link
+
+Function
+Callback that should return the string to use for a tooltip, tooltipField takes precedence if set. If using a custom tooltipComponent you may return any custom value to be passed to your tooltip component. @agModule TooltipModule
+headerTooltip
+Copy Link
+string
+Tooltip for the column header @agModule TooltipModule
+Tooltips for Truncated Text
+Copy Link
+It's possible to configure tooltips to show only when the items hovered are truncated by setting tooltipShowMode = 'whenTruncated'.
+
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Show and Hide Delay
+Copy Link
+Tooltips show after 2 seconds and hide after 10 seconds. Set tooltipShowDelay and tooltipHideDelay to override these values. The example below has tooltipShowDelay=0 (shows immediately) and tooltipHideDelay=2000 (hides in 2,000 milliseconds, or 2 seconds).
+
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Setting delays will have no effect if using Browser Tooltips as Browser Tooltips are controlled by the browser and not the grid.
+
+Blank Values
+Copy Link
+Tooltips are not shown for the missing values undefined, null and "" (empty String). To display tooltips for missing values, provide a tooltipValueGetter to return something that is not empty.
+
+In the example below:
+
+The data has missing values undefined, null and '' (empty String) as the first three rows.
+Column A uses tooltipField, no tooltip is shown.
+Column B uses tooltipValueGetter to return an object, tooltip is shown.
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Row Groups
+Copy Link
+The example below shows how to use the default tooltip component with group columns. Because the group column has no real field assigned to it, the tooltipValueGetter function must be used.
+
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Mouse Tracking
+Copy Link
+The example below enables mouse tracking to demonstrate a scenario where tooltips need to follow the cursor. To enable this feature, set the tooltipMouseTrack to true in the gridOptions.
+
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Browser Tooltip
+Copy Link
+Set the grid property enableBrowserTooltips=true to stop using rich HTML Components and use the browsers native tooltip.
+
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Interactive Tooltips
+Copy Link
+By default, it is impossible to click on tooltips and hovering them has no effect. If tooltipInteraction=true is set in the gridOptions, the tooltips will not disappear while being hovered and you will be able to click and select the text within the tooltip.
+
+<ag-grid-angular
+    [tooltipInteraction]="tooltipInteraction"
+    /* other grid options ... */ />
+
+this.tooltipInteraction = true;
+The example below enables Tooltip Interaction to demonstrate a scenario where tooltips will not disappear while hovered. Note following:
+
+Tooltips will not disappear while being hovered.
+Tooltips content can be selected and copied.
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+The example below shows Tooltip Interaction with Custom Tooltips. Note the following:
+
+Tooltip is enabled for the Athlete and Age columns.
+Tooltips will not disappear while being hovered.
+The custom tooltip displays a text input and a Submit button which when clicked, updates the value of the Athlete Column cell in the hovered row and then closes itself by calling hideTooltipCallback().
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Custom Component
+Copy Link
+The grid does not use the browser's default tooltip, instead it has a rich HTML Tooltip Component. The default Tooltip Component can be replaced with a Custom Tooltip Component using colDef.tooltipComponent.
+
+In the example below:
+
+tooltipComponent is set on the Default Column Definition so it applies to all Columns.
+tooltipComponentParams is set on the Athlete Column Definition to provide a Custom Property, in this instance setting the background color.
+ Code
+Copy Link
+New Tab
+CodeSandbox
+Plunker
+Implement this interface to create a tooltip component.
+
+interface ITooltipAngularComp {
+    // The agInit(params) method is called on the tooltip component once.
+    // See below for details on the parameters.
+    agInit(params: ITooltipParams): void;
+}
+The agInit(params) method takes a params object with the items listed below:
+
+Properties available on the ITooltipParams<TData = any, TValue = any, TContext = any> interface.
+
+location
+Copy Link
+
+TooltipLocation
+What part of the application is showing the tooltip, e.g. 'cell', 'header', 'menuItem' etc
+value
+Copy Link
+TValue | null
+The value to be rendered by the tooltip.
+valueFormatted
+Copy Link
+string | null
+The formatted value to be rendered by the tooltip.
+colDef
+Copy Link
+ColDef | ColGroupDef | null
+Column / ColumnGroup definition.
+column
+Copy Link
+Column | ColumnGroup
+Column / ColumnGroup
+rowIndex
+Copy Link
+number
+The index of the row containing the cell rendering the tooltip.
+node
+Copy Link
+IRowNode
+The row node.
+data
+Copy Link
+TData
+Data for the row node in question.
+hideTooltipCallback
+Copy Link
+
+Function
+A callback function that hides the tooltip
+api
+Copy Link
+GridApi
+The grid api.
+context
+Copy Link
+TContext
+Application context as set on gridOptions.context.
