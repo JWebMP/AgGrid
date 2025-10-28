@@ -3,6 +3,7 @@ package com.jwebmp.plugins.aggrid.options;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.StringSerializer;
@@ -45,6 +46,16 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     @JsonProperty("sortable")
     private Boolean sortable;
 
+    @JsonProperty("sort")
+    @Getter
+    private String sort;
+
+    public J setSort(String sort)
+    {
+        this.sort = sort;
+        return (J) this;
+    }
+
     /**
      * Filter setting.
      * Accepts:
@@ -66,6 +77,19 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      */
     @JsonProperty("resizable")
     private Boolean resizable;
+
+    /**
+     * Whether the column is resizable
+     */
+    @JsonProperty("hide")
+    @Getter
+    private Boolean hide;
+
+    public J setHide(Boolean hide)
+    {
+        this.hide = hide;
+        return (J) this;
+    }
 
     /**
      * The width of the column
@@ -278,6 +302,12 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      */
     @JsonProperty("suppressFillHandle")
     private Boolean suppressFillHandle;
+
+    /**
+     * When true, this column's cells will flash when their values change.
+     */
+    @JsonProperty("enableCellChangeFlash")
+    private Boolean enableCellChangeFlash;
 
     /**
      * Default constructor
@@ -1188,6 +1218,23 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     }
 
     /**
+     * @return whether this column flashes on value changes
+     */
+    public Boolean getEnableCellChangeFlash()
+    {
+        return enableCellChangeFlash;
+    }
+
+    /**
+     * Enable/disable flashing for this column's cells when values change.
+     */
+    public J setEnableCellChangeFlash(Boolean enableCellChangeFlash)
+    {
+        this.enableCellChangeFlash = enableCellChangeFlash;
+        return (J) this;
+    }
+
+    /**
      * valueGetter as a field selector (string expression or raw JS via implementations).
      */
     @JsonProperty("valueGetter")
@@ -1278,5 +1325,58 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     {
         this.filterValueGetter = rawJsFunction == null ? null : new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorRaw(rawJsFunction);
         return (J) this;
+    }
+
+    /**
+     * Column-specific context menu items or callback.
+     * Accepts either:
+     * - a List of built-in item keys (e.g., "copy", "paste", "export") and/or MenuItemDef-like maps/POJOs
+     * - a raw JavaScript callback: (params, defaultItems) => (DefaultMenuItem | MenuItemDef)[]
+     * Note: colDef.contextMenuItems takes priority over gridOptions.getContextMenuItems.
+     */
+    @JsonIgnore
+    private Object contextMenuItems;
+
+    /**
+     * @return the column-specific context menu items configuration or callback
+     */
+    public Object getContextMenuItems()
+    {
+        return contextMenuItems;
+    }
+
+    /**
+     * Set a list or structure describing context menu items for this column.
+     */
+    public J setContextMenuItems(Object items)
+    {
+        this.contextMenuItems = items;
+        return (J) this;
+    }
+
+    /**
+     * Set a raw JS callback for column context menu items: (params, defaultItems) => items[]
+     * The function is serialized without quotes.
+     */
+    public J setContextMenuItemsRaw(String rawJsCallback)
+    {
+        this.contextMenuItems = rawJsCallback == null ? null : new RawJsFunction(rawJsCallback);
+        return (J) this;
+    }
+
+    /**
+     * Minimal raw wrapper to serialize JS functions/objects without quotes.
+     */
+    static class RawJsFunction extends com.jwebmp.core.htmlbuilder.javascript.JavascriptFunction<RawJsFunction>
+    {
+        private final String raw;
+
+        RawJsFunction(String raw) {this.raw = raw;}
+
+        @Override
+        public String renderFunction()
+        {
+            return raw == null ? "null" : raw;
+        }
     }
 }

@@ -54,6 +54,7 @@ import java.util.List;
 @NgImportReference(value = "RowSelectedEvent", reference = "ag-grid-community")
 @NgImportReference(value = "GetRowIdFunc", reference = "ag-grid-community")
 @NgImportReference(value = "GetRowIdParams", reference = "ag-grid-community")
+@NgImportReference(value = "GridOptions", reference = "ag-grid-community")
 
 
 //@NgImportReference(value = "ColDef, GridOptions, GridApi, ColumnApi, GridReadyEvent, CellValueChangedEvent", reference = "ag-grid-community")
@@ -485,6 +486,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
             // Initialize the grid with options
             if (options != null)
             {
+                addAttribute("[gridOptions]", "options");
                 if (options.getColumnDefs() != null)
                 {
                     for (AgGridColumnDef<?> columnDef : options.getColumnDefs())
@@ -616,14 +618,20 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                                                                           .toString() + ";");
         }
 
-        // Add row data field if needed (only when not using raw binding)
-        if (options != null && Strings.isNullOrEmpty(options.getRowDataRaw()) && options.getRowData() != null && !options.getRowData()
-                                                                                                                         .isEmpty())
+        // Add row data binding
+        if (options != null)
         {
-            addAttribute("[rowData]", options.getRowDataRaw());
-            addAttribute("*ngIf", options.getRowDataRaw());
-            //fields.add("rowData: any[] = " + options.getRowData()
-            //                                        .toString() + ";");
+            if (!Strings.isNullOrEmpty(options.getRowDataRaw()))
+            {
+                // Bind directly to the provided TS/Angular expression
+                addAttribute("[rowData]", options.getRowDataRaw());
+            }
+            else if (options.getRowData() != null && !options.getRowData().isEmpty())
+            {
+                // Emit a local TS field and bind to it
+                fields.add("rowData: any[] = " + options.getRowData().toString() + ";");
+                addAttribute("[rowData]", "rowData");
+            }
         }
 
         fields.add("getRowId: GetRowIdFunc = (params: GetRowIdParams) => String(params.data." + getRowIdFieldName() + ");");
@@ -656,6 +664,11 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
 
         fields.add("@ViewChild('" + getID() + "') " + getID() + "? : AgGridAngular;");
 
+        if (options != null)
+        {
+            fields.add("options: GridOptions = " + options.toString() + ";");
+        }
+
         return fields;
     }
 
@@ -676,5 +689,27 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
     public List<String> onRowSelectJS()
     {
         return new ArrayList<>();
+    }
+
+    /**
+     * Bind the grid-level enableCellChangeFlash as an Angular attribute and mirror into options.
+     * Renders: [enableCellChangeFlash]="true|false". Removes the attribute when value is null.
+     */
+    public J bindEnableCellChangeFlash(Boolean value)
+    {
+        if (getOptions() != null)
+        {
+            getOptions().setEnableCellChangeFlash(value);
+        }
+        String key = "[enableCellChangeFlash]";
+        if (value == null)
+        {
+            removeAttribute(key);
+        }
+        else
+        {
+            addAttribute(key, value ? "true" : "false");
+        }
+        return (J) this;
     }
 }

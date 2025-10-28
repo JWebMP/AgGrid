@@ -20,7 +20,7 @@ import jakarta.validation.constraints.NotNull;
 @PluginInformation(pluginName = "AG Grid",
         pluginDescription = "AG Grid is a feature-rich data grid supporting multiple frameworks",
         pluginUniqueName = "ag-grid",
-        pluginVersion = "33.0.0",
+        pluginVersion = "34.2.0",
         pluginCategories = "grid, table, data, ui, web ui, framework",
         pluginSubtitle = "AG Grid is a feature-rich data grid supporting multiple frameworks",
         pluginSourceUrl = "https://www.ag-grid.com/",
@@ -37,8 +37,8 @@ import jakarta.validation.constraints.NotNull;
         pluginStatus = PluginStatus.Released
 )
 
-@TsDependency(value = "ag-grid-community", version = "^33.0.0")
-@TsDependency(value = "ag-grid-angular", version = "^33.0.0")
+@TsDependency(value = "ag-grid-community", version = "^34.2.0")
+@TsDependency(value = "ag-grid-angular", version = "^34.2.0")
 
 
 /*@NgScript(name = "AG Grid", value = "node_modules/ag-grid-community/dist/ag-grid-community.min.js")*/
