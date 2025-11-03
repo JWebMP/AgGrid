@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.jwebmp.core.base.angular.client.services.interfaces.AnnotationUtils;
 import com.jwebmp.core.base.angular.client.services.interfaces.INgComponent;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
+import com.jwebmp.plugins.aggrid.cellrenderers.ICellRenderer;
 import com.jwebmp.plugins.aggrid.cellrenderers.DefaultCellRenderer;
 import com.jwebmp.plugins.aggrid.headers.DefaultHeaderComponent;
 import lombok.Getter;
@@ -107,7 +108,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * The cell renderer component
      */
     @JsonProperty("cellRenderer")
-    private DefaultCellRenderer<?> cellRenderer;
+    private ICellRenderer<?> cellRenderer;
 
     /**
      * The cell renderer params
@@ -549,7 +550,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      *
      * @return The cell renderer component
      */
-    public DefaultCellRenderer<?> getCellRenderer(boolean raw)
+    public ICellRenderer<?> getCellRenderer(boolean raw)
     {
         return cellRenderer;
     }
@@ -560,7 +561,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param cellRenderer The cell renderer component
      * @return This object
      */
-    public J setCellRenderer(DefaultCellRenderer<?> cellRenderer)
+    public J setCellRenderer(ICellRenderer<?> cellRenderer)
     {
         this.cellRenderer = cellRenderer;
         return (J) this;

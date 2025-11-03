@@ -23,6 +23,7 @@ import com.jwebmp.core.base.html.DivSimple;
 import com.jwebmp.core.plugins.ComponentInformation;
 import com.jwebmp.core.base.angular.client.services.interfaces.AnnotationUtils;
 import com.jwebmp.plugins.aggrid.cellrenderers.DefaultCellRenderer;
+import com.jwebmp.plugins.aggrid.cellrenderers.ICellRenderer;
 import com.jwebmp.plugins.aggrid.options.AgGridColumnDef;
 import com.jwebmp.plugins.aggrid.options.AgGridOptions;
 import jakarta.validation.constraints.NotNull;
@@ -573,12 +574,12 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param cellRendererClass The cell renderer class
      * @return This object
      */
-    public J configureCellRenderer(AgGridColumnDef<?> columnDef, DefaultCellRenderer<?> cellRendererClass)
+    public J configureCellRenderer(AgGridColumnDef<?> columnDef, ICellRenderer<?> cellRenderer)
     {
         // Add component reference for the renderer
-        addConfiguration(AnnotationUtils.getNgComponentReference((Class<? extends IComponent<?>>) cellRendererClass.getClass()));
+        addConfiguration(AnnotationUtils.getNgComponentReference((Class<? extends IComponent<?>>) cellRenderer.getClass()));
         // Set the cell renderer on the column definition
-        columnDef.setCellRenderer(cellRendererClass);
+        columnDef.setCellRenderer(cellRenderer);
         return (J) this;
     }
 
@@ -626,10 +627,12 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                 // Bind directly to the provided TS/Angular expression
                 addAttribute("[rowData]", options.getRowDataRaw());
             }
-            else if (options.getRowData() != null && !options.getRowData().isEmpty())
+            else if (options.getRowData() != null && !options.getRowData()
+                                                             .isEmpty())
             {
                 // Emit a local TS field and bind to it
-                fields.add("rowData: any[] = " + options.getRowData().toString() + ";");
+                fields.add("rowData: any[] = " + options.getRowData()
+                                                        .toString() + ";");
                 addAttribute("[rowData]", "rowData");
             }
         }
