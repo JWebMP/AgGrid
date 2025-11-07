@@ -50,12 +50,19 @@ import java.util.List;
 // Import references
 @NgImportReference(value = "AgGridAngular", reference = "ag-grid-angular")
 @NgImportModule("AgGridAngular")
+@NgImportReference(value = "ClientSideRowModelApiModule", reference = "ag-grid-community")
+@NgImportReference(value = "ClientSideRowModelModule", reference = "ag-grid-community")
 @NgImportReference(value = "ColDef", reference = "ag-grid-community")
 @NgImportReference(value = "ColGroupDef", reference = "ag-grid-community")
 @NgImportReference(value = "RowSelectedEvent", reference = "ag-grid-community")
 @NgImportReference(value = "GetRowIdFunc", reference = "ag-grid-community")
 @NgImportReference(value = "GetRowIdParams", reference = "ag-grid-community")
 @NgImportReference(value = "GridOptions", reference = "ag-grid-community")
+@NgImportReference(value = "GridReadyEvent", reference = "ag-grid-community")
+@NgImportReference(value = "GridApi", reference = "ag-grid-community")
+@NgImportReference(value = "RowSelectionModule", reference = "ag-grid-community")
+@NgImportReference(value = "RowSelectionOptions", reference = "ag-grid-community")
+@NgImportReference(value = "ValidationModule", reference = "ag-grid-community")
 
 
 //@NgImportReference(value = "ColDef, GridOptions, GridApi, ColumnApi, GridReadyEvent, CellValueChangedEvent", reference = "ag-grid-community")
@@ -96,36 +103,6 @@ import java.util.List;
             return `${this.listenerName}-${uuidv4()}`;
         }
         """)
-
-
-@NgConstructorBody("""
-        this.subscription = this.eventBusService.listen(this.listenerName, this.handlerId)
-              .subscribe({
-                  next: (message: any) => {
-                      if (message) {
-                          if (Array.isArray(message)) {
-                          alert('array instructions table : ' + JSON.stringify(message));
-                          /*    for (let m of message) {
-                                  if (typeof m == 'string')
-                                      this.chartConfiguration.set(JSON.parse(m));
-                                  else
-                                      this.chartConfiguration.set(m);
-                              }*/
-                          }
-                      }else {
-                        alert('normal instructions table : ' + JSON.stringify(message));
-                        /*  if (typeof message == 'string')
-                              this.chartConfiguration.set(JSON.parse(message));
-                          else
-                              this.chartConfiguration.set(message);*/
-                      }
-                  },
-                  error: (error: any) => {
-                      console.log(error);
-                  },
-              })
-        """)
-
 
 // Fields for grid API and column API
 @NgImportReference(value = "GridApi", reference = "ag-grid-community")
@@ -570,8 +547,8 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
     /**
      * Configures a column to use a cell renderer that implements INgComponent
      *
-     * @param columnDef         The column definition to configure
-     * @param cellRendererClass The cell renderer class
+     * @param columnDef    The column definition to configure
+     * @param cellRenderer The cell renderer class
      * @return This object
      */
     public J configureCellRenderer(AgGridColumnDef<?> columnDef, ICellRenderer<?> cellRenderer)
@@ -687,6 +664,69 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                     %s
                 }""".formatted(getID(), String.join("\n\t\t", strings)));
         return s;
+    }
+
+    private static final String updateDataString = """
+            this.subscription = this.eventBusService.listen(this.listenerName, this.handlerId)
+              .subscribe({
+                  next: (message: any) => {
+                      if (message) {
+                          if (Array.isArray(message)) {
+                              // message is an array of items (or strings)
+                              const rows: any[] = [];
+                              for (let m of message) {
+                                  if (typeof m === 'string') {
+                                      try { rows.push(...(JSON.parse(m) ?? [])); } catch {}
+                                  } else {
+                                      rows.push(m);
+                                  }
+                              }
+                              if (this.TABLE_ID?.api) {
+                                  this.TABLE_ID.api.setGridOption('rowData', rows);
+                              } else if (this.TABLE_ID) {
+                                  this.TABLE_ID.rowData = rows;
+                              }
+                          } else {
+                              // single message
+                              let rows: any[] | undefined;
+                              if (typeof message === 'string') {
+                                  try { rows = JSON.parse(message); } catch {}
+                              } else {
+                                  rows = Array.isArray(message) ? message : [message];
+                              }
+                              if (rows) {
+                                  if (this.TABLE_ID?.api) {
+                                      this.TABLE_ID.api.setGridOption('rowData', rows);
+                                  } else if (this.TABLE_ID) {
+                                      this.TABLE_ID.rowData = rows;
+                                  }
+                              }
+                          }
+                      } else {
+                          // message is falsy -> clear data
+                          if (this.TABLE_ID?.api) {
+                              this.TABLE_ID.api.setGridOption('rowData', []);
+                          } else if (this.TABLE_ID) {
+                              this.TABLE_ID.rowData = [];
+                          }
+                      }
+                  },
+                  error: (error: any) => {
+                      console.log(error);
+                  },
+              })
+            """;
+
+    @Override
+    public List<String> constructorBody()
+    {
+        var out = INgComponent.super.constructorBody();
+        // Dynamically target the ViewChild reference based on this component's ID
+        // Replace the placeholder identifier 'TABLE_ID' in updateDataString with the actual ID
+        String viewChildId = getID();
+        String dynamicUpdateData = updateDataString.replace("TABLE_ID", viewChildId);
+        out.add(dynamicUpdateData);
+        return out;
     }
 
     public List<String> onRowSelectJS()

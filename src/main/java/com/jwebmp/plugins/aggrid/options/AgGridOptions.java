@@ -75,7 +75,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * Default column definition applied to all columns
      */
     @JsonProperty("defaultColDef")
-    private AgGridColumnDef<?> defaultColDef;
+    private AgGridColumnDef<?> defaultColDef = new AgGridColumnDef<>();
 
     /**
      * The height in pixels for the row containing the column label header
@@ -1512,6 +1512,10 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      */
     public AgGridColumnDef<?> getAutoGroupColumnDef()
     {
+        if (autoGroupColumnDef == null)
+        {
+            autoGroupColumnDef = new AgGridColumnDef<>();
+        }
         return autoGroupColumnDef;
     }
 
