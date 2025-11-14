@@ -111,6 +111,55 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     private ICellRenderer<?> cellRenderer;
 
     /**
+     * Chart data type for integrated/cross-filter charts: 'category' | 'series' | 'excluded'.
+     * See AG Grid documentation.
+     */
+    @JsonProperty("chartDataType")
+    private String chartDataType;
+
+    public J setChartDataType(String chartDataType)
+    {
+        this.chartDataType = chartDataType;
+        return (J) this;
+    }
+
+    /**
+     * Chart data type for Integrated Charts. Preferred type-safe overload.
+     * Accepts CATEGORY, SERIES, TIME, or EXCLUDED and serialises to the
+     * lowercase string values expected by AG Grid.
+     */
+    public J setChartDataType(ChartDataType chartDataType)
+    {
+        this.chartDataType = chartDataType == null ? null : chartDataType.toString();
+        return (J) this;
+    }
+
+    /**
+     * Supported chart data types for AG Grid Integrated Charts. Values render to
+     * 'category' | 'series' | 'time' | 'excluded'.
+     */
+    public enum ChartDataType
+    {
+        CATEGORY("category"),
+        SERIES("series"),
+        TIME("time"),
+        EXCLUDED("excluded");
+
+        private final String json;
+
+        ChartDataType(String json)
+        {
+            this.json = json;
+        }
+
+        @Override
+        public String toString()
+        {
+            return json;
+        }
+    }
+
+    /**
      * The cell renderer params
      */
     @JsonProperty("cellRendererParams")
