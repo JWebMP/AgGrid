@@ -175,7 +175,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
 
     public abstract String getRowIdFieldName();
 
-    protected static class AgGridFetchDataReceiver extends WebSocketAbstractCallReceiver
+    protected static class AgGridFetchDataReceiver extends WebSocketAbstractCallReceiver<AgGridFetchDataReceiver>
     {
         private String listenerName;
         private Class<? extends AgGrid<?>> actionClass;
@@ -199,27 +199,28 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
         @Override
         public io.smallrye.mutiny.Uni<AjaxResponse<?>> action(AjaxCall<?> call, AjaxResponse<?> response)
         {
-            return io.smallrye.mutiny.Uni.createFrom().item(() -> {
-                try
-                {
-                    actionClass = (Class<? extends AgGrid<?>>) Class.forName(call.getClassName());
-                    listenerName = call.getUnknownFields()
-                                       .get("listenerName")
-                                       .toString();
-                }
-                catch (ClassNotFoundException e)
-                {
-                    e.printStackTrace();
-                }
-                var initialEvents = IGuiceContext.get(actionClass)
-                                                 .fetchData();
-                if (initialEvents == null)
-                {
-                    return null;
-                }
-                response.addDataResponse(listenerName, initialEvents);
-                return response;
-            });
+            return io.smallrye.mutiny.Uni.createFrom()
+                                         .item(() -> {
+                                             try
+                                             {
+                                                 actionClass = (Class<? extends AgGrid<?>>) Class.forName(call.getClassName());
+                                                 listenerName = call.getUnknownFields()
+                                                                    .get("listenerName")
+                                                                    .toString();
+                                             }
+                                             catch (ClassNotFoundException e)
+                                             {
+                                                 e.printStackTrace();
+                                             }
+                                             var initialEvents = IGuiceContext.get(actionClass)
+                                                                              .fetchData();
+                                             if (initialEvents == null)
+                                             {
+                                                 return null;
+                                             }
+                                             response.addDataResponse(listenerName, initialEvents);
+                                             return response;
+                                         });
         }
     }
 
