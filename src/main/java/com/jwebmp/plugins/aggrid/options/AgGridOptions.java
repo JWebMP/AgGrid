@@ -559,7 +559,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     // ----- Sorting getters/setters -----
     public Boolean getAccentedSort() {return accentedSort;}
 
-    public J setAccentedSort(Boolean accentedSort)
+    public @org.jspecify.annotations.NonNull J setAccentedSort(Boolean accentedSort)
     {
         this.accentedSort = accentedSort;
         return (J) this;
@@ -567,7 +567,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressMultiSort() {return suppressMultiSort;}
 
-    public J setSuppressMultiSort(Boolean suppressMultiSort)
+    public @org.jspecify.annotations.NonNull J setSuppressMultiSort(Boolean suppressMultiSort)
     {
         this.suppressMultiSort = suppressMultiSort;
         return (J) this;
@@ -575,7 +575,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getAlwaysMultiSort() {return alwaysMultiSort;}
 
-    public J setAlwaysMultiSort(Boolean alwaysMultiSort)
+    public @org.jspecify.annotations.NonNull J setAlwaysMultiSort(Boolean alwaysMultiSort)
     {
         this.alwaysMultiSort = alwaysMultiSort;
         return (J) this;
@@ -583,13 +583,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getMultiSortKey() {return multiSortKey;}
 
-    public J setMultiSortKey(String multiSortKey)
+    public @org.jspecify.annotations.NonNull J setMultiSortKey(String multiSortKey)
     {
         this.multiSortKey = multiSortKey;
         return (J) this;
     }
 
-    public J setMultiSortKey(MultiSortKey key)
+    public @org.jspecify.annotations.NonNull J setMultiSortKey(MultiSortKey key)
     {
         this.multiSortKey = key == null ? null : key.getJson();
         return (J) this;
@@ -597,7 +597,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressMaintainUnsortedOrder() {return suppressMaintainUnsortedOrder;}
 
-    public J setSuppressMaintainUnsortedOrder(Boolean suppressMaintainUnsortedOrder)
+    public @org.jspecify.annotations.NonNull J setSuppressMaintainUnsortedOrder(Boolean suppressMaintainUnsortedOrder)
     {
         this.suppressMaintainUnsortedOrder = suppressMaintainUnsortedOrder;
         return (J) this;
@@ -610,7 +610,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * Example: "nodes => nodes.sort((a,b)=>a.data.order-b.data.order)".
      * The value is serialized without quotes.
      */
-    public J setPostSortRowsRaw(String postSortRowsRawJs)
+    public @org.jspecify.annotations.NonNull J setPostSortRowsRaw(String postSortRowsRawJs)
     {
         this.postSortRows = postSortRowsRawJs;
         return (J) this;
@@ -618,7 +618,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getDeltaSort() {return deltaSort;}
 
-    public J setDeltaSort(Boolean deltaSort)
+    public @org.jspecify.annotations.NonNull J setDeltaSort(Boolean deltaSort)
     {
         this.deltaSort = deltaSort;
         return (J) this;
@@ -627,7 +627,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     // ----- Selection getters/setters -----
     public Boolean getSuppressCellFocus() {return suppressCellFocus;}
 
-    public J setSuppressCellFocus(Boolean suppressCellFocus)
+    public @org.jspecify.annotations.NonNull J setSuppressCellFocus(Boolean suppressCellFocus)
     {
         this.suppressCellFocus = suppressCellFocus;
         return (J) this;
@@ -635,7 +635,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressHeaderFocus() {return suppressHeaderFocus;}
 
-    public J setSuppressHeaderFocus(Boolean suppressHeaderFocus)
+    public @org.jspecify.annotations.NonNull J setSuppressHeaderFocus(Boolean suppressHeaderFocus)
     {
         this.suppressHeaderFocus = suppressHeaderFocus;
         return (J) this;
@@ -643,7 +643,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getEnableCellTextSelection() {return enableCellTextSelection;}
 
-    public J setEnableCellTextSelection(Boolean enableCellTextSelection)
+    public @org.jspecify.annotations.NonNull J setEnableCellTextSelection(Boolean enableCellTextSelection)
     {
         this.enableCellTextSelection = enableCellTextSelection;
         return (J) this;
@@ -661,7 +661,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set locale text customisations object.
      */
-    public J setLocaleText(com.jwebmp.plugins.aggrid.options.locale.ILocaleText<?> localeText)
+    public @org.jspecify.annotations.NonNull J setLocaleText(com.jwebmp.plugins.aggrid.options.locale.ILocaleText<?> localeText)
     {
         this.localeText = localeText;
         return (J) this;
@@ -678,7 +678,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Enable/disable Filter Handlers so Multi Filter buttons control child filters.
      */
-    public J setEnableFilterHandlers(Boolean enableFilterHandlers)
+    public @org.jspecify.annotations.NonNull J setEnableFilterHandlers(Boolean enableFilterHandlers)
     {
         this.enableFilterHandlers = enableFilterHandlers;
         return (J) this;
@@ -696,7 +696,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * Set the onFillStart callback as raw JavaScript.
      * Example: "e => console.log('fill start', e)".
      */
-    public J setOnFillStartRaw(String onFillStartRawJs)
+    public @org.jspecify.annotations.NonNull J setOnFillStartRaw(String onFillStartRawJs)
     {
         this.onFillStart = onFillStartRawJs;
         return (J) this;
@@ -714,7 +714,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * Set the onFillEnd callback as raw JavaScript.
      * Example: "e => console.log('fill end', e)".
      */
-    public J setOnFillEndRaw(String onFillEndRawJs)
+    public @org.jspecify.annotations.NonNull J setOnFillEndRaw(String onFillEndRawJs)
     {
         this.onFillEnd = onFillEndRawJs;
         return (J) this;
@@ -723,7 +723,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Convenience: set Mini Filter placeholder text (searchOoo). Creates LocaleText if needed.
      */
-    public J setLocaleSearchOoo(String searchOoo)
+    public @org.jspecify.annotations.NonNull J setLocaleSearchOoo(String searchOoo)
     {
         if (this.localeText == null)
         {
@@ -737,7 +737,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Convenience: set Mini Filter no matches message. Creates LocaleText if needed.
      */
-    public J setLocaleNoMatches(String noMatches)
+    public @org.jspecify.annotations.NonNull J setLocaleNoMatches(String noMatches)
     {
         if (this.localeText == null)
         {
@@ -767,7 +767,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param columnDefs The column definitions
      * @return This object
      */
-    public J setColumnDefs(List<AgGridColumnDef<?>> columnDefs)
+    public @org.jspecify.annotations.NonNull J setColumnDefs(List<AgGridColumnDef<?>> columnDefs)
     {
         this.columnDefs = columnDefs;
         return (J) this;
@@ -793,7 +793,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param rowData The row data
      * @return This object
      */
-    public J setRowData(List<Object> rowData)
+    public @org.jspecify.annotations.NonNull J setRowData(List<Object> rowData)
     {
         this.rowData = rowData;
         return (J) this;
@@ -816,7 +816,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param rowDataRaw The raw expression to bind.
      * @return This object
      */
-    public J setRowDataRaw(String rowDataRaw)
+    public @org.jspecify.annotations.NonNull J setRowDataRaw(String rowDataRaw)
     {
         this.rowDataRaw = rowDataRaw;
         if (rowDataRaw != null && !rowDataRaw.isBlank())
@@ -846,7 +846,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param pagination Whether pagination is enabled
      * @return This object
      */
-    public J setPagination(Boolean pagination)
+    public @org.jspecify.annotations.NonNull J setPagination(Boolean pagination)
     {
         this.pagination = pagination;
         return (J) this;
@@ -868,7 +868,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param paginationPageSize The page size for pagination
      * @return This object
      */
-    public J setPaginationPageSize(Integer paginationPageSize)
+    public @org.jspecify.annotations.NonNull J setPaginationPageSize(Integer paginationPageSize)
     {
         this.paginationPageSize = paginationPageSize;
         return (J) this;
@@ -890,7 +890,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param rowHeight The row height in pixels (e.g., 50)
      * @return This object
      */
-    public J setRowHeight(Integer rowHeight)
+    public @org.jspecify.annotations.NonNull J setRowHeight(Integer rowHeight)
     {
         this.rowHeight = rowHeight;
         return (J) this;
@@ -915,7 +915,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return defaultColDef;
     }
 
-    public J setDefaultColDef(AgGridColumnDef<?> defaultColDef)
+    public @org.jspecify.annotations.NonNull J setDefaultColDef(AgGridColumnDef<?> defaultColDef)
     {
         this.defaultColDef = defaultColDef;
         return (J) this;
@@ -927,7 +927,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param rowSelection The row selection options
      * @return This object
      */
-    public J setRowSelection(RowSelectionOptions<?> rowSelection)
+    public @org.jspecify.annotations.NonNull J setRowSelection(RowSelectionOptions<?> rowSelection)
     {
         this.rowSelection = rowSelection;
         return (J) this;
@@ -939,7 +939,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param mode The row selection mode
      * @return This object
      */
-    public J setRowSelectionMode(RowSelectionMode mode)
+    public @org.jspecify.annotations.NonNull J setRowSelectionMode(RowSelectionMode mode)
     {
         if (this.rowSelection == null)
         {
@@ -953,7 +953,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * Convenience overload to set row selection using a string mode: 'single' | 'multiple'.
      * This maps to RowSelectionMode enum values.
      */
-    public J setRowSelection(String mode)
+    public @org.jspecify.annotations.NonNull J setRowSelection(String mode)
     {
         if (this.rowSelection == null)
         {
@@ -993,7 +993,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param headerHeight The header height
      * @return This object
      */
-    public J setHeaderHeight(Integer headerHeight)
+    public @org.jspecify.annotations.NonNull J setHeaderHeight(Integer headerHeight)
     {
         this.headerHeight = headerHeight;
         return (J) this;
@@ -1015,7 +1015,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param groupHeaderHeight The group header height
      * @return This object
      */
-    public J setGroupHeaderHeight(Integer groupHeaderHeight)
+    public @org.jspecify.annotations.NonNull J setGroupHeaderHeight(Integer groupHeaderHeight)
     {
         this.groupHeaderHeight = groupHeaderHeight;
         return (J) this;
@@ -1037,7 +1037,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param floatingFiltersHeight The floating filters height
      * @return This object
      */
-    public J setFloatingFiltersHeight(Integer floatingFiltersHeight)
+    public @org.jspecify.annotations.NonNull J setFloatingFiltersHeight(Integer floatingFiltersHeight)
     {
         this.floatingFiltersHeight = floatingFiltersHeight;
         return (J) this;
@@ -1059,7 +1059,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param pivotHeaderHeight The pivot header height
      * @return This object
      */
-    public J setPivotHeaderHeight(Integer pivotHeaderHeight)
+    public @org.jspecify.annotations.NonNull J setPivotHeaderHeight(Integer pivotHeaderHeight)
     {
         this.pivotHeaderHeight = pivotHeaderHeight;
         return (J) this;
@@ -1081,7 +1081,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param pivotGroupHeaderHeight The pivot group header height
      * @return This object
      */
-    public J setPivotGroupHeaderHeight(Integer pivotGroupHeaderHeight)
+    public @org.jspecify.annotations.NonNull J setPivotGroupHeaderHeight(Integer pivotGroupHeaderHeight)
     {
         this.pivotGroupHeaderHeight = pivotGroupHeaderHeight;
         return (J) this;
@@ -1103,7 +1103,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param autoHeaderHeight Whether to automatically adjust header height
      * @return This object
      */
-    public J setAutoHeaderHeight(Boolean autoHeaderHeight)
+    public @org.jspecify.annotations.NonNull J setAutoHeaderHeight(Boolean autoHeaderHeight)
     {
         this.autoHeaderHeight = autoHeaderHeight;
         return (J) this;
@@ -1125,7 +1125,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param hidePaddedHeaderRows Whether to hide padded header rows
      * @return This object
      */
-    public J setHidePaddedHeaderRows(Boolean hidePaddedHeaderRows)
+    public @org.jspecify.annotations.NonNull J setHidePaddedHeaderRows(Boolean hidePaddedHeaderRows)
     {
         this.hidePaddedHeaderRows = hidePaddedHeaderRows;
         return (J) this;
@@ -1147,7 +1147,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param defaultColGroupDef The default column group definition
      * @return This object
      */
-    public J setDefaultColGroupDef(AgGridColumnDef<?> defaultColGroupDef)
+    public @org.jspecify.annotations.NonNull J setDefaultColGroupDef(AgGridColumnDef<?> defaultColGroupDef)
     {
         this.defaultColGroupDef = defaultColGroupDef;
         return (J) this;
@@ -1169,7 +1169,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param suppressColumnMoveAnimation Whether to suppress column move animation
      * @return This object
      */
-    public J setSuppressColumnMoveAnimation(Boolean suppressColumnMoveAnimation)
+    public @org.jspecify.annotations.NonNull J setSuppressColumnMoveAnimation(Boolean suppressColumnMoveAnimation)
     {
         this.suppressColumnMoveAnimation = suppressColumnMoveAnimation;
         return (J) this;
@@ -1191,7 +1191,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param suppressDragLeaveHidesColumns Whether to suppress columns being hidden when dragged outside the grid
      * @return This object
      */
-    public J setSuppressDragLeaveHidesColumns(Boolean suppressDragLeaveHidesColumns)
+    public @org.jspecify.annotations.NonNull J setSuppressDragLeaveHidesColumns(Boolean suppressDragLeaveHidesColumns)
     {
         this.suppressDragLeaveHidesColumns = suppressDragLeaveHidesColumns;
         return (J) this;
@@ -1213,7 +1213,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param suppressMoveWhenColumnDragging Whether to suppress column movement while dragging
      * @return This object
      */
-    public J setSuppressMoveWhenColumnDragging(Boolean suppressMoveWhenColumnDragging)
+    public @org.jspecify.annotations.NonNull J setSuppressMoveWhenColumnDragging(Boolean suppressMoveWhenColumnDragging)
     {
         this.suppressMoveWhenColumnDragging = suppressMoveWhenColumnDragging;
         return (J) this;
@@ -1236,7 +1236,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param processUnpinnedColumns The function to process columns being removed from pinned sections
      * @return This object
      */
-    public J setProcessUnpinnedColumns(String processUnpinnedColumns)
+    public @org.jspecify.annotations.NonNull J setProcessUnpinnedColumns(String processUnpinnedColumns)
     {
         this.processUnpinnedColumns = processUnpinnedColumns;
         return (J) this;
@@ -1258,7 +1258,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param autoSizeStrategy The auto-size strategy for columns
      * @return This object
      */
-    public J setAutoSizeStrategy(AutoSizeStrategy autoSizeStrategy)
+    public @org.jspecify.annotations.NonNull J setAutoSizeStrategy(AutoSizeStrategy autoSizeStrategy)
     {
         this.autoSizeStrategy = autoSizeStrategy;
         return (J) this;
@@ -1280,7 +1280,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param colResizeDefault The default column resize behavior ('normal' or 'shift')
      * @return This object
      */
-    public J setColResizeDefault(String colResizeDefault)
+    public @org.jspecify.annotations.NonNull J setColResizeDefault(String colResizeDefault)
     {
         this.colResizeDefault = colResizeDefault;
         return (J) this;
@@ -1302,7 +1302,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param skipHeaderOnAutoSize Whether to skip the header when auto-sizing columns
      * @return This object
      */
-    public J setSkipHeaderOnAutoSize(Boolean skipHeaderOnAutoSize)
+    public @org.jspecify.annotations.NonNull J setSkipHeaderOnAutoSize(Boolean skipHeaderOnAutoSize)
     {
         this.skipHeaderOnAutoSize = skipHeaderOnAutoSize;
         return (J) this;
@@ -1324,7 +1324,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param suppressColumnVirtualisation Whether to suppress column virtualization
      * @return This object
      */
-    public J setSuppressColumnVirtualisation(Boolean suppressColumnVirtualisation)
+    public @org.jspecify.annotations.NonNull J setSuppressColumnVirtualisation(Boolean suppressColumnVirtualisation)
     {
         this.suppressColumnVirtualisation = suppressColumnVirtualisation;
         return (J) this;
@@ -1346,7 +1346,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param selectionColumnDef The selection column configuration
      * @return This object
      */
-    public J setSelectionColumnDef(AgGridColumnDef<?> selectionColumnDef)
+    public @org.jspecify.annotations.NonNull J setSelectionColumnDef(AgGridColumnDef<?> selectionColumnDef)
     {
         this.selectionColumnDef = selectionColumnDef;
         return (J) this;
@@ -1368,7 +1368,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param isFullWidthRow The callback function as a string
      * @return This object
      */
-    public J setIsFullWidthRow(String isFullWidthRow)
+    public @org.jspecify.annotations.NonNull J setIsFullWidthRow(String isFullWidthRow)
     {
         this.isFullWidthRow = isFullWidthRow;
         return (J) this;
@@ -1390,7 +1390,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param fullWidthCellRenderer The cell renderer name
      * @return This object
      */
-    public J setFullWidthCellRenderer(String fullWidthCellRenderer)
+    public @org.jspecify.annotations.NonNull J setFullWidthCellRenderer(String fullWidthCellRenderer)
     {
         this.fullWidthCellRenderer = fullWidthCellRenderer;
         return (J) this;
@@ -1402,7 +1402,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param fullWidthCellRendererClassName The cell renderer class name
      * @return This object
      */
-    public J setFullWidthCellRendererClassName(String fullWidthCellRendererClassName)
+    public @org.jspecify.annotations.NonNull J setFullWidthCellRendererClassName(String fullWidthCellRendererClassName)
     {
         this.fullWidthCellRenderer = fullWidthCellRendererClassName;
         return (J) this;
@@ -1414,7 +1414,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param fullWidthCellRendererClass The cell renderer component class
      * @return This object
      */
-    public J setFullWidthCellRenderer(Class<? extends INgComponent<?>> fullWidthCellRendererClass)
+    public @org.jspecify.annotations.NonNull J setFullWidthCellRenderer(Class<? extends INgComponent<?>> fullWidthCellRendererClass)
     {
         this.fullWidthCellRenderer = fullWidthCellRendererClass.getSimpleName();
         return (J) this;
@@ -1437,7 +1437,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * @param embedFullWidthRows Whether to embed full width rows
      * @return This object
      */
-    public J setEmbedFullWidthRows(Boolean embedFullWidthRows)
+    public @org.jspecify.annotations.NonNull J setEmbedFullWidthRows(Boolean embedFullWidthRows)
     {
         this.embedFullWidthRows = embedFullWidthRows;
         return (J) this;
@@ -1456,7 +1456,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * Example: "params => { params.api.onFilterChanged(); }"
      * The value is serialized without quotes.
      */
-    public J setOnCellValueChangedRaw(String onCellValueChangedRawJs)
+    public @org.jspecify.annotations.NonNull J setOnCellValueChangedRaw(String onCellValueChangedRawJs)
     {
         this.onCellValueChanged = onCellValueChangedRawJs;
         return (J) this;
@@ -1483,7 +1483,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Enable/disable Tree Data mode.
      */
-    public J setTreeData(Boolean treeData)
+    public @org.jspecify.annotations.NonNull J setTreeData(Boolean treeData)
     {
         this.treeData = treeData;
         return (J) this;
@@ -1501,7 +1501,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * Set the getDataPath callback using a raw JavaScript function or arrow function.
      * Example: "(data) => data.path"
      */
-    public J setGetDataPathRaw(String getDataPathRawJs)
+    public @org.jspecify.annotations.NonNull J setGetDataPathRaw(String getDataPathRawJs)
     {
         this.getDataPath = getDataPathRawJs;
         return (J) this;
@@ -1522,7 +1522,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set the auto group column definition used when grouping/tree data is enabled.
      */
-    public J setAutoGroupColumnDef(AgGridColumnDef<?> autoGroupColumnDef)
+    public @org.jspecify.annotations.NonNull J setAutoGroupColumnDef(AgGridColumnDef<?> autoGroupColumnDef)
     {
         this.autoGroupColumnDef = autoGroupColumnDef;
         return (J) this;
@@ -1539,7 +1539,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Enable/disable cell flash on value changes at grid level.
      */
-    public J setEnableCellChangeFlash(Boolean enableCellChangeFlash)
+    public @org.jspecify.annotations.NonNull J setEnableCellChangeFlash(Boolean enableCellChangeFlash)
     {
         this.enableCellChangeFlash = enableCellChangeFlash;
         return (J) this;
@@ -1558,7 +1558,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Enable/disable row animation (true by default in AG Grid).
      */
-    public J setAnimateRows(Boolean animateRows)
+    public @org.jspecify.annotations.NonNull J setAnimateRows(Boolean animateRows)
     {
         this.animateRows = animateRows;
         return (J) this;
@@ -1575,7 +1575,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Sets the duration a cell remains in flashed state after changes.
      */
-    public J setCellFlashDuration(Integer cellFlashDuration)
+    public @org.jspecify.annotations.NonNull J setCellFlashDuration(Integer cellFlashDuration)
     {
         this.cellFlashDuration = cellFlashDuration;
         return (J) this;
@@ -1592,7 +1592,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Sets the fade-out duration for the flashed cell state.
      */
-    public J setCellFadeDuration(Integer cellFadeDuration)
+    public @org.jspecify.annotations.NonNull J setCellFadeDuration(Integer cellFadeDuration)
     {
         this.cellFadeDuration = cellFadeDuration;
         return (J) this;
@@ -1609,7 +1609,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Allow cells to flash even when change is caused by filtering (default false).
      */
-    public J setAllowShowChangeAfterFilter(Boolean allowShowChangeAfterFilter)
+    public @org.jspecify.annotations.NonNull J setAllowShowChangeAfterFilter(Boolean allowShowChangeAfterFilter)
     {
         this.allowShowChangeAfterFilter = allowShowChangeAfterFilter;
         return (J) this;
@@ -1622,7 +1622,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return copyHeadersToClipboard;
     }
 
-    public J setCopyHeadersToClipboard(Boolean copyHeadersToClipboard)
+    public @org.jspecify.annotations.NonNull J setCopyHeadersToClipboard(Boolean copyHeadersToClipboard)
     {
         this.copyHeadersToClipboard = copyHeadersToClipboard;
         return (J) this;
@@ -1633,7 +1633,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return copyGroupHeadersToClipboard;
     }
 
-    public J setCopyGroupHeadersToClipboard(Boolean copyGroupHeadersToClipboard)
+    public @org.jspecify.annotations.NonNull J setCopyGroupHeadersToClipboard(Boolean copyGroupHeadersToClipboard)
     {
         this.copyGroupHeadersToClipboard = copyGroupHeadersToClipboard;
         return (J) this;
@@ -1644,7 +1644,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return clipboardDelimiter;
     }
 
-    public J setClipboardDelimiter(String clipboardDelimiter)
+    public @org.jspecify.annotations.NonNull J setClipboardDelimiter(String clipboardDelimiter)
     {
         this.clipboardDelimiter = clipboardDelimiter;
         return (J) this;
@@ -1655,7 +1655,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return suppressCutToClipboard;
     }
 
-    public J setSuppressCutToClipboard(Boolean suppressCutToClipboard)
+    public @org.jspecify.annotations.NonNull J setSuppressCutToClipboard(Boolean suppressCutToClipboard)
     {
         this.suppressCutToClipboard = suppressCutToClipboard;
         return (J) this;
@@ -1666,7 +1666,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return suppressLastEmptyLineOnPaste;
     }
 
-    public J setSuppressLastEmptyLineOnPaste(Boolean suppressLastEmptyLineOnPaste)
+    public @org.jspecify.annotations.NonNull J setSuppressLastEmptyLineOnPaste(Boolean suppressLastEmptyLineOnPaste)
     {
         this.suppressLastEmptyLineOnPaste = suppressLastEmptyLineOnPaste;
         return (J) this;
@@ -1677,7 +1677,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return suppressClipboardPaste;
     }
 
-    public J setSuppressClipboardPaste(Boolean suppressClipboardPaste)
+    public @org.jspecify.annotations.NonNull J setSuppressClipboardPaste(Boolean suppressClipboardPaste)
     {
         this.suppressClipboardPaste = suppressClipboardPaste;
         return (J) this;
@@ -1688,7 +1688,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return suppressClipboardApi;
     }
 
-    public J setSuppressClipboardApi(Boolean suppressClipboardApi)
+    public @org.jspecify.annotations.NonNull J setSuppressClipboardApi(Boolean suppressClipboardApi)
     {
         this.suppressClipboardApi = suppressClipboardApi;
         return (J) this;
@@ -1699,7 +1699,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return processCellForClipboard;
     }
 
-    public J setProcessCellForClipboardRaw(String processCellForClipboard)
+    public @org.jspecify.annotations.NonNull J setProcessCellForClipboardRaw(String processCellForClipboard)
     {
         this.processCellForClipboard = processCellForClipboard;
         return (J) this;
@@ -1710,7 +1710,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return processHeaderForClipboard;
     }
 
-    public J setProcessHeaderForClipboardRaw(String processHeaderForClipboard)
+    public @org.jspecify.annotations.NonNull J setProcessHeaderForClipboardRaw(String processHeaderForClipboard)
     {
         this.processHeaderForClipboard = processHeaderForClipboard;
         return (J) this;
@@ -1721,7 +1721,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return processGroupHeaderForClipboard;
     }
 
-    public J setProcessGroupHeaderForClipboardRaw(String processGroupHeaderForClipboard)
+    public @org.jspecify.annotations.NonNull J setProcessGroupHeaderForClipboardRaw(String processGroupHeaderForClipboard)
     {
         this.processGroupHeaderForClipboard = processGroupHeaderForClipboard;
         return (J) this;
@@ -1732,7 +1732,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return processCellFromClipboard;
     }
 
-    public J setProcessCellFromClipboardRaw(String processCellFromClipboard)
+    public @org.jspecify.annotations.NonNull J setProcessCellFromClipboardRaw(String processCellFromClipboard)
     {
         this.processCellFromClipboard = processCellFromClipboard;
         return (J) this;
@@ -1743,7 +1743,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return sendToClipboard;
     }
 
-    public J setSendToClipboardRaw(String sendToClipboard)
+    public @org.jspecify.annotations.NonNull J setSendToClipboardRaw(String sendToClipboard)
     {
         this.sendToClipboard = sendToClipboard;
         return (J) this;
@@ -1754,7 +1754,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return processDataFromClipboard;
     }
 
-    public J setProcessDataFromClipboardRaw(String processDataFromClipboard)
+    public @org.jspecify.annotations.NonNull J setProcessDataFromClipboardRaw(String processDataFromClipboard)
     {
         this.processDataFromClipboard = processDataFromClipboard;
         return (J) this;
@@ -1767,7 +1767,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return suppressMovableColumns;
     }
 
-    public J setSuppressMovableColumns(Boolean suppressMovableColumns)
+    public @org.jspecify.annotations.NonNull J setSuppressMovableColumns(Boolean suppressMovableColumns)
     {
         this.suppressMovableColumns = suppressMovableColumns;
         return (J) this;
@@ -1821,7 +1821,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     // Scrolling getters/setters
     public Boolean getAlwaysShowHorizontalScroll() {return alwaysShowHorizontalScroll;}
 
-    public J setAlwaysShowHorizontalScroll(Boolean v)
+    public @org.jspecify.annotations.NonNull J setAlwaysShowHorizontalScroll(Boolean v)
     {
         this.alwaysShowHorizontalScroll = v;
         return (J) this;
@@ -1829,7 +1829,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getAlwaysShowVerticalScroll() {return alwaysShowVerticalScroll;}
 
-    public J setAlwaysShowVerticalScroll(Boolean v)
+    public @org.jspecify.annotations.NonNull J setAlwaysShowVerticalScroll(Boolean v)
     {
         this.alwaysShowVerticalScroll = v;
         return (J) this;
@@ -1837,7 +1837,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getDebounceVerticalScrollbar() {return debounceVerticalScrollbar;}
 
-    public J setDebounceVerticalScrollbar(Boolean v)
+    public @org.jspecify.annotations.NonNull J setDebounceVerticalScrollbar(Boolean v)
     {
         this.debounceVerticalScrollbar = v;
         return (J) this;
@@ -1845,7 +1845,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressHorizontalScroll() {return suppressHorizontalScroll;}
 
-    public J setSuppressHorizontalScroll(Boolean v)
+    public @org.jspecify.annotations.NonNull J setSuppressHorizontalScroll(Boolean v)
     {
         this.suppressHorizontalScroll = v;
         return (J) this;
@@ -1853,7 +1853,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressScrollOnNewData() {return suppressScrollOnNewData;}
 
-    public J setSuppressScrollOnNewData(Boolean v)
+    public @org.jspecify.annotations.NonNull J setSuppressScrollOnNewData(Boolean v)
     {
         this.suppressScrollOnNewData = v;
         return (J) this;
@@ -1861,7 +1861,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressScrollWhenPopupsAreOpen() {return suppressScrollWhenPopupsAreOpen;}
 
-    public J setSuppressScrollWhenPopupsAreOpen(Boolean v)
+    public @org.jspecify.annotations.NonNull J setSuppressScrollWhenPopupsAreOpen(Boolean v)
     {
         this.suppressScrollWhenPopupsAreOpen = v;
         return (J) this;
@@ -1869,7 +1869,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressMiddleClickScrolls() {return suppressMiddleClickScrolls;}
 
-    public J setSuppressMiddleClickScrolls(Boolean v)
+    public @org.jspecify.annotations.NonNull J setSuppressMiddleClickScrolls(Boolean v)
     {
         this.suppressMiddleClickScrolls = v;
         return (J) this;
@@ -1877,7 +1877,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressPreventDefaultOnMouseWheel() {return suppressPreventDefaultOnMouseWheel;}
 
-    public J setSuppressPreventDefaultOnMouseWheel(Boolean v)
+    public @org.jspecify.annotations.NonNull J setSuppressPreventDefaultOnMouseWheel(Boolean v)
     {
         this.suppressPreventDefaultOnMouseWheel = v;
         return (J) this;
@@ -1885,7 +1885,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getScrollbarWidth() {return scrollbarWidth;}
 
-    public J setScrollbarWidth(Integer v)
+    public @org.jspecify.annotations.NonNull J setScrollbarWidth(Integer v)
     {
         this.scrollbarWidth = v;
         return (J) this;
@@ -1896,7 +1896,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return enableBrowserTooltips;
     }
 
-    public J setEnableBrowserTooltips(Boolean enableBrowserTooltips)
+    public @org.jspecify.annotations.NonNull J setEnableBrowserTooltips(Boolean enableBrowserTooltips)
     {
         this.enableBrowserTooltips = enableBrowserTooltips;
         return (J) this;
@@ -1907,7 +1907,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return tooltipShowDelay;
     }
 
-    public J setTooltipShowDelay(Integer tooltipShowDelay)
+    public @org.jspecify.annotations.NonNull J setTooltipShowDelay(Integer tooltipShowDelay)
     {
         this.tooltipShowDelay = tooltipShowDelay;
         return (J) this;
@@ -1918,7 +1918,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return tooltipHideDelay;
     }
 
-    public J setTooltipHideDelay(Integer tooltipHideDelay)
+    public @org.jspecify.annotations.NonNull J setTooltipHideDelay(Integer tooltipHideDelay)
     {
         this.tooltipHideDelay = tooltipHideDelay;
         return (J) this;
@@ -1929,7 +1929,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return tooltipMouseTrack;
     }
 
-    public J setTooltipMouseTrack(Boolean tooltipMouseTrack)
+    public @org.jspecify.annotations.NonNull J setTooltipMouseTrack(Boolean tooltipMouseTrack)
     {
         this.tooltipMouseTrack = tooltipMouseTrack;
         return (J) this;
@@ -1940,13 +1940,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return tooltipShowMode;
     }
 
-    public J setTooltipShowMode(String tooltipShowMode)
+    public @org.jspecify.annotations.NonNull J setTooltipShowMode(String tooltipShowMode)
     {
         this.tooltipShowMode = tooltipShowMode;
         return (J) this;
     }
 
-    public J setTooltipShowMode(TooltipShowMode mode)
+    public @org.jspecify.annotations.NonNull J setTooltipShowMode(TooltipShowMode mode)
     {
         this.tooltipShowMode = mode == null ? null : mode.getJson();
         return (J) this;
@@ -1957,13 +1957,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return tooltipTrigger;
     }
 
-    public J setTooltipTrigger(String tooltipTrigger)
+    public @org.jspecify.annotations.NonNull J setTooltipTrigger(String tooltipTrigger)
     {
         this.tooltipTrigger = tooltipTrigger;
         return (J) this;
     }
 
-    public J setTooltipTrigger(TooltipTrigger trigger)
+    public @org.jspecify.annotations.NonNull J setTooltipTrigger(TooltipTrigger trigger)
     {
         this.tooltipTrigger = trigger == null ? null : trigger.getJson();
         return (J) this;
@@ -1974,7 +1974,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return tooltipInteraction;
     }
 
-    public J setTooltipInteraction(Boolean tooltipInteraction)
+    public @org.jspecify.annotations.NonNull J setTooltipInteraction(Boolean tooltipInteraction)
     {
         this.tooltipInteraction = tooltipInteraction;
         return (J) this;
@@ -2000,13 +2000,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getColumnMenu() {return columnMenu;}
 
-    public J setColumnMenu(String columnMenu)
+    public @org.jspecify.annotations.NonNull J setColumnMenu(String columnMenu)
     {
         this.columnMenu = columnMenu;
         return (J) this;
     }
 
-    public J setColumnMenu(ColumnMenuType type)
+    public @org.jspecify.annotations.NonNull J setColumnMenu(ColumnMenuType type)
     {
         this.columnMenu = type == null ? null : type.getJson();
         return (J) this;
@@ -2033,13 +2033,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getDomLayout() {return domLayout;}
 
-    public J setDomLayout(String domLayout)
+    public @org.jspecify.annotations.NonNull J setDomLayout(String domLayout)
     {
         this.domLayout = domLayout;
         return (J) this;
     }
 
-    public J setDomLayout(DomLayoutType type)
+    public @org.jspecify.annotations.NonNull J setDomLayout(DomLayoutType type)
     {
         this.domLayout = type == null ? null : type.getJson();
         return (J) this;
@@ -2066,7 +2066,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getPaginationAutoPageSize() {return paginationAutoPageSize;}
 
-    public J setPaginationAutoPageSize(Boolean v)
+    public @org.jspecify.annotations.NonNull J setPaginationAutoPageSize(Boolean v)
     {
         this.paginationAutoPageSize = v;
         return (J) this;
@@ -2074,7 +2074,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getPaginateChildRows() {return paginateChildRows;}
 
-    public J setPaginateChildRows(Boolean v)
+    public @org.jspecify.annotations.NonNull J setPaginateChildRows(Boolean v)
     {
         this.paginateChildRows = v;
         return (J) this;
@@ -2082,7 +2082,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressPaginationPanel() {return suppressPaginationPanel;}
 
-    public J setSuppressPaginationPanel(Boolean v)
+    public @org.jspecify.annotations.NonNull J setSuppressPaginationPanel(Boolean v)
     {
         this.suppressPaginationPanel = v;
         return (J) this;
@@ -2090,13 +2090,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getPaginationPageSizeSelector() {return paginationPageSizeSelector;}
 
-    public J setPaginationPageSizeSelector(Boolean show)
+    public @org.jspecify.annotations.NonNull J setPaginationPageSizeSelector(Boolean show)
     {
         this.paginationPageSizeSelector = show;
         return (J) this;
     }
 
-    public J setPaginationPageSizeSelector(int[] values)
+    public @org.jspecify.annotations.NonNull J setPaginationPageSizeSelector(int[] values)
     {
         this.paginationPageSizeSelector = values;
         return (J) this;
@@ -2105,7 +2105,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Convenience overload accepting a List<Integer> of page sizes.
      */
-    public J setPaginationPageSizeSelector(java.util.List<Integer> values)
+    public @org.jspecify.annotations.NonNull J setPaginationPageSizeSelector(java.util.List<Integer> values)
     {
         this.paginationPageSizeSelector = values;
         return (J) this;
@@ -2117,7 +2117,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * Set the paginationNumberFormatter callback using raw JavaScript.
      * Example: "params => `${params.value.toLocaleString()}`"
      */
-    public J setPaginationNumberFormatterRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setPaginationNumberFormatterRaw(String rawJs)
     {
         this.paginationNumberFormatter = rawJs;
         return (J) this;
@@ -2161,19 +2161,19 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getEnableRowPinning() {return enableRowPinning;}
 
-    public J setEnableRowPinning(Boolean v)
+    public @org.jspecify.annotations.NonNull J setEnableRowPinning(Boolean v)
     {
         this.enableRowPinning = v;
         return (J) this;
     }
 
-    public J setEnableRowPinning(String position)
+    public @org.jspecify.annotations.NonNull J setEnableRowPinning(String position)
     {
         this.enableRowPinning = position;
         return (J) this;
     }
 
-    public J setEnableRowPinning(RowPinPosition pos)
+    public @org.jspecify.annotations.NonNull J setEnableRowPinning(RowPinPosition pos)
     {
         this.enableRowPinning = pos == null ? null : pos.getJson();
         return (J) this;
@@ -2181,7 +2181,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getIsRowPinnable() {return isRowPinnable;}
 
-    public J setIsRowPinnableRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setIsRowPinnableRaw(String rawJs)
     {
         this.isRowPinnable = rawJs;
         return (J) this;
@@ -2189,7 +2189,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getIsRowPinned() {return isRowPinned;}
 
-    public J setIsRowPinnedRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setIsRowPinnedRaw(String rawJs)
     {
         this.isRowPinned = rawJs;
         return (J) this;
@@ -2197,7 +2197,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public java.util.List<Object> getPinnedTopRowData() {return pinnedTopRowData;}
 
-    public J setPinnedTopRowData(java.util.List<Object> data)
+    public @org.jspecify.annotations.NonNull J setPinnedTopRowData(java.util.List<Object> data)
     {
         this.pinnedTopRowData = data;
         return (J) this;
@@ -2205,7 +2205,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public java.util.List<Object> getPinnedBottomRowData() {return pinnedBottomRowData;}
 
-    public J setPinnedBottomRowData(java.util.List<Object> data)
+    public @org.jspecify.annotations.NonNull J setPinnedBottomRowData(java.util.List<Object> data)
     {
         this.pinnedBottomRowData = data;
         return (J) this;
@@ -2263,7 +2263,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     // Overlays getters/setters
     public Boolean getLoading() {return loading;}
 
-    public J setLoading(Boolean loading)
+    public @org.jspecify.annotations.NonNull J setLoading(Boolean loading)
     {
         this.loading = loading;
         return (J) this;
@@ -2271,7 +2271,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getOverlayLoadingTemplate() {return overlayLoadingTemplate;}
 
-    public J setOverlayLoadingTemplate(String overlayLoadingTemplate)
+    public @org.jspecify.annotations.NonNull J setOverlayLoadingTemplate(String overlayLoadingTemplate)
     {
         this.overlayLoadingTemplate = overlayLoadingTemplate;
         return (J) this;
@@ -2279,7 +2279,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getLoadingOverlayComponent() {return loadingOverlayComponent;}
 
-    public J setLoadingOverlayComponent(Object loadingOverlayComponent)
+    public @org.jspecify.annotations.NonNull J setLoadingOverlayComponent(Object loadingOverlayComponent)
     {
         this.loadingOverlayComponent = loadingOverlayComponent;
         return (J) this;
@@ -2287,7 +2287,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getLoadingOverlayComponentParams() {return loadingOverlayComponentParams;}
 
-    public J setLoadingOverlayComponentParams(Object loadingOverlayComponentParams)
+    public @org.jspecify.annotations.NonNull J setLoadingOverlayComponentParams(Object loadingOverlayComponentParams)
     {
         this.loadingOverlayComponentParams = loadingOverlayComponentParams;
         return (J) this;
@@ -2295,7 +2295,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressNoRowsOverlay() {return suppressNoRowsOverlay;}
 
-    public J setSuppressNoRowsOverlay(Boolean suppressNoRowsOverlay)
+    public @org.jspecify.annotations.NonNull J setSuppressNoRowsOverlay(Boolean suppressNoRowsOverlay)
     {
         this.suppressNoRowsOverlay = suppressNoRowsOverlay;
         return (J) this;
@@ -2303,7 +2303,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getOverlayNoRowsTemplate() {return overlayNoRowsTemplate;}
 
-    public J setOverlayNoRowsTemplate(String overlayNoRowsTemplate)
+    public @org.jspecify.annotations.NonNull J setOverlayNoRowsTemplate(String overlayNoRowsTemplate)
     {
         this.overlayNoRowsTemplate = overlayNoRowsTemplate;
         return (J) this;
@@ -2311,7 +2311,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getNoRowsOverlayComponent() {return noRowsOverlayComponent;}
 
-    public J setNoRowsOverlayComponent(Object noRowsOverlayComponent)
+    public @org.jspecify.annotations.NonNull J setNoRowsOverlayComponent(Object noRowsOverlayComponent)
     {
         this.noRowsOverlayComponent = noRowsOverlayComponent;
         return (J) this;
@@ -2319,7 +2319,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getNoRowsOverlayComponentParams() {return noRowsOverlayComponentParams;}
 
-    public J setNoRowsOverlayComponentParams(Object noRowsOverlayComponentParams)
+    public @org.jspecify.annotations.NonNull J setNoRowsOverlayComponentParams(Object noRowsOverlayComponentParams)
     {
         this.noRowsOverlayComponentParams = noRowsOverlayComponentParams;
         return (J) this;
@@ -2347,7 +2347,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getLoadingCellRenderer() {return loadingCellRenderer;}
 
-    public J setLoadingCellRenderer(Object loadingCellRenderer)
+    public @org.jspecify.annotations.NonNull J setLoadingCellRenderer(Object loadingCellRenderer)
     {
         this.loadingCellRenderer = loadingCellRenderer;
         return (J) this;
@@ -2355,7 +2355,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getLoadingCellRendererParams() {return loadingCellRendererParams;}
 
-    public J setLoadingCellRendererParams(Object loadingCellRendererParams)
+    public @org.jspecify.annotations.NonNull J setLoadingCellRendererParams(Object loadingCellRendererParams)
     {
         this.loadingCellRendererParams = loadingCellRendererParams;
         return (J) this;
@@ -2366,7 +2366,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set loadingCellRendererSelector using raw JS. Example: "params => ({ component: 'MyRenderer' })".
      */
-    public J setLoadingCellRendererSelectorRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setLoadingCellRendererSelectorRaw(String rawJs)
     {
         this.loadingCellRendererSelector = rawJs;
         return (J) this;
@@ -2419,7 +2419,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getRowStyle() {return rowStyle;}
 
-    public J setRowStyle(Object rowStyle)
+    public @org.jspecify.annotations.NonNull J setRowStyle(Object rowStyle)
     {
         this.rowStyle = rowStyle;
         return (J) this;
@@ -2427,7 +2427,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getGetRowStyle() {return getRowStyle;}
 
-    public J setGetRowStyleRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setGetRowStyleRaw(String rawJs)
     {
         this.getRowStyle = rawJs;
         return (J) this;
@@ -2435,7 +2435,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getRowClass() {return rowClass;}
 
-    public J setRowClass(Object rowClass)
+    public @org.jspecify.annotations.NonNull J setRowClass(Object rowClass)
     {
         this.rowClass = rowClass;
         return (J) this;
@@ -2443,7 +2443,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getGetRowClass() {return getRowClass;}
 
-    public J setGetRowClassRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setGetRowClassRaw(String rawJs)
     {
         this.getRowClass = rawJs;
         return (J) this;
@@ -2451,7 +2451,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getRowClassRules() {return rowClassRules;}
 
-    public J setRowClassRules(Object rowClassRules)
+    public @org.jspecify.annotations.NonNull J setRowClassRules(Object rowClassRules)
     {
         this.rowClassRules = rowClassRules;
         return (J) this;
@@ -2459,7 +2459,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressRowHoverHighlight() {return suppressRowHoverHighlight;}
 
-    public J setSuppressRowHoverHighlight(Boolean suppressRowHoverHighlight)
+    public @org.jspecify.annotations.NonNull J setSuppressRowHoverHighlight(Boolean suppressRowHoverHighlight)
     {
         this.suppressRowHoverHighlight = suppressRowHoverHighlight;
         return (J) this;
@@ -2467,7 +2467,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getColumnHoverHighlight() {return columnHoverHighlight;}
 
-    public J setColumnHoverHighlight(Boolean columnHoverHighlight)
+    public @org.jspecify.annotations.NonNull J setColumnHoverHighlight(Boolean columnHoverHighlight)
     {
         this.columnHoverHighlight = columnHoverHighlight;
         return (J) this;
@@ -2494,7 +2494,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressContextMenu() {return suppressContextMenu;}
 
-    public J setSuppressContextMenu(Boolean suppressContextMenu)
+    public @org.jspecify.annotations.NonNull J setSuppressContextMenu(Boolean suppressContextMenu)
     {
         this.suppressContextMenu = suppressContextMenu;
         return (J) this;
@@ -2502,7 +2502,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getPreventDefaultOnContextMenu() {return preventDefaultOnContextMenu;}
 
-    public J setPreventDefaultOnContextMenu(Boolean preventDefaultOnContextMenu)
+    public @org.jspecify.annotations.NonNull J setPreventDefaultOnContextMenu(Boolean preventDefaultOnContextMenu)
     {
         this.preventDefaultOnContextMenu = preventDefaultOnContextMenu;
         return (J) this;
@@ -2510,7 +2510,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getAllowContextMenuWithControlKey() {return allowContextMenuWithControlKey;}
 
-    public J setAllowContextMenuWithControlKey(Boolean allowContextMenuWithControlKey)
+    public @org.jspecify.annotations.NonNull J setAllowContextMenuWithControlKey(Boolean allowContextMenuWithControlKey)
     {
         this.allowContextMenuWithControlKey = allowContextMenuWithControlKey;
         return (J) this;
@@ -2557,7 +2557,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Example: "() => true" to handle focusing yourself.
      */
-    public J setFocusGridInnerElementRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setFocusGridInnerElementRaw(String rawJs)
     {
         this.focusGridInnerElement = rawJs;
         return (J) this;
@@ -2565,7 +2565,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getNavigateToNextHeader() {return navigateToNextHeader;}
 
-    public J setNavigateToNextHeaderRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setNavigateToNextHeaderRaw(String rawJs)
     {
         this.navigateToNextHeader = rawJs;
         return (J) this;
@@ -2573,7 +2573,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getTabToNextHeader() {return tabToNextHeader;}
 
-    public J setTabToNextHeaderRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setTabToNextHeaderRaw(String rawJs)
     {
         this.tabToNextHeader = rawJs;
         return (J) this;
@@ -2581,7 +2581,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getNavigateToNextCell() {return navigateToNextCell;}
 
-    public J setNavigateToNextCellRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setNavigateToNextCellRaw(String rawJs)
     {
         this.navigateToNextCell = rawJs;
         return (J) this;
@@ -2589,7 +2589,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getTabToNextCell() {return tabToNextCell;}
 
-    public J setTabToNextCellRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setTabToNextCellRaw(String rawJs)
     {
         this.tabToNextCell = rawJs;
         return (J) this;
@@ -2659,7 +2659,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getDebug() {return debug;}
 
-    public J setDebug(Boolean debug)
+    public @org.jspecify.annotations.NonNull J setDebug(Boolean debug)
     {
         this.debug = debug;
         return (J) this;
@@ -2667,7 +2667,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressFocusAfterRefresh() {return suppressFocusAfterRefresh;}
 
-    public J setSuppressFocusAfterRefresh(Boolean suppressFocusAfterRefresh)
+    public @org.jspecify.annotations.NonNull J setSuppressFocusAfterRefresh(Boolean suppressFocusAfterRefresh)
     {
         this.suppressFocusAfterRefresh = suppressFocusAfterRefresh;
         return (J) this;
@@ -2675,7 +2675,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getEnsureDomOrder() {return ensureDomOrder;}
 
-    public J setEnsureDomOrder(Boolean ensureDomOrder)
+    public @org.jspecify.annotations.NonNull J setEnsureDomOrder(Boolean ensureDomOrder)
     {
         this.ensureDomOrder = ensureDomOrder;
         return (J) this;
@@ -2683,7 +2683,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getGridId() {return gridId;}
 
-    public J setGridId(String gridId)
+    public @org.jspecify.annotations.NonNull J setGridId(String gridId)
     {
         this.gridId = gridId;
         return (J) this;
@@ -2694,7 +2694,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS: e.g., "params => { console.log('row created'); }"
      */
-    public J setProcessRowPostCreateRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setProcessRowPostCreateRaw(String rawJs)
     {
         this.processRowPostCreate = rawJs;
         return (J) this;
@@ -2702,7 +2702,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getEnableRtl() {return enableRtl;}
 
-    public J setEnableRtl(Boolean enableRtl)
+    public @org.jspecify.annotations.NonNull J setEnableRtl(Boolean enableRtl)
     {
         this.enableRtl = enableRtl;
         return (J) this;
@@ -2710,7 +2710,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressRowVirtualisation() {return suppressRowVirtualisation;}
 
-    public J setSuppressRowVirtualisation(Boolean suppressRowVirtualisation)
+    public @org.jspecify.annotations.NonNull J setSuppressRowVirtualisation(Boolean suppressRowVirtualisation)
     {
         this.suppressRowVirtualisation = suppressRowVirtualisation;
         return (J) this;
@@ -2718,7 +2718,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressMaxRenderedRowRestriction() {return suppressMaxRenderedRowRestriction;}
 
-    public J setSuppressMaxRenderedRowRestriction(Boolean suppressMaxRenderedRowRestriction)
+    public @org.jspecify.annotations.NonNull J setSuppressMaxRenderedRowRestriction(Boolean suppressMaxRenderedRowRestriction)
     {
         this.suppressMaxRenderedRowRestriction = suppressMaxRenderedRowRestriction;
         return (J) this;
@@ -2726,7 +2726,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getEnableCellSpan() {return enableCellSpan;}
 
-    public J setEnableCellSpan(Boolean enableCellSpan)
+    public @org.jspecify.annotations.NonNull J setEnableCellSpan(Boolean enableCellSpan)
     {
         this.enableCellSpan = enableCellSpan;
         return (J) this;
@@ -2734,7 +2734,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getRowBuffer() {return rowBuffer;}
 
-    public J setRowBuffer(Integer rowBuffer)
+    public @org.jspecify.annotations.NonNull J setRowBuffer(Integer rowBuffer)
     {
         this.rowBuffer = rowBuffer;
         return (J) this;
@@ -2792,7 +2792,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getMasterDetail() {return masterDetail;}
 
-    public J setMasterDetail(Boolean masterDetail)
+    public @org.jspecify.annotations.NonNull J setMasterDetail(Boolean masterDetail)
     {
         this.masterDetail = masterDetail;
         return (J) this;
@@ -2803,7 +2803,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS for isRowMaster, e.g., "params => params.data && params.data.master"
      */
-    public J setIsRowMasterRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setIsRowMasterRaw(String rawJs)
     {
         this.isRowMaster = rawJs;
         return (J) this;
@@ -2811,7 +2811,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getDetailCellRenderer() {return detailCellRenderer;}
 
-    public J setDetailCellRenderer(Object detailCellRenderer)
+    public @org.jspecify.annotations.NonNull J setDetailCellRenderer(Object detailCellRenderer)
     {
         this.detailCellRenderer = detailCellRenderer;
         return (J) this;
@@ -2819,7 +2819,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getDetailCellRendererParams() {return detailCellRendererParams;}
 
-    public J setDetailCellRendererParams(Object detailCellRendererParams)
+    public @org.jspecify.annotations.NonNull J setDetailCellRendererParams(Object detailCellRendererParams)
     {
         this.detailCellRendererParams = detailCellRendererParams;
         return (J) this;
@@ -2827,7 +2827,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getDetailRowHeight() {return detailRowHeight;}
 
-    public J setDetailRowHeight(Integer detailRowHeight)
+    public @org.jspecify.annotations.NonNull J setDetailRowHeight(Integer detailRowHeight)
     {
         this.detailRowHeight = detailRowHeight;
         return (J) this;
@@ -2835,7 +2835,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getDetailRowAutoHeight() {return detailRowAutoHeight;}
 
-    public J setDetailRowAutoHeight(Boolean detailRowAutoHeight)
+    public @org.jspecify.annotations.NonNull J setDetailRowAutoHeight(Boolean detailRowAutoHeight)
     {
         this.detailRowAutoHeight = detailRowAutoHeight;
         return (J) this;
@@ -2843,7 +2843,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getKeepDetailRows() {return keepDetailRows;}
 
-    public J setKeepDetailRows(Boolean keepDetailRows)
+    public @org.jspecify.annotations.NonNull J setKeepDetailRows(Boolean keepDetailRows)
     {
         this.keepDetailRows = keepDetailRows;
         return (J) this;
@@ -2851,7 +2851,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getKeepDetailRowsCount() {return keepDetailRowsCount;}
 
-    public J setKeepDetailRowsCount(Integer keepDetailRowsCount)
+    public @org.jspecify.annotations.NonNull J setKeepDetailRowsCount(Integer keepDetailRowsCount)
     {
         this.keepDetailRowsCount = keepDetailRowsCount;
         return (J) this;
@@ -2922,7 +2922,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getRowDragManaged() {return rowDragManaged;}
 
-    public J setRowDragManaged(Boolean rowDragManaged)
+    public @org.jspecify.annotations.NonNull J setRowDragManaged(Boolean rowDragManaged)
     {
         this.rowDragManaged = rowDragManaged;
         return (J) this;
@@ -2930,7 +2930,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getRowDragEntireRow() {return rowDragEntireRow;}
 
-    public J setRowDragEntireRow(Boolean rowDragEntireRow)
+    public @org.jspecify.annotations.NonNull J setRowDragEntireRow(Boolean rowDragEntireRow)
     {
         this.rowDragEntireRow = rowDragEntireRow;
         return (J) this;
@@ -2938,7 +2938,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getRowDragMultiRow() {return rowDragMultiRow;}
 
-    public J setRowDragMultiRow(Boolean rowDragMultiRow)
+    public @org.jspecify.annotations.NonNull J setRowDragMultiRow(Boolean rowDragMultiRow)
     {
         this.rowDragMultiRow = rowDragMultiRow;
         return (J) this;
@@ -2946,7 +2946,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressRowDrag() {return suppressRowDrag;}
 
-    public J setSuppressRowDrag(Boolean suppressRowDrag)
+    public @org.jspecify.annotations.NonNull J setSuppressRowDrag(Boolean suppressRowDrag)
     {
         this.suppressRowDrag = suppressRowDrag;
         return (J) this;
@@ -2954,7 +2954,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressMoveWhenRowDragging() {return suppressMoveWhenRowDragging;}
 
-    public J setSuppressMoveWhenRowDragging(Boolean suppressMoveWhenRowDragging)
+    public @org.jspecify.annotations.NonNull J setSuppressMoveWhenRowDragging(Boolean suppressMoveWhenRowDragging)
     {
         this.suppressMoveWhenRowDragging = suppressMoveWhenRowDragging;
         return (J) this;
@@ -2962,7 +2962,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getRowDragText() {return rowDragText;}
 
-    public J setRowDragTextRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setRowDragTextRaw(String rawJs)
     {
         this.rowDragText = rawJs;
         return (J) this;
@@ -2970,7 +2970,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getDragAndDropImageComponent() {return dragAndDropImageComponent;}
 
-    public J setDragAndDropImageComponent(Object dragAndDropImageComponent)
+    public @org.jspecify.annotations.NonNull J setDragAndDropImageComponent(Object dragAndDropImageComponent)
     {
         this.dragAndDropImageComponent = dragAndDropImageComponent;
         return (J) this;
@@ -2978,7 +2978,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getDragAndDropImageComponentParams() {return dragAndDropImageComponentParams;}
 
-    public J setDragAndDropImageComponentParams(Object dragAndDropImageComponentParams)
+    public @org.jspecify.annotations.NonNull J setDragAndDropImageComponentParams(Object dragAndDropImageComponentParams)
     {
         this.dragAndDropImageComponentParams = dragAndDropImageComponentParams;
         return (J) this;
@@ -2986,7 +2986,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getRowDragInsertDelay() {return rowDragInsertDelay;}
 
-    public J setRowDragInsertDelay(Integer rowDragInsertDelay)
+    public @org.jspecify.annotations.NonNull J setRowDragInsertDelay(Integer rowDragInsertDelay)
     {
         this.rowDragInsertDelay = rowDragInsertDelay;
         return (J) this;
@@ -2994,7 +2994,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getIsRowValidDropPosition() {return isRowValidDropPosition;}
 
-    public J setIsRowValidDropPositionRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setIsRowValidDropPositionRaw(String rawJs)
     {
         this.isRowValidDropPosition = rawJs;
         return (J) this;
@@ -3033,13 +3033,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getTheme() {return theme;}
 
-    public J setTheme(Object theme)
+    public @org.jspecify.annotations.NonNull J setTheme(Object theme)
     {
         this.theme = theme;
         return (J) this;
     }
 
-    public J setTheme(String theme)
+    public @org.jspecify.annotations.NonNull J setTheme(String theme)
     {
         this.theme = theme;
         return (J) this;
@@ -3047,7 +3047,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getLoadThemeGoogleFonts() {return loadThemeGoogleFonts;}
 
-    public J setLoadThemeGoogleFonts(Boolean loadThemeGoogleFonts)
+    public @org.jspecify.annotations.NonNull J setLoadThemeGoogleFonts(Boolean loadThemeGoogleFonts)
     {
         this.loadThemeGoogleFonts = loadThemeGoogleFonts;
         return (J) this;
@@ -3055,7 +3055,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getThemeStyleContainer() {return themeStyleContainer;}
 
-    public J setThemeStyleContainer(Object themeStyleContainer)
+    public @org.jspecify.annotations.NonNull J setThemeStyleContainer(Object themeStyleContainer)
     {
         this.themeStyleContainer = themeStyleContainer;
         return (J) this;
@@ -3063,7 +3063,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getThemeCssLayer() {return themeCssLayer;}
 
-    public J setThemeCssLayer(String themeCssLayer)
+    public @org.jspecify.annotations.NonNull J setThemeCssLayer(String themeCssLayer)
     {
         this.themeCssLayer = themeCssLayer;
         return (J) this;
@@ -3071,7 +3071,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getStyleNonce() {return styleNonce;}
 
-    public J setStyleNonce(String styleNonce)
+    public @org.jspecify.annotations.NonNull J setStyleNonce(String styleNonce)
     {
         this.styleNonce = styleNonce;
         return (J) this;
@@ -3089,7 +3089,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getAsyncTransactionWaitMillis() {return asyncTransactionWaitMillis;}
 
-    public J setAsyncTransactionWaitMillis(Integer millis)
+    public @org.jspecify.annotations.NonNull J setAsyncTransactionWaitMillis(Integer millis)
     {
         this.asyncTransactionWaitMillis = millis;
         return (J) this;
@@ -3097,7 +3097,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressModelUpdateAfterUpdateTransaction() {return suppressModelUpdateAfterUpdateTransaction;}
 
-    public J setSuppressModelUpdateAfterUpdateTransaction(Boolean v)
+    public @org.jspecify.annotations.NonNull J setSuppressModelUpdateAfterUpdateTransaction(Boolean v)
     {
         this.suppressModelUpdateAfterUpdateTransaction = v;
         return (J) this;
@@ -3105,7 +3105,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getResetRowDataOnUpdate() {return resetRowDataOnUpdate;}
 
-    public J setResetRowDataOnUpdate(Boolean v)
+    public @org.jspecify.annotations.NonNull J setResetRowDataOnUpdate(Boolean v)
     {
         this.resetRowDataOnUpdate = v;
         return (J) this;
@@ -3117,7 +3117,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getImmutableData() {return immutableData;}
 
-    public J setImmutableData(Boolean immutableData)
+    public @org.jspecify.annotations.NonNull J setImmutableData(Boolean immutableData)
     {
         this.immutableData = immutableData;
         return (J) this;
@@ -3145,7 +3145,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getDatasource() {return datasource;}
 
-    public J setDatasourceRaw(String rawJsDatasource)
+    public @org.jspecify.annotations.NonNull J setDatasourceRaw(String rawJsDatasource)
     {
         this.datasource = rawJsDatasource;
         return (J) this;
@@ -3153,7 +3153,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getCacheOverflowSize() {return cacheOverflowSize;}
 
-    public J setCacheOverflowSize(Integer cacheOverflowSize)
+    public @org.jspecify.annotations.NonNull J setCacheOverflowSize(Integer cacheOverflowSize)
     {
         this.cacheOverflowSize = cacheOverflowSize;
         return (J) this;
@@ -3161,7 +3161,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getMaxConcurrentDatasourceRequests() {return maxConcurrentDatasourceRequests;}
 
-    public J setMaxConcurrentDatasourceRequests(Integer maxConcurrentDatasourceRequests)
+    public @org.jspecify.annotations.NonNull J setMaxConcurrentDatasourceRequests(Integer maxConcurrentDatasourceRequests)
     {
         this.maxConcurrentDatasourceRequests = maxConcurrentDatasourceRequests;
         return (J) this;
@@ -3169,7 +3169,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getCacheBlockSize() {return cacheBlockSize;}
 
-    public J setCacheBlockSize(Integer cacheBlockSize)
+    public @org.jspecify.annotations.NonNull J setCacheBlockSize(Integer cacheBlockSize)
     {
         this.cacheBlockSize = cacheBlockSize;
         return (J) this;
@@ -3177,7 +3177,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getMaxBlocksInCache() {return maxBlocksInCache;}
 
-    public J setMaxBlocksInCache(Integer maxBlocksInCache)
+    public @org.jspecify.annotations.NonNull J setMaxBlocksInCache(Integer maxBlocksInCache)
     {
         this.maxBlocksInCache = maxBlocksInCache;
         return (J) this;
@@ -3185,7 +3185,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getInfiniteInitialRowCount() {return infiniteInitialRowCount;}
 
-    public J setInfiniteInitialRowCount(Integer infiniteInitialRowCount)
+    public @org.jspecify.annotations.NonNull J setInfiniteInitialRowCount(Integer infiniteInitialRowCount)
     {
         this.infiniteInitialRowCount = infiniteInitialRowCount;
         return (J) this;
@@ -3204,7 +3204,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getViewportDatasource() {return viewportDatasource;}
 
-    public J setViewportDatasourceRaw(String rawJsViewportDatasource)
+    public @org.jspecify.annotations.NonNull J setViewportDatasourceRaw(String rawJsViewportDatasource)
     {
         this.viewportDatasource = rawJsViewportDatasource;
         return (J) this;
@@ -3212,7 +3212,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getViewportRowModelPageSize() {return viewportRowModelPageSize;}
 
-    public J setViewportRowModelPageSize(Integer viewportRowModelPageSize)
+    public @org.jspecify.annotations.NonNull J setViewportRowModelPageSize(Integer viewportRowModelPageSize)
     {
         this.viewportRowModelPageSize = viewportRowModelPageSize;
         return (J) this;
@@ -3220,7 +3220,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getViewportRowModelBufferSize() {return viewportRowModelBufferSize;}
 
-    public J setViewportRowModelBufferSize(Integer viewportRowModelBufferSize)
+    public @org.jspecify.annotations.NonNull J setViewportRowModelBufferSize(Integer viewportRowModelBufferSize)
     {
         this.viewportRowModelBufferSize = viewportRowModelBufferSize;
         return (J) this;
@@ -3243,7 +3243,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getGetMainMenuItems() {return getMainMenuItems;}
 
-    public J setGetMainMenuItemsRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setGetMainMenuItemsRaw(String rawJs)
     {
         this.getMainMenuItems = rawJs;
         return (J) this;
@@ -3251,7 +3251,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressMenuHide() {return suppressMenuHide;}
 
-    public J setSuppressMenuHide(Boolean suppressMenuHide)
+    public @org.jspecify.annotations.NonNull J setSuppressMenuHide(Boolean suppressMenuHide)
     {
         this.suppressMenuHide = suppressMenuHide;
         return (J) this;
@@ -3259,7 +3259,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getPopupParent() {return popupParent;}
 
-    public J setPopupParent(Object popupParent)
+    public @org.jspecify.annotations.NonNull J setPopupParent(Object popupParent)
     {
         this.popupParent = popupParent;
         return (J) this;
@@ -3267,7 +3267,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getPostProcessPopup() {return postProcessPopup;}
 
-    public J setPostProcessPopupRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setPostProcessPopupRaw(String rawJs)
     {
         this.postProcessPopup = rawJs;
         return (J) this;
@@ -3384,13 +3384,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     // ----- Editing getters/setters -----
     public String getEditType() {return editType;}
 
-    public J setEditType(String v)
+    public @org.jspecify.annotations.NonNull J setEditType(String v)
     {
         this.editType = v;
         return (J) this;
     }
 
-    public J setEditType(EditType v)
+    public @org.jspecify.annotations.NonNull J setEditType(EditType v)
     {
         this.editType = v == null ? null : v.getJson();
         return (J) this;
@@ -3401,7 +3401,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS: e.g., "(params) => []" returning array of validation errors.
      */
-    public J setGetFullRowEditValidationErrorsRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setGetFullRowEditValidationErrorsRaw(String rawJs)
     {
         this.getFullRowEditValidationErrors = rawJs;
         return (J) this;
@@ -3409,13 +3409,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getInvalidEditValueMode() {return invalidEditValueMode;}
 
-    public J setInvalidEditValueMode(String v)
+    public @org.jspecify.annotations.NonNull J setInvalidEditValueMode(String v)
     {
         this.invalidEditValueMode = v;
         return (J) this;
     }
 
-    public J setInvalidEditValueMode(EditValidationCommitType v)
+    public @org.jspecify.annotations.NonNull J setInvalidEditValueMode(EditValidationCommitType v)
     {
         this.invalidEditValueMode = v == null ? null : v.getJson();
         return (J) this;
@@ -3423,7 +3423,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSingleClickEdit() {return singleClickEdit;}
 
-    public J setSingleClickEdit(Boolean v)
+    public @org.jspecify.annotations.NonNull J setSingleClickEdit(Boolean v)
     {
         this.singleClickEdit = v;
         return (J) this;
@@ -3431,7 +3431,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressClickEdit() {return suppressClickEdit;}
 
-    public J setSuppressClickEdit(Boolean v)
+    public @org.jspecify.annotations.NonNull J setSuppressClickEdit(Boolean v)
     {
         this.suppressClickEdit = v;
         return (J) this;
@@ -3439,7 +3439,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getStopEditingWhenCellsLoseFocus() {return stopEditingWhenCellsLoseFocus;}
 
-    public J setStopEditingWhenCellsLoseFocus(Boolean v)
+    public @org.jspecify.annotations.NonNull J setStopEditingWhenCellsLoseFocus(Boolean v)
     {
         this.stopEditingWhenCellsLoseFocus = v;
         return (J) this;
@@ -3447,7 +3447,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressStartEditOnTab() {return suppressStartEditOnTab;}
 
-    public J setSuppressStartEditOnTab(Boolean v)
+    public @org.jspecify.annotations.NonNull J setSuppressStartEditOnTab(Boolean v)
     {
         this.suppressStartEditOnTab = v;
         return (J) this;
@@ -3455,7 +3455,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getEnterNavigatesVertically() {return enterNavigatesVertically;}
 
-    public J setEnterNavigatesVertically(Boolean v)
+    public @org.jspecify.annotations.NonNull J setEnterNavigatesVertically(Boolean v)
     {
         this.enterNavigatesVertically = v;
         return (J) this;
@@ -3463,7 +3463,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getEnterNavigatesVerticallyAfterEdit() {return enterNavigatesVerticallyAfterEdit;}
 
-    public J setEnterNavigatesVerticallyAfterEdit(Boolean v)
+    public @org.jspecify.annotations.NonNull J setEnterNavigatesVerticallyAfterEdit(Boolean v)
     {
         this.enterNavigatesVerticallyAfterEdit = v;
         return (J) this;
@@ -3471,7 +3471,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getEnableCellEditingOnBackspace() {return enableCellEditingOnBackspace;}
 
-    public J setEnableCellEditingOnBackspace(Boolean v)
+    public @org.jspecify.annotations.NonNull J setEnableCellEditingOnBackspace(Boolean v)
     {
         this.enableCellEditingOnBackspace = v;
         return (J) this;
@@ -3479,7 +3479,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getUndoRedoCellEditing() {return undoRedoCellEditing;}
 
-    public J setUndoRedoCellEditing(Boolean v)
+    public @org.jspecify.annotations.NonNull J setUndoRedoCellEditing(Boolean v)
     {
         this.undoRedoCellEditing = v;
         return (J) this;
@@ -3487,7 +3487,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getUndoRedoCellEditingLimit() {return undoRedoCellEditingLimit;}
 
-    public J setUndoRedoCellEditingLimit(Integer v)
+    public @org.jspecify.annotations.NonNull J setUndoRedoCellEditingLimit(Integer v)
     {
         this.undoRedoCellEditingLimit = v;
         return (J) this;
@@ -3495,7 +3495,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getReadOnlyEdit() {return readOnlyEdit;}
 
-    public J setReadOnlyEdit(Boolean v)
+    public @org.jspecify.annotations.NonNull J setReadOnlyEdit(Boolean v)
     {
         this.readOnlyEdit = v;
         return (J) this;
@@ -3534,7 +3534,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getDefaultCsvExportParams() {return defaultCsvExportParams;}
 
-    public J setDefaultCsvExportParams(Object defaultCsvExportParams)
+    public @org.jspecify.annotations.NonNull J setDefaultCsvExportParams(Object defaultCsvExportParams)
     {
         this.defaultCsvExportParams = defaultCsvExportParams;
         return (J) this;
@@ -3542,7 +3542,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressCsvExport() {return suppressCsvExport;}
 
-    public J setSuppressCsvExport(Boolean suppressCsvExport)
+    public @org.jspecify.annotations.NonNull J setSuppressCsvExport(Boolean suppressCsvExport)
     {
         this.suppressCsvExport = suppressCsvExport;
         return (J) this;
@@ -3550,7 +3550,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getDefaultExcelExportParams() {return defaultExcelExportParams;}
 
-    public J setDefaultExcelExportParams(Object defaultExcelExportParams)
+    public @org.jspecify.annotations.NonNull J setDefaultExcelExportParams(Object defaultExcelExportParams)
     {
         this.defaultExcelExportParams = defaultExcelExportParams;
         return (J) this;
@@ -3558,7 +3558,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressExcelExport() {return suppressExcelExport;}
 
-    public J setSuppressExcelExport(Boolean suppressExcelExport)
+    public @org.jspecify.annotations.NonNull J setSuppressExcelExport(Boolean suppressExcelExport)
     {
         this.suppressExcelExport = suppressExcelExport;
         return (J) this;
@@ -3566,7 +3566,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public java.util.List<Object> getExcelStyles() {return excelStyles;}
 
-    public J setExcelStyles(java.util.List<Object> excelStyles)
+    public @org.jspecify.annotations.NonNull J setExcelStyles(java.util.List<Object> excelStyles)
     {
         this.excelStyles = excelStyles;
         return (J) this;
@@ -3646,7 +3646,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getQuickFilterText() {return quickFilterText;}
 
-    public J setQuickFilterText(String quickFilterText)
+    public @org.jspecify.annotations.NonNull J setQuickFilterText(String quickFilterText)
     {
         this.quickFilterText = quickFilterText;
         return (J) this;
@@ -3654,7 +3654,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getCacheQuickFilter() {return cacheQuickFilter;}
 
-    public J setCacheQuickFilter(Boolean cacheQuickFilter)
+    public @org.jspecify.annotations.NonNull J setCacheQuickFilter(Boolean cacheQuickFilter)
     {
         this.cacheQuickFilter = cacheQuickFilter;
         return (J) this;
@@ -3662,7 +3662,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getIncludeHiddenColumnsInQuickFilter() {return includeHiddenColumnsInQuickFilter;}
 
-    public J setIncludeHiddenColumnsInQuickFilter(Boolean includeHiddenColumnsInQuickFilter)
+    public @org.jspecify.annotations.NonNull J setIncludeHiddenColumnsInQuickFilter(Boolean includeHiddenColumnsInQuickFilter)
     {
         this.includeHiddenColumnsInQuickFilter = includeHiddenColumnsInQuickFilter;
         return (J) this;
@@ -3670,7 +3670,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getQuickFilterParser() {return quickFilterParser;}
 
-    public J setQuickFilterParserRaw(String quickFilterParser)
+    public @org.jspecify.annotations.NonNull J setQuickFilterParserRaw(String quickFilterParser)
     {
         this.quickFilterParser = quickFilterParser;
         return (J) this;
@@ -3678,7 +3678,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getQuickFilterMatcher() {return quickFilterMatcher;}
 
-    public J setQuickFilterMatcherRaw(String quickFilterMatcher)
+    public @org.jspecify.annotations.NonNull J setQuickFilterMatcherRaw(String quickFilterMatcher)
     {
         this.quickFilterMatcher = quickFilterMatcher;
         return (J) this;
@@ -3686,7 +3686,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getApplyQuickFilterBeforePivotOrAgg() {return applyQuickFilterBeforePivotOrAgg;}
 
-    public J setApplyQuickFilterBeforePivotOrAgg(Boolean applyQuickFilterBeforePivotOrAgg)
+    public @org.jspecify.annotations.NonNull J setApplyQuickFilterBeforePivotOrAgg(Boolean applyQuickFilterBeforePivotOrAgg)
     {
         this.applyQuickFilterBeforePivotOrAgg = applyQuickFilterBeforePivotOrAgg;
         return (J) this;
@@ -3697,7 +3697,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS: e.g., "() => true"
      */
-    public J setIsExternalFilterPresentRaw(String isExternalFilterPresent)
+    public @org.jspecify.annotations.NonNull J setIsExternalFilterPresentRaw(String isExternalFilterPresent)
     {
         this.isExternalFilterPresent = isExternalFilterPresent;
         return (J) this;
@@ -3708,7 +3708,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS: e.g., "(node) => true"
      */
-    public J setDoesExternalFilterPassRaw(String doesExternalFilterPass)
+    public @org.jspecify.annotations.NonNull J setDoesExternalFilterPassRaw(String doesExternalFilterPass)
     {
         this.doesExternalFilterPass = doesExternalFilterPass;
         return (J) this;
@@ -3716,7 +3716,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getExcludeChildrenWhenTreeDataFiltering() {return excludeChildrenWhenTreeDataFiltering;}
 
-    public J setExcludeChildrenWhenTreeDataFiltering(Boolean excludeChildrenWhenTreeDataFiltering)
+    public @org.jspecify.annotations.NonNull J setExcludeChildrenWhenTreeDataFiltering(Boolean excludeChildrenWhenTreeDataFiltering)
     {
         this.excludeChildrenWhenTreeDataFiltering = excludeChildrenWhenTreeDataFiltering;
         return (J) this;
@@ -3727,7 +3727,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS: e.g., "(params) => params.data?.alwaysVisible === true"
      */
-    public J setAlwaysPassFilterRaw(String alwaysPassFilter)
+    public @org.jspecify.annotations.NonNull J setAlwaysPassFilterRaw(String alwaysPassFilter)
     {
         this.alwaysPassFilter = alwaysPassFilter;
         return (J) this;
@@ -3735,7 +3735,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getFilterHandlers() {return filterHandlers;}
 
-    public J setFilterHandlers(Object filterHandlers)
+    public @org.jspecify.annotations.NonNull J setFilterHandlers(Object filterHandlers)
     {
         this.filterHandlers = filterHandlers;
         return (J) this;
@@ -3754,7 +3754,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS: e.g., "(key, defaultValue) => translations[key] ?? defaultValue"
      */
-    public J setGetLocaleTextRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setGetLocaleTextRaw(String rawJs)
     {
         this.getLocaleText = rawJs;
         return (J) this;
@@ -3793,7 +3793,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getColumnTypes() {return columnTypes;}
 
-    public J setColumnTypes(Object columnTypes)
+    public @org.jspecify.annotations.NonNull J setColumnTypes(Object columnTypes)
     {
         this.columnTypes = columnTypes;
         return (J) this;
@@ -3801,7 +3801,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getDataTypeDefinitions() {return dataTypeDefinitions;}
 
-    public J setDataTypeDefinitions(Object dataTypeDefinitions)
+    public @org.jspecify.annotations.NonNull J setDataTypeDefinitions(Object dataTypeDefinitions)
     {
         this.dataTypeDefinitions = dataTypeDefinitions;
         return (J) this;
@@ -3809,7 +3809,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getMaintainColumnOrder() {return maintainColumnOrder;}
 
-    public J setMaintainColumnOrder(Boolean maintainColumnOrder)
+    public @org.jspecify.annotations.NonNull J setMaintainColumnOrder(Boolean maintainColumnOrder)
     {
         this.maintainColumnOrder = maintainColumnOrder;
         return (J) this;
@@ -3817,7 +3817,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getEnableStrictPivotColumnOrder() {return enableStrictPivotColumnOrder;}
 
-    public J setEnableStrictPivotColumnOrder(Boolean enableStrictPivotColumnOrder)
+    public @org.jspecify.annotations.NonNull J setEnableStrictPivotColumnOrder(Boolean enableStrictPivotColumnOrder)
     {
         this.enableStrictPivotColumnOrder = enableStrictPivotColumnOrder;
         return (J) this;
@@ -3825,7 +3825,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressFieldDotNotation() {return suppressFieldDotNotation;}
 
-    public J setSuppressFieldDotNotation(Boolean suppressFieldDotNotation)
+    public @org.jspecify.annotations.NonNull J setSuppressFieldDotNotation(Boolean suppressFieldDotNotation)
     {
         this.suppressFieldDotNotation = suppressFieldDotNotation;
         return (J) this;
@@ -3895,7 +3895,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getValueCache() {return valueCache;}
 
-    public J setValueCache(Boolean valueCache)
+    public @org.jspecify.annotations.NonNull J setValueCache(Boolean valueCache)
     {
         this.valueCache = valueCache;
         return (J) this;
@@ -3903,7 +3903,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getValueCacheNeverExpires() {return valueCacheNeverExpires;}
 
-    public J setValueCacheNeverExpires(Boolean valueCacheNeverExpires)
+    public @org.jspecify.annotations.NonNull J setValueCacheNeverExpires(Boolean valueCacheNeverExpires)
     {
         this.valueCacheNeverExpires = valueCacheNeverExpires;
         return (J) this;
@@ -3911,7 +3911,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getEnableCellExpressions() {return enableCellExpressions;}
 
-    public J setEnableCellExpressions(Boolean enableCellExpressions)
+    public @org.jspecify.annotations.NonNull J setEnableCellExpressions(Boolean enableCellExpressions)
     {
         this.enableCellExpressions = enableCellExpressions;
         return (J) this;
@@ -3922,7 +3922,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS: e.g., "() => document" or a custom document getter.
      */
-    public J setGetDocumentRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setGetDocumentRaw(String rawJs)
     {
         this.getDocument = rawJs;
         return (J) this;
@@ -3930,7 +3930,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressTouch() {return suppressTouch;}
 
-    public J setSuppressTouch(Boolean suppressTouch)
+    public @org.jspecify.annotations.NonNull J setSuppressTouch(Boolean suppressTouch)
     {
         this.suppressTouch = suppressTouch;
         return (J) this;
@@ -3938,7 +3938,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressChangeDetection() {return suppressChangeDetection;}
 
-    public J setSuppressChangeDetection(Boolean suppressChangeDetection)
+    public @org.jspecify.annotations.NonNull J setSuppressChangeDetection(Boolean suppressChangeDetection)
     {
         this.suppressChangeDetection = suppressChangeDetection;
         return (J) this;
@@ -3946,7 +3946,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getTabIndex() {return tabIndex;}
 
-    public J setTabIndex(Integer tabIndex)
+    public @org.jspecify.annotations.NonNull J setTabIndex(Integer tabIndex)
     {
         this.tabIndex = tabIndex;
         return (J) this;
@@ -3954,7 +3954,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getContext() {return context;}
 
-    public J setContext(Object context)
+    public @org.jspecify.annotations.NonNull J setContext(Object context)
     {
         this.context = context;
         return (J) this;
@@ -3962,7 +3962,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getAlignedGrids() {return alignedGrids;}
 
-    public J setAlignedGrids(Object alignedGrids)
+    public @org.jspecify.annotations.NonNull J setAlignedGrids(Object alignedGrids)
     {
         this.alignedGrids = alignedGrids;
         return (J) this;
@@ -3970,7 +3970,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getComponents() {return components;}
 
-    public J setComponents(Object components)
+    public @org.jspecify.annotations.NonNull J setComponents(Object components)
     {
         this.components = components;
         return (J) this;
@@ -4020,7 +4020,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS: e.g., "(params) => ['copy','paste']"
      */
-    public J setGetContextMenuItemsRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setGetContextMenuItemsRaw(String rawJs)
     {
         this.getContextMenuItems = rawJs;
         return (J) this;
@@ -4030,7 +4030,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     public Object getStatusBar() {return statusBar;}
 
     @Deprecated
-    public J setStatusBar(Object statusBar)
+    public @org.jspecify.annotations.NonNull J setStatusBar(Object statusBar)
     {
         this.statusBar = statusBar;
         return (J) this;
@@ -4041,7 +4041,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Accepts Boolean (enable/disable), String preset (e.g. "columns"), string[], or full definition object.
      */
-    public J setSideBar(Object sideBar)
+    public @org.jspecify.annotations.NonNull J setSideBar(Object sideBar)
     {
         this.sideBar = sideBar;
         return (J) this;
@@ -4049,13 +4049,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getRowNumbers() {return rowNumbers;}
 
-    public J setRowNumbers(boolean enabled)
+    public @org.jspecify.annotations.NonNull J setRowNumbers(boolean enabled)
     {
         this.rowNumbers = enabled;
         return (J) this;
     }
 
-    public J setRowNumbers(Object options)
+    public @org.jspecify.annotations.NonNull J setRowNumbers(Object options)
     {
         this.rowNumbers = options;
         return (J) this;
@@ -4063,7 +4063,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getFindSearchValue() {return findSearchValue;}
 
-    public J setFindSearchValue(String findSearchValue)
+    public @org.jspecify.annotations.NonNull J setFindSearchValue(String findSearchValue)
     {
         this.findSearchValue = findSearchValue;
         return (J) this;
@@ -4071,7 +4071,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getFindOptions() {return findOptions;}
 
-    public J setFindOptions(Object findOptions)
+    public @org.jspecify.annotations.NonNull J setFindOptions(Object findOptions)
     {
         this.findOptions = findOptions;
         return (J) this;
@@ -4086,7 +4086,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getRowModelType() {return rowModelType;}
 
-    public J setRowModelType(String rowModelType)
+    public @org.jspecify.annotations.NonNull J setRowModelType(String rowModelType)
     {
         this.rowModelType = rowModelType;
         return (J) this;
@@ -4118,7 +4118,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS for getRowHeight, e.g. "(params) => params.data?.height || 25"
      */
-    public J setGetRowHeightRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setGetRowHeightRaw(String rawJs)
     {
         this.getRowHeight = rawJs;
         return (J) this;
@@ -4129,7 +4129,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set raw JS for getBusinessKeyForNode, e.g. "(node) => node.data?.id"
      */
-    public J setGetBusinessKeyForNodeRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setGetBusinessKeyForNodeRaw(String rawJs)
     {
         this.getBusinessKeyForNode = rawJs;
         return (J) this;
@@ -4137,7 +4137,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressAnimationFrame() {return suppressAnimationFrame;}
 
-    public J setSuppressAnimationFrame(Boolean suppressAnimationFrame)
+    public @org.jspecify.annotations.NonNull J setSuppressAnimationFrame(Boolean suppressAnimationFrame)
     {
         this.suppressAnimationFrame = suppressAnimationFrame;
         return (J) this;
@@ -4146,13 +4146,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Convenience aliases for clarity with raw JS setters already present.
      */
-    public J setIsFullWidthRowRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setIsFullWidthRowRaw(String rawJs)
     {
         this.isFullWidthRow = rawJs;
         return (J) this;
     }
 
-    public J setProcessUnpinnedColumnsRaw(String rawJs)
+    public @org.jspecify.annotations.NonNull J setProcessUnpinnedColumnsRaw(String rawJs)
     {
         this.processUnpinnedColumns = rawJs;
         return (J) this;
@@ -4173,7 +4173,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Boolean getSuppressAutoSize() {return suppressAutoSize;}
 
-    public J setSuppressAutoSize(Boolean suppressAutoSize)
+    public @org.jspecify.annotations.NonNull J setSuppressAutoSize(Boolean suppressAutoSize)
     {
         this.suppressAutoSize = suppressAutoSize;
         return (J) this;
@@ -4181,7 +4181,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Integer getAutoSizePadding() {return autoSizePadding;}
 
-    public J setAutoSizePadding(Integer autoSizePadding)
+    public @org.jspecify.annotations.NonNull J setAutoSizePadding(Integer autoSizePadding)
     {
         this.autoSizePadding = autoSizePadding;
         return (J) this;
@@ -4196,7 +4196,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public Object getInitialState() {return initialState;}
 
-    public J setInitialState(Object initialState)
+    public @org.jspecify.annotations.NonNull J setInitialState(Object initialState)
     {
         this.initialState = initialState;
         return (J) this;
@@ -4217,7 +4217,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getTreeDataChildrenField() {return treeDataChildrenField;}
 
-    public J setTreeDataChildrenField(String treeDataChildrenField)
+    public @org.jspecify.annotations.NonNull J setTreeDataChildrenField(String treeDataChildrenField)
     {
         this.treeDataChildrenField = treeDataChildrenField;
         return (J) this;
@@ -4225,7 +4225,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public String getTreeDataParentIdField() {return treeDataParentIdField;}
 
-    public J setTreeDataParentIdField(String treeDataParentIdField)
+    public @org.jspecify.annotations.NonNull J setTreeDataParentIdField(String treeDataParentIdField)
     {
         this.treeDataParentIdField = treeDataParentIdField;
         return (J) this;
@@ -4248,7 +4248,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Set icons using a Java Map / object structure.
      */
-    public J setIcons(Object icons)
+    public @org.jspecify.annotations.NonNull J setIcons(Object icons)
     {
         this.icons = icons;
         return (J) this;
@@ -4258,7 +4258,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * Provide a raw JavaScript object literal for icons.
      * Example: "{ sortAscending: 'my-asc', sortDescending: 'my-desc', checkboxChecked: params => '...'}"
      */
-    public J setIconsRaw(String rawJsObject)
+    public @org.jspecify.annotations.NonNull J setIconsRaw(String rawJsObject)
     {
         this.icons = rawJsObject == null ? null : new RawJsFunction(rawJsObject);
         return (J) this;
@@ -4301,7 +4301,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Typed overload to set the row model type using enum.
      */
-    public J setRowModelType(RowModelType type)
+    public @org.jspecify.annotations.NonNull J setRowModelType(RowModelType type)
     {
         this.rowModelType = type == null ? null : type.getJson();
         return (J) this;
@@ -4326,7 +4326,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Typed overload to set the default column resize behavior using enum.
      */
-    public J setColResizeDefault(ColResizeDefault value)
+    public @org.jspecify.annotations.NonNull J setColResizeDefault(ColResizeDefault value)
     {
         this.colResizeDefault = value == null ? null : value.getJson();
         return (J) this;

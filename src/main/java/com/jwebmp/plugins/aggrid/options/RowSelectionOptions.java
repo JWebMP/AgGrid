@@ -99,7 +99,7 @@ public class RowSelectionOptions<J extends RowSelectionOptions<J>> extends JavaS
      * @param mode The row selection mode
      * @return This object
      */
-    public J setMode(RowSelectionMode mode)
+    public @org.jspecify.annotations.NonNull J setMode(RowSelectionMode mode)
     {
         this.mode = mode;
         return (J) this;
@@ -121,7 +121,7 @@ public class RowSelectionOptions<J extends RowSelectionOptions<J>> extends JavaS
      * @param checkboxes Whether to show checkboxes
      * @return This object
      */
-    public J setCheckboxes(Boolean checkboxes)
+    public @org.jspecify.annotations.NonNull J setCheckboxes(Boolean checkboxes)
     {
         this.checkboxes = checkboxes;
         return (J) this;
@@ -143,7 +143,7 @@ public class RowSelectionOptions<J extends RowSelectionOptions<J>> extends JavaS
      * @param checkboxLocation Where to display checkboxes
      * @return This object
      */
-    public J setCheckboxLocation(CheckboxLocation checkboxLocation)
+    public @org.jspecify.annotations.NonNull J setCheckboxLocation(CheckboxLocation checkboxLocation)
     {
         this.checkboxLocation = checkboxLocation;
         return (J) this;
@@ -155,7 +155,7 @@ public class RowSelectionOptions<J extends RowSelectionOptions<J>> extends JavaS
      * @param checkboxLocation Where to display checkboxes ("selectionColumn" or "autoGroupColumn")
      * @return This object
      */
-    public J setCheckboxLocationString(String checkboxLocation)
+    public @org.jspecify.annotations.NonNull J setCheckboxLocationString(String checkboxLocation)
     {
         this.checkboxLocation = CheckboxLocation.fromString(checkboxLocation);
         return (J) this;
@@ -177,7 +177,7 @@ public class RowSelectionOptions<J extends RowSelectionOptions<J>> extends JavaS
      * @param hideDisabledCheckboxes Whether to hide disabled checkboxes
      * @return This object
      */
-    public J setHideDisabledCheckboxes(Boolean hideDisabledCheckboxes)
+    public @org.jspecify.annotations.NonNull J setHideDisabledCheckboxes(Boolean hideDisabledCheckboxes)
     {
         this.hideDisabledCheckboxes = hideDisabledCheckboxes;
         return (J) this;
@@ -199,7 +199,7 @@ public class RowSelectionOptions<J extends RowSelectionOptions<J>> extends JavaS
      * @param enableClickSelection Whether to enable click selection (true, false, "enableSelection", "enableDeselection")
      * @return This object
      */
-    public J setEnableClickSelection(Object enableClickSelection)
+    public @org.jspecify.annotations.NonNull J setEnableClickSelection(Object enableClickSelection)
     {
         this.enableClickSelection = enableClickSelection;
         return (J) this;
@@ -221,7 +221,7 @@ public class RowSelectionOptions<J extends RowSelectionOptions<J>> extends JavaS
      * @param copySelectedRows Whether to copy selected rows
      * @return This object
      */
-    public J setCopySelectedRows(Boolean copySelectedRows)
+    public @org.jspecify.annotations.NonNull J setCopySelectedRows(Boolean copySelectedRows)
     {
         this.copySelectedRows = copySelectedRows;
         return (J) this;
@@ -243,7 +243,7 @@ public class RowSelectionOptions<J extends RowSelectionOptions<J>> extends JavaS
      * @param enableSelectionWithoutKeys Whether to allow selection without keys
      * @return This object
      */
-    public J setEnableSelectionWithoutKeys(Boolean enableSelectionWithoutKeys)
+    public @org.jspecify.annotations.NonNull J setEnableSelectionWithoutKeys(Boolean enableSelectionWithoutKeys)
     {
         this.enableSelectionWithoutKeys = enableSelectionWithoutKeys;
         return (J) this;
@@ -265,7 +265,7 @@ public class RowSelectionOptions<J extends RowSelectionOptions<J>> extends JavaS
      * @param masterSelects The master selection behavior ("self" or "detail")
      * @return This object
      */
-    public J setMasterSelects(String masterSelects)
+    public @org.jspecify.annotations.NonNull J setMasterSelects(String masterSelects)
     {
         this.masterSelects = masterSelects;
         return (J) this;

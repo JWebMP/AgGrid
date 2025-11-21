@@ -51,7 +51,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     @Getter
     private String sort;
 
-    public J setSort(String sort)
+    public @org.jspecify.annotations.NonNull J setSort(String sort)
     {
         this.sort = sort;
         return (J) this;
@@ -86,7 +86,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     @Getter
     private Boolean hide;
 
-    public J setHide(Boolean hide)
+    public @org.jspecify.annotations.NonNull J setHide(Boolean hide)
     {
         this.hide = hide;
         return (J) this;
@@ -117,7 +117,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     @JsonProperty("chartDataType")
     private String chartDataType;
 
-    public J setChartDataType(String chartDataType)
+    public @org.jspecify.annotations.NonNull J setChartDataType(String chartDataType)
     {
         this.chartDataType = chartDataType;
         return (J) this;
@@ -128,7 +128,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * Accepts CATEGORY, SERIES, TIME, or EXCLUDED and serialises to the
      * lowercase string values expected by AG Grid.
      */
-    public J setChartDataType(ChartDataType chartDataType)
+    public @org.jspecify.annotations.NonNull J setChartDataType(ChartDataType chartDataType)
     {
         this.chartDataType = chartDataType == null ? null : chartDataType.toString();
         return (J) this;
@@ -342,6 +342,16 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     private String findTextFunc;
 
     /**
+     * Callback to suppress keyboard events for this column.
+     * AG Grid calls this with params and expects a boolean: true to suppress, false to allow.
+     * Provide a raw JavaScript function or arrow function string. It will be serialized without quotes.
+     * Example: (params) => params.event.key === 'Enter'
+     */
+    @JsonProperty("suppressKeyboardEvent")
+    @JsonRawValue
+    private String suppressKeyboardEvent;
+
+    /**
      * Enterprise: define grouping hierarchy parts (e.g., ['year','month'] or ColDef objects).
      */
     @JsonProperty("rowGroupingHierarchy")
@@ -406,7 +416,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param field The field name
      * @return This object
      */
-    public J setField(String field)
+    public @org.jspecify.annotations.NonNull J setField(String field)
     {
         this.field = field;
         return (J) this;
@@ -428,7 +438,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param headerName The column header
      * @return This object
      */
-    public J setHeaderName(String headerName)
+    public @org.jspecify.annotations.NonNull J setHeaderName(String headerName)
     {
         this.headerName = headerName;
         return (J) this;
@@ -450,7 +460,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param sortable Whether the column is sortable
      * @return This object
      */
-    public J setSortable(Boolean sortable)
+    public @org.jspecify.annotations.NonNull J setSortable(Boolean sortable)
     {
         this.sortable = sortable;
         return (J) this;
@@ -472,7 +482,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param filter Whether the column is filterable
      * @return This object
      */
-    public J setFilter(Boolean filter)
+    public @org.jspecify.annotations.NonNull J setFilter(Boolean filter)
     {
         this.filter = filter;
         return (J) this;
@@ -481,7 +491,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     /**
      * Sets the filter type by key (e.g., "agTextColumnFilter", "agSetColumnFilter", "agMultiColumnFilter").
      */
-    public J setFilter(String filterKey)
+    public @org.jspecify.annotations.NonNull J setFilter(String filterKey)
     {
         this.filter = filterKey;
         return (J) this;
@@ -508,7 +518,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * Set filter params (typed CRTP interface). Use Set Filter params from the Enterprise module or appropriate
      * params for other filter types.
      */
-    public J setFilterParams(com.jwebmp.plugins.aggrid.options.filters.IFilterParams<?> filterParams)
+    public @org.jspecify.annotations.NonNull J setFilterParams(com.jwebmp.plugins.aggrid.options.filters.IFilterParams<?> filterParams)
     {
         this.filterParams = filterParams;
         return (J) this;
@@ -530,7 +540,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param resizable Whether the column is resizable
      * @return This object
      */
-    public J setResizable(Boolean resizable)
+    public @org.jspecify.annotations.NonNull J setResizable(Boolean resizable)
     {
         this.resizable = resizable;
         return (J) this;
@@ -552,7 +562,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param width The width of the column
      * @return This object
      */
-    public J setWidth(Integer width)
+    public @org.jspecify.annotations.NonNull J setWidth(Integer width)
     {
         this.width = width;
         return (J) this;
@@ -574,7 +584,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param pinned Whether the column is pinned (e.g., "left", "right")
      * @return This object
      */
-    public J setPinned(String pinned)
+    public @org.jspecify.annotations.NonNull J setPinned(String pinned)
     {
         this.pinned = pinned;
         return (J) this;
@@ -610,7 +620,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param cellRenderer The cell renderer component
      * @return This object
      */
-    public J setCellRenderer(ICellRenderer<?> cellRenderer)
+    public @org.jspecify.annotations.NonNull J setCellRenderer(ICellRenderer<?> cellRenderer)
     {
         this.cellRenderer = cellRenderer;
         return (J) this;
@@ -632,7 +642,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param cellRendererParams The cell renderer params
      * @return This object
      */
-    public J setCellRendererParams(Object cellRendererParams)
+    public @org.jspecify.annotations.NonNull J setCellRendererParams(Object cellRendererParams)
     {
         this.cellRendererParams = cellRendererParams;
         return (J) this;
@@ -654,7 +664,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param headerStyle The CSS styles for the header
      * @return This object
      */
-    public J setHeaderStyle(Object headerStyle)
+    public @org.jspecify.annotations.NonNull J setHeaderStyle(Object headerStyle)
     {
         this.headerStyle = headerStyle;
         return (J) this;
@@ -676,7 +686,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param headerClass The CSS classes for the header
      * @return This object
      */
-    public J setHeaderClass(Object headerClass)
+    public @org.jspecify.annotations.NonNull J setHeaderClass(Object headerClass)
     {
         this.headerClass = headerClass;
         return (J) this;
@@ -722,7 +732,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param headerComponent The custom header component
      * @return This object
      */
-    public J setHeaderComponent(DefaultHeaderComponent<?> headerComponent)
+    public @org.jspecify.annotations.NonNull J setHeaderComponent(DefaultHeaderComponent<?> headerComponent)
     {
         this.headerComponent = headerComponent;
         return (J) this;
@@ -744,7 +754,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param headerComponentParams The params object
      * @return This object
      */
-    public J setHeaderComponentParams(HeaderComponentParams headerComponentParams)
+    public @org.jspecify.annotations.NonNull J setHeaderComponentParams(HeaderComponentParams headerComponentParams)
     {
         this.headerComponentParams = headerComponentParams;
         return (J) this;
@@ -756,7 +766,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param headerTooltip The tooltip for the header
      * @return This object
      */
-    public J setHeaderTooltip(String headerTooltip)
+    public @org.jspecify.annotations.NonNull J setHeaderTooltip(String headerTooltip)
     {
         this.headerTooltip = headerTooltip;
         return (J) this;
@@ -778,7 +788,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param autoHeaderHeight Whether to automatically adjust header height
      * @return This object
      */
-    public J setAutoHeaderHeight(Boolean autoHeaderHeight)
+    public @org.jspecify.annotations.NonNull J setAutoHeaderHeight(Boolean autoHeaderHeight)
     {
         this.autoHeaderHeight = autoHeaderHeight;
         return (J) this;
@@ -800,7 +810,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param wrapHeaderText Whether to wrap header text
      * @return This object
      */
-    public J setWrapHeaderText(Boolean wrapHeaderText)
+    public @org.jspecify.annotations.NonNull J setWrapHeaderText(Boolean wrapHeaderText)
     {
         this.wrapHeaderText = wrapHeaderText;
         return (J) this;
@@ -822,7 +832,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param children The child columns
      * @return This object
      */
-    public J setChildren(List<AgGridColumnDef<?>> children)
+    public @org.jspecify.annotations.NonNull J setChildren(List<AgGridColumnDef<?>> children)
     {
         this.children = children;
         return (J) this;
@@ -844,7 +854,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param columnGroupShow When to show the column ('open', 'closed', or null)
      * @return This object
      */
-    public J setColumnGroupShow(String columnGroupShow)
+    public @org.jspecify.annotations.NonNull J setColumnGroupShow(String columnGroupShow)
     {
         this.columnGroupShow = columnGroupShow;
         return (J) this;
@@ -866,7 +876,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param marryChildren Whether child columns will always move together
      * @return This object
      */
-    public J setMarryChildren(Boolean marryChildren)
+    public @org.jspecify.annotations.NonNull J setMarryChildren(Boolean marryChildren)
     {
         this.marryChildren = marryChildren;
         return (J) this;
@@ -888,7 +898,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param openByDefault Whether the column group is open by default
      * @return This object
      */
-    public J setOpenByDefault(Boolean openByDefault)
+    public @org.jspecify.annotations.NonNull J setOpenByDefault(Boolean openByDefault)
     {
         this.openByDefault = openByDefault;
         return (J) this;
@@ -910,7 +920,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param suppressStickyLabel Whether the column group header label will not remain visible when scrolling
      * @return This object
      */
-    public J setSuppressStickyLabel(Boolean suppressStickyLabel)
+    public @org.jspecify.annotations.NonNull J setSuppressStickyLabel(Boolean suppressStickyLabel)
     {
         this.suppressStickyLabel = suppressStickyLabel;
         return (J) this;
@@ -932,7 +942,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param suppressSpanHeaderHeight Whether the column will not span the entire header height
      * @return This object
      */
-    public J setSuppressSpanHeaderHeight(Boolean suppressSpanHeaderHeight)
+    public @org.jspecify.annotations.NonNull J setSuppressSpanHeaderHeight(Boolean suppressSpanHeaderHeight)
     {
         this.suppressSpanHeaderHeight = suppressSpanHeaderHeight;
         return (J) this;
@@ -954,7 +964,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param suppressMovable Whether the column cannot be moved by dragging
      * @return This object
      */
-    public J setSuppressMovable(Boolean suppressMovable)
+    public @org.jspecify.annotations.NonNull J setSuppressMovable(Boolean suppressMovable)
     {
         this.suppressMovable = suppressMovable;
         return (J) this;
@@ -976,7 +986,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param lockPosition The locked position of the column ("left" or "right")
      * @return This object
      */
-    public J setLockPosition(String lockPosition)
+    public @org.jspecify.annotations.NonNull J setLockPosition(String lockPosition)
     {
         this.lockPosition = lockPosition;
         return (J) this;
@@ -998,7 +1008,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param lockVisible Whether the column's visibility cannot be changed via the UI
      * @return This object
      */
-    public J setLockVisible(Boolean lockVisible)
+    public @org.jspecify.annotations.NonNull J setLockVisible(Boolean lockVisible)
     {
         this.lockVisible = lockVisible;
         return (J) this;
@@ -1020,7 +1030,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param lockPinned Whether the column cannot be pinned or unpinned via the UI
      * @return This object
      */
-    public J setLockPinned(Boolean lockPinned)
+    public @org.jspecify.annotations.NonNull J setLockPinned(Boolean lockPinned)
     {
         this.lockPinned = lockPinned;
         return (J) this;
@@ -1042,7 +1052,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param flex The flex value for the column
      * @return This object
      */
-    public J setFlex(Integer flex)
+    public @org.jspecify.annotations.NonNull J setFlex(Integer flex)
     {
         this.flex = flex;
         return (J) this;
@@ -1064,7 +1074,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param minWidth The minimum width for the column
      * @return This object
      */
-    public J setMinWidth(Integer minWidth)
+    public @org.jspecify.annotations.NonNull J setMinWidth(Integer minWidth)
     {
         this.minWidth = minWidth;
         return (J) this;
@@ -1086,7 +1096,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param maxWidth The maximum width for the column
      * @return This object
      */
-    public J setMaxWidth(Integer maxWidth)
+    public @org.jspecify.annotations.NonNull J setMaxWidth(Integer maxWidth)
     {
         this.maxWidth = maxWidth;
         return (J) this;
@@ -1108,7 +1118,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param suppressSizeToFit Whether the column will not be included when sizing columns to fit the grid
      * @return This object
      */
-    public J setSuppressSizeToFit(Boolean suppressSizeToFit)
+    public @org.jspecify.annotations.NonNull J setSuppressSizeToFit(Boolean suppressSizeToFit)
     {
         this.suppressSizeToFit = suppressSizeToFit;
         return (J) this;
@@ -1131,13 +1141,13 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * @param colSpan The column span function or value
      * @return This object
      */
-    public J setColSpan(Object colSpan)
+    public @org.jspecify.annotations.NonNull J setColSpan(Object colSpan)
     {
         this.colSpan = colSpan;
         return (J) this;
     }
 
-    public J setCellClass(String cellClass)
+    public @org.jspecify.annotations.NonNull J setCellClass(String cellClass)
     {
         this.cellClass = cellClass;
         return (J) this;
@@ -1156,7 +1166,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     /**
      * Enable/disable grouping by this column.
      */
-    public J setRowGroup(Boolean rowGroup)
+    public @org.jspecify.annotations.NonNull J setRowGroup(Boolean rowGroup)
     {
         this.rowGroup = rowGroup;
         return (J) this;
@@ -1173,7 +1183,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     /**
      * Set the order to group by when grouping by multiple columns.
      */
-    public J setRowGroupIndex(Integer rowGroupIndex)
+    public @org.jspecify.annotations.NonNull J setRowGroupIndex(Integer rowGroupIndex)
     {
         this.rowGroupIndex = rowGroupIndex;
         return (J) this;
@@ -1191,7 +1201,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * Set a raw JavaScript function for keyCreator, e.g. "params => params.value.id".
      * The value is serialized without quotes.
      */
-    public J setKeyCreator(String keyCreatorRaw)
+    public @org.jspecify.annotations.NonNull J setKeyCreator(String keyCreatorRaw)
     {
         this.keyCreator = keyCreatorRaw;
         return (J) this;
@@ -1209,7 +1219,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * Set a raw JavaScript function for valueFormatter, e.g. "params => params.value.name".
      * The value is serialized without quotes.
      */
-    public J setValueFormatter(String valueFormatterRaw)
+    public @org.jspecify.annotations.NonNull J setValueFormatter(String valueFormatterRaw)
     {
         this.valueFormatter = valueFormatterRaw;
         return (J) this;
@@ -1227,7 +1237,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * Set a raw JavaScript function for getFindText, e.g. "params => `Year is ${params.value}`".
      * The value is serialized without quotes.
      */
-    public J setGetFindText(String getFindTextRaw)
+    public @org.jspecify.annotations.NonNull J setGetFindText(String getFindTextRaw)
     {
         this.findTextFunc = getFindTextRaw;
         return (J) this;
@@ -1244,7 +1254,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     /**
      * Define grouping by parts for date/time or custom hierarchy.
      */
-    public J setRowGroupingHierarchy(List<Object> rowGroupingHierarchy)
+    public @org.jspecify.annotations.NonNull J setRowGroupingHierarchy(List<Object> rowGroupingHierarchy)
     {
         this.rowGroupingHierarchy = rowGroupingHierarchy;
         return (J) this;
@@ -1261,7 +1271,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     /**
      * Set to true to disable the Fill Handle for this column.
      */
-    public J setSuppressFillHandle(Boolean suppressFillHandle)
+    public @org.jspecify.annotations.NonNull J setSuppressFillHandle(Boolean suppressFillHandle)
     {
         this.suppressFillHandle = suppressFillHandle;
         return (J) this;
@@ -1278,7 +1288,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     /**
      * Enable/disable flashing for this column's cells when values change.
      */
-    public J setEnableCellChangeFlash(Boolean enableCellChangeFlash)
+    public @org.jspecify.annotations.NonNull J setEnableCellChangeFlash(Boolean enableCellChangeFlash)
     {
         this.enableCellChangeFlash = enableCellChangeFlash;
         return (J) this;
@@ -1298,7 +1308,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     /**
      * Sets the valueGetter using a typed FieldSelector implementation.
      */
-    public J setValueGetter(com.jwebmp.plugins.aggrid.options.selectors.FieldSelector valueGetter)
+    public @org.jspecify.annotations.NonNull J setValueGetter(com.jwebmp.plugins.aggrid.options.selectors.FieldSelector valueGetter)
     {
         this.valueGetter = valueGetter;
         return (J) this;
@@ -1309,7 +1319,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * Deprecated: prefer {@link #setValueGetter(com.jwebmp.plugins.aggrid.options.selectors.FieldSelector)}.
      */
     @Deprecated
-    public J setValueGetter(Object valueGetter)
+    public @org.jspecify.annotations.NonNull J setValueGetter(Object valueGetter)
     {
         if (valueGetter == null)
         {
@@ -1333,7 +1343,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     /**
      * Convenience setter for string expressions, e.g. "node.rowIndex + 1"
      */
-    public J setValueGetterExpression(String expression)
+    public @org.jspecify.annotations.NonNull J setValueGetterExpression(String expression)
     {
         this.valueGetter = expression == null ? null : new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorExpression(expression);
         return (J) this;
@@ -1342,7 +1352,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     /**
      * Convenience setter for raw JavaScript (function or arrow function). Will be serialized without quotes.
      */
-    public J setValueGetterRaw(String rawJsFunction)
+    public @org.jspecify.annotations.NonNull J setValueGetterRaw(String rawJsFunction)
     {
         this.valueGetter = rawJsFunction == null ? null : new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorRaw(rawJsFunction);
         return (J) this;
@@ -1359,21 +1369,40 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
         return filterValueGetter;
     }
 
-    public J setFilterValueGetter(com.jwebmp.plugins.aggrid.options.selectors.FieldSelector filterValueGetter)
+    public @org.jspecify.annotations.NonNull J setFilterValueGetter(com.jwebmp.plugins.aggrid.options.selectors.FieldSelector filterValueGetter)
     {
         this.filterValueGetter = filterValueGetter;
         return (J) this;
     }
 
-    public J setFilterValueGetterExpression(String expression)
+    public @org.jspecify.annotations.NonNull J setFilterValueGetterExpression(String expression)
     {
         this.filterValueGetter = expression == null ? null : new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorExpression(expression);
         return (J) this;
     }
 
-    public J setFilterValueGetterRaw(String rawJsFunction)
+    public @org.jspecify.annotations.NonNull J setFilterValueGetterRaw(String rawJsFunction)
     {
         this.filterValueGetter = rawJsFunction == null ? null : new com.jwebmp.plugins.aggrid.options.selectors.FieldSelectorRaw(rawJsFunction);
+        return (J) this;
+    }
+
+    /**
+     * @return the raw JavaScript function used to suppress keyboard events on this column
+     */
+    public String getSuppressKeyboardEvent()
+    {
+        return suppressKeyboardEvent;
+    }
+
+    /**
+     * Set a raw JavaScript function for suppressing keyboard events on this column definition.
+     * The provided string is written to JSON without quotes via @JsonRawValue.
+     * Example value: (params) => params.event.key === 'Enter'
+     */
+    public @org.jspecify.annotations.NonNull J setSuppressKeyboardEventRaw(String rawJsFunction)
+    {
+        this.suppressKeyboardEvent = rawJsFunction;
         return (J) this;
     }
 
@@ -1398,7 +1427,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     /**
      * Set a list or structure describing context menu items for this column.
      */
-    public J setContextMenuItems(Object items)
+    public @org.jspecify.annotations.NonNull J setContextMenuItems(Object items)
     {
         this.contextMenuItems = items;
         return (J) this;
@@ -1408,7 +1437,7 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
      * Set a raw JS callback for column context menu items: (params, defaultItems) => items[]
      * The function is serialized without quotes.
      */
-    public J setContextMenuItemsRaw(String rawJsCallback)
+    public @org.jspecify.annotations.NonNull J setContextMenuItemsRaw(String rawJsCallback)
     {
         this.contextMenuItems = rawJsCallback == null ? null : new RawJsFunction(rawJsCallback);
         return (J) this;

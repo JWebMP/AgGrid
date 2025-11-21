@@ -152,7 +152,8 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
         setTag("ag-grid-angular");
         //addAttribute("class", "ag-theme-alpine");
         addAttribute("style", "width: 100%; height: 500px;");
-
+								addAttribute("[context]", "{ componentParent: this }");
+								
         // addAttribute("(gridReady)", "onGridReady($event)");
         //  addAttribute("(cellValueChanged)", "onCellValueChanged($event)");
         options = new AgGridOptions<>();
@@ -245,7 +246,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @return This object
      */
     @NotNull
-    public J setOptions(AgGridOptions<?> options)
+    public @org.jspecify.annotations.NonNull J setOptions(AgGridOptions<?> options)
     {
         this.options = options;
         return (J) this;
@@ -349,7 +350,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param height The height value (e.g., "500px", "100%")
      * @return This object
      */
-    public J setHeight(String height)
+    public @org.jspecify.annotations.NonNull J setHeight(String height)
     {
         addAttribute("style", "width: 100%; height: " + height + ";");
         return (J) this;
@@ -361,7 +362,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param width The width value (e.g., "500px", "100%")
      * @return This object
      */
-    public J setWidth(String width)
+    public @org.jspecify.annotations.NonNull J setWidth(String width)
     {
         String currentStyle = getAttribute("style");
         if (currentStyle != null && currentStyle.contains("height"))
@@ -383,7 +384,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      * @param theme The theme name (e.g., "ag-theme-alpine", "ag-theme-balham")
      * @return This object
      */
-    public J setTheme(String theme)
+    public @org.jspecify.annotations.NonNull J setTheme(String theme)
     {
         addAttribute("class", theme);
         return (J) this;
@@ -458,8 +459,8 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
     {
         if (!isInitialized())
         {
-            addConfiguration(AnnotationUtils.getNgField("readonly listenerName = '" + getID() + "';"));
-            addConfiguration(AnnotationUtils.getNgField("readonly clazzName = '%s';".formatted(getClass().getCanonicalName())));
+            addConfiguration(AnnotationUtils.getNgField("readonly listenerName = '" + getID() + "';",false,true));
+            addConfiguration(AnnotationUtils.getNgField("readonly clazzName = '%s';".formatted(getClass().getCanonicalName()),false,true));
 
             registerWebSocketListeners();
 
