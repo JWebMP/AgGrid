@@ -1,4 +1,4 @@
-import com.guicedee.guicedinjection.interfaces.IGuiceScanModuleInclusions;
+import com.guicedee.client.services.config.IGuiceScanModuleInclusions;
 import com.jwebmp.plugins.aggrid.implementations.AgGridInclusionsModule;
 
 module com.jwebmp.plugins.aggrid {

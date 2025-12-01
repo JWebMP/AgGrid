@@ -2,7 +2,7 @@ package com.jwebmp.plugins.aggrid;
 
 import com.google.common.base.Strings;
 import com.guicedee.client.IGuiceContext;
-import com.guicedee.guicedservlets.websockets.options.IGuicedWebSocket;
+import com.guicedee.client.services.websocket.IGuicedWebSocket;
 import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -14,7 +14,6 @@ import com.jwebmp.core.base.angular.client.annotations.references.NgImportModule
 import com.jwebmp.core.base.angular.client.annotations.references.NgImportReference;
 import com.jwebmp.core.base.angular.client.annotations.structures.NgField;
 import com.jwebmp.core.base.angular.client.annotations.structures.NgMethod;
-import com.jwebmp.core.base.angular.client.annotations.typescript.TsDependency;
 import com.jwebmp.core.base.angular.client.services.EventBusService;
 import com.jwebmp.core.base.angular.client.services.interfaces.IComponent;
 import com.jwebmp.core.base.angular.client.services.interfaces.INgComponent;
