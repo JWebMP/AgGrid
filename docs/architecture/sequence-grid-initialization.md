@@ -5,11 +5,11 @@ This diagram illustrates the key steps when a grid component is first created, i
 ```mermaid
 sequenceDiagram
     actor Developer
-    participant Java[JWebMP Host<br/>Java Backend]
-    participant Codegen[Codegen<br/>Annotation Processor]
-    participant Browser[Browser<br/>Angular + JS]
-    participant Server[Vert.x<br/>WebSocket Server]
-    participant GridService[GridService<br/>fetchData]
+    participant Java as "JWebMP Host\nJava Backend"
+    participant Codegen as "Codegen\nAnnotation Processor"
+    participant Browser as "Browser\nAngular + JS"
+    participant Server as "Vert.x\nWebSocket Server"
+    participant GridService as "GridService\nfetchData"
 
     Developer->>Java: new MyGrid() { ... }
     activate Java
@@ -20,7 +20,8 @@ sequenceDiagram
     Java->>Java: Register WebSocket listener (AgGridFetchDataReceiver)
     deactivate Java
     
-    Java->>Browser: Render HTML: &lt;ag-grid-angular [gridOptions]="options"&gt;
+    Java->>Browser: Render Angular component template
+    Note over Java,Browser: HTML tag ag-grid-angular with gridOptions bound to "options"
     activate Browser
     Browser->>Browser: Angular bootstrap & component init
     Browser->>Browser: ngAfterViewInit: grid ready, emit listener event
@@ -100,9 +101,9 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-    participant User[Browser: User]
-    participant Grid[AG Grid]
-    participant Server[Java: Data Service]
+    participant User as "Browser User"
+    participant Grid as "AG Grid"
+    participant Server as "Java Data Service"
 
     User->>Grid: Click row (row selection event)
     activate Grid
