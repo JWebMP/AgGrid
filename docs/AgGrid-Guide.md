@@ -5,8 +5,9 @@ This guide provides comprehensive information on how to use the AG Grid plugin i
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Installation](#installation)
-3. [Basic Usage](#basic-usage)
+2. [AG Grid Community API Overview](#ag-grid-community-api-overview)
+3. [Installation](#installation)
+4. [Basic Usage](#basic-usage)
 4. [Configuration Options](#configuration-options)
    - [Grid-Level Options](#grid-level-options)
    - [Column Definitions](#column-definitions)
@@ -27,12 +28,99 @@ This guide provides comprehensive information on how to use the AG Grid plugin i
 
 AG Grid is a feature-rich data grid component for displaying and manipulating tabular data. The JWebMP AG Grid plugin provides a Java wrapper around the AG Grid library, making it easy to use in JWebMP applications.
 
+**Minimum Version**: AG Grid **34.2.0** or higher (Community or Enterprise Edition)
+
 Key features include:
 - Data binding with server-side data sources
 - Custom cell renderers
 - Sorting, filtering, and pagination
 - Column resizing and reordering
 - Row selection
+- Comprehensive Grid API for programmatic control
+- Export functionality (CSV, Excel)
+- Keyboard navigation and accessibility
+
+## AG Grid Community API Overview
+
+The AG Grid Community Edition (included with v34.2.0+) provides a comprehensive API for programmatic grid control. This section highlights the key API categories available:
+
+### Grid Data & Rows
+
+- **Row Access**: `getRowNode()`, `forEachNode()`, `forEachNodeAfterFilter()`, `forEachLeafNode()`
+- **Row Display**: `getDisplayedRowAtIndex()`, `getDisplayedRowCount()`, `getFirstDisplayedRowIndex()`, `getLastDisplayedRowIndex()`
+- **Row Selection**: `selectAll()`, `deselectAll()`, `getSelectedNodes()`, `getSelectedRows()`, `setNodesSelected()`
+- **Row Grouping**: `getRowGroupColumns()`, `setRowGroupColumns()`, `addRowGroupColumns()`, `removeRowGroupColumns()`
+- **Row Data**: `applyTransaction()`, `applyTransactionAsync()`, `flushAsyncTransactions()`, `isRowDataEmpty()`
+
+### Column Management
+
+- **Column Definitions**: `getColumnDefs()`, `getColumn()`, `getColumns()`, `getAllGridColumns()`
+- **Column Display**: `setColumnsVisible()`, `getDisplayedCenterColumns()`, `getDisplayedLeftColumns()`, `getDisplayedRightColumns()`
+- **Column State**: `getColumnState()`, `applyColumnState()`, `resetColumnState()`, `getColumnGroupState()`, `setColumnGroupState()`
+- **Column Sizing**: `setColumnWidths()`, `sizeColumnsToFit()`, `autoSizeColumns()`, `autoSizeAllColumns()`
+- **Column Pinning**: `setColumnsPinned()`, `isPinning()`, `isPinningLeft()`, `isPinningRight()`
+- **Column Moving**: `moveColumns()`, `moveColumnByIndex()`
+
+### Filtering & Sorting
+
+- **Quick Filter**: `getQuickFilter()`, `resetQuickFilter()`, `isQuickFilterPresent()`
+- **Column Filtering**: `isColumnFilterPresent()`, `isAnyFilterPresent()`, `getColumnFilterInstance()`, `getFilterModel()`, `setFilterModel()`
+- **Advanced Filter**: `getAdvancedFilterModel()`, `setAdvancedFilterModel()`, `showAdvancedFilterBuilder()`, `hideAdvancedFilterBuilder()`
+- **Sorting**: `onSortChanged()`
+
+### Pagination & Scrolling
+
+- **Pagination**: `paginationGetPageSize()`, `paginationGetCurrentPage()`, `paginationGetTotalPages()`, `paginationGoToPage()`, `paginationGoToNextPage()`, `paginationGoToPreviousPage()`
+- **Scrolling**: `ensureIndexVisible()`, `ensureNodeVisible()`, `ensureColumnVisible()`, `getHorizontalPixelRange()`, `getVerticalPixelRange()`
+
+### Cell Editing
+
+- **Edit Control**: `startEditingCell()`, `stopEditing()`, `getEditingCells()`, `getCellEditorInstances()`, `validateEdit()`
+- **Clipboard**: `cutToClipboard()`, `copyToClipboard()`, `pasteFromClipboard()`, `copySelectedRowsToClipboard()`, `copySelectedRangeToClipboard()`
+
+### Export & Data Access
+
+- **CSV Export**: `exportDataAsCsv()`, `getDataAsCsv()`
+- **Excel Export**: `exportDataAsExcel()`, `getDataAsExcel()`, `getSheetDataForExcel()` (for multiple sheets)
+- **Cell Values**: `getCellValue()`
+
+### Rendering & Refresh
+
+- **Refresh**: `refreshCells()`, `redrawRows()`, `refreshHeader()`, `onRowHeightChanged()`, `resetRowHeights()`
+- **Cell Renderers**: `getCellRendererInstances()`, `getRenderedNodes()`
+- **Flash**: `flashCells()` (with HighlightChangesModule)
+
+### Grid Options & State
+
+- **Options**: `getGridOption()`, `setGridOption()`, `updateGridOptions()`
+- **Grid State**: `getState()`, `setState()`
+- **Grid ID**: `getGridId()`
+
+### Events
+
+- **Event Listeners**: `addEventListener()`, `removeEventListener()`, `addGlobalListener()`, `removeGlobalListener()`
+- **Row Events**: `addRenderedRowListener()`
+
+### Accessory Features
+
+- **Column Menu**: `showColumnMenu()`, `hidePopupMenu()`, `showColumnChooser()`, `hideColumnChooser()`, `showColumnFilter()`, `hideColumnFilter()`
+- **Side Bar**: `getSideBar()`, `setSideBarVisible()`, `isSideBarVisible()`, `setSideBarPosition()`, `openToolPanel()`, `closeToolPanel()`
+- **Status Bar**: `getStatusPanel()`
+- **Context Menu**: `showContextMenu()`
+
+### Master-Detail & Charts
+
+- **Master-Detail**: `getDetailGridInfo()`, `forEachDetailGridInfo()`, `addDetailGridInfo()`, `removeDetailGridInfo()`
+- **Charts**: `createRangeChart()`, `createPivotChart()`, `updateChart()`, `getChartRef()`, `getChartModels()`, `restoreChart()`
+
+### Additional Capabilities
+
+- **Find**: `findNext()`, `findPrevious()`, `findGetTotalMatches()`, `findGoTo()`, `findClearActive()`
+- **Keyboard Navigation**: `getFocusedCell()`, `setFocusedCell()`, `clearFocusedCell()`, `setFocusedHeader()`, `tabToNextCell()`, `tabToPreviousCell()`
+- **Module Registration**: `isModuleRegistered()`
+- **Cleanup**: `destroy()`, `isDestroyed()`
+
+For detailed documentation on all Grid API methods, parameters, and examples, see the [AG Grid Angular Data Grid API Reference](https://www.ag-grid.com/angular-data-grid/grid-api/).
 
 ## Installation
 

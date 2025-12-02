@@ -435,8 +435,11 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      */
     public J addRowData(Object rowData)
     {
-        getOptions().getRowData()
-                    .add(rowData);
+        Object existing = getOptions().getRowData();
+        if (existing instanceof List)
+        {
+            ((List<Object>) existing).add(rowData);
+        }
         return (J) this;
     }
 
@@ -448,8 +451,11 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
      */
     public J addRowData(List<Object> rowData)
     {
-        getOptions().getRowData()
-                    .addAll(rowData);
+        Object existing = getOptions().getRowData();
+        if (existing instanceof List)
+        {
+            ((List<Object>) existing).addAll(rowData);
+        }
         return (J) this;
     }
 
@@ -506,13 +512,16 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                 {
                     addAttribute("[rowData]", options.getRowDataRaw());
                 }
-                else if (options.getRowData() != null && !options.getRowData()
-                                                                 .isEmpty())
+                else if (options.getRowData() != null && (options.getRowData() instanceof List))
                 {
-                    addAttribute("[rowData]", "rowData");
+                    List<?> rowDataList = (List<?>) options.getRowData();
+                    if (!rowDataList.isEmpty())
+                    {
+                        addAttribute("[rowData]", "rowData");
+                    }
                 }
 
-                if (options.getPagination() != null && options.getPagination())
+                if (options.configureRowPivoting().getPivotMode() != null && options.configureRowPivoting().getPivotMode())
                 {
                     addAttribute("[pagination]", "true");
                 }
@@ -607,13 +616,16 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                 // Bind directly to the provided TS/Angular expression
                 addAttribute("[rowData]", options.getRowDataRaw());
             }
-            else if (options.getRowData() != null && !options.getRowData()
-                                                             .isEmpty())
+            else if (options.getRowData() != null && (options.getRowData() instanceof List))
             {
-                // Emit a local TS field and bind to it
-                fields.add("rowData: any[] = " + options.getRowData()
-                                                        .toString() + ";");
-                addAttribute("[rowData]", "rowData");
+                List<?> rowDataList = (List<?>) options.getRowData();
+                if (!rowDataList.isEmpty())
+                {
+                    // Emit a local TS field and bind to it
+                    fields.add("rowData: any[] = " + rowDataList
+                                                           .toString() + ";");
+                    addAttribute("[rowData]", "rowData");
+                }
             }
         }
 

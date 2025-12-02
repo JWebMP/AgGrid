@@ -29,6 +29,52 @@
             <artifactId>jwebmp-testlib</artifactId>
             <scope>test</scope>
         </dependency>
+    <dependency>
+
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-commons</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-engine</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-suite-api</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+
     </dependencies>
 
     <properties>
@@ -40,20 +86,11 @@
         <dependencies>
             <dependency>
                 <groupId>com.guicedee</groupId>
-                <artifactId>standalone-bom</artifactId>
+                <artifactId>guicedee-bom</artifactId>
                 <type>pom</type>
                 <scope>import</scope>
                 <version>${guicedee.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.guicedee</groupId>
-                <artifactId>fasterxml-bom</artifactId>
-                <type>pom</type>
-                <scope>import</scope>
-                <version>${guicedee.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.jwebmp</groupId>
                 <artifactId>jwebmp-bom</artifactId>
