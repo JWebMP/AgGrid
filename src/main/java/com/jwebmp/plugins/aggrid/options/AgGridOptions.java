@@ -8,6 +8,8 @@ import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.plugins.aggrid.options.enums.*;
 import org.jspecify.annotations.Nullable;
 
+import java.util.ArrayList;
+
 /**
  * AG Grid Options - MODULAR COMPOSITION PATTERN
  * 
@@ -501,6 +503,12 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     private java.util.List<com.jwebmp.plugins.aggrid.options.AgGridColumnDef<?>> columnDefs;
 
     /**
+     * Default Column Definition applied to all columns unless overridden per-column.
+     */
+    @JsonProperty("defaultColDef")
+    private com.jwebmp.plugins.aggrid.options.AgGridColumnDef<?> defaultColDef;
+
+    /**
      * The row data
      * NOT serialized to JSON
      */
@@ -520,7 +528,11 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public java.util.List<com.jwebmp.plugins.aggrid.options.AgGridColumnDef<?>> getColumnDefs()
     {
-        return columnDefs;
+						if (columnDefs == null)
+						{
+								this.columnDefs = new ArrayList<>();
+						}
+						return columnDefs;
     }
 
     public Object getRowData()
@@ -564,7 +576,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     @SuppressWarnings("unchecked")
     public J setDefaultColDef(com.jwebmp.plugins.aggrid.options.AgGridColumnDef<?> defaultColDef)
     {
-        // This should be implemented if needed, defaultColDef is likely in one of the option modules
+        this.defaultColDef = defaultColDef;
         return (J) this;
     }
 
@@ -573,8 +585,23 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      */
     public com.jwebmp.plugins.aggrid.options.AgGridColumnDef<?> getDefaultColDef()
     {
-        // Return null for now - default column def should be set via options if needed
-        return null;
+        if (defaultColDef == null)
+        {
+            return null;
+        }
+        try
+        {
+            // Defensive copy: return a new instance so callers cannot mutate internal state
+            com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            byte[] json = mapper.writeValueAsBytes(defaultColDef);
+            Object copy = mapper.readValue(json, (Class<?>) defaultColDef.getClass());
+            return (com.jwebmp.plugins.aggrid.options.AgGridColumnDef<?>) copy;
+        }
+        catch (Exception e)
+        {
+            // Fallback: return a fresh instance to avoid leaking internals
+            return new com.jwebmp.plugins.aggrid.options.AgGridColumnDef<>();
+        }
     }
 
     /**
@@ -594,6 +621,22 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     }
 
     /**
+     * Convenience method for setting row height without having to navigate HeaderSizingOptions.
+     * Mirrors AG Grid's gridOptions.rowHeight. When set, AgGrid will generate a TS field and bind
+     * [rowHeight] to it so the runtime grid receives the correct value.
+     */
+    @SuppressWarnings("unchecked")
+    public J setRowHeight(Integer rowHeight)
+    {
+        if (this.headerSizing == null)
+        {
+            this.headerSizing = new HeaderSizingOptions<>();
+        }
+        this.headerSizing.setRowHeight(rowHeight);
+        return (J) this;
+    }
+
+    /**
      * Convenience method to set row selection using enum
      */
     @SuppressWarnings("unchecked")
@@ -603,6 +646,63 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         {
             this.rowSelection = mode;
         }
+        return (J) this;
+    }
+
+    /**
+     * Enable classic checkbox selection using the Auto Group Column with new modular options.
+     * - Sets rowSelection to MULTIPLE
+     * - Configures autoGroupColumnDef with checkboxSelection and optional headerCheckboxSelection
+     * - Wires group selection behaviour flags (groupSelectsChildren / groupSelectsFiltered)
+     *
+     * Usage example:
+     *   options.enableGroupCheckboxSelection(true, true, true, true);
+     */
+    @SuppressWarnings("unchecked")
+    public J enableGroupCheckboxSelection(boolean headerCheckbox, boolean rowCheckbox, boolean selectChildren, boolean selectFiltered)
+    {
+        // Ensure multiple selection for checkbox UX
+        this.rowSelection = com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode.MULTIPLE;
+
+        // Configure auto group column definition
+        RowGroupingOptions<?> rg = this.rowGrouping != null ? this.rowGrouping : (this.rowGrouping = new RowGroupingOptions<>());
+        AgGridColumnDef<?> auto = rg.getAutoGroupColumnDef();
+        if (auto == null)
+        {
+            auto = new AgGridColumnDef<>();
+            rg.setAutoGroupColumnDef(auto);
+        }
+        auto.setCheckboxSelection(rowCheckbox);
+        auto.setHeaderCheckboxSelection(headerCheckbox);
+
+        // Configure group selection behaviour
+        rg.setGroupSelectsChildren(selectChildren);
+        rg.setGroupSelectsFiltered(selectFiltered);
+
+        return (J) this;
+    }
+
+    /**
+     * Convenience getter mirroring legacy suppressAggHeader flag.
+     * Maps to AG Grid's suppressAggFuncInHeader on the row grouping module.
+     */
+    public Boolean getSuppressAggFuncInHeader()
+    {
+        return rowGrouping != null ? rowGrouping.getSuppressAggFuncInHeader() : null;
+    }
+
+    /**
+     * Convenience setter mirroring legacy suppressAggHeader flag.
+     * Delegates to RowGroupingOptions#setSuppressAggFuncInHeader(Boolean).
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressAggFuncInHeader(Boolean suppress)
+    {
+        if (this.rowGrouping == null)
+        {
+            this.rowGrouping = new RowGroupingOptions<>();
+        }
+        this.rowGrouping.setSuppressAggFuncInHeader(suppress);
         return (J) this;
     }
 

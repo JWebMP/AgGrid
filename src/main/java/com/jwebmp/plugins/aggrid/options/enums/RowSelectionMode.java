@@ -13,12 +13,12 @@ public enum RowSelectionMode
     /**
      * Single row selection mode
      */
-    SINGLE("singleRow"),
+    SINGLE("single"),
 
     /**
      * Multiple row selection mode
      */
-    MULTIPLE("multiRow");
+    MULTIPLE("multiple");
 
     private final String value;
 

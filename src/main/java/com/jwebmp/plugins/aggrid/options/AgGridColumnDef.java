@@ -111,6 +111,20 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     private ICellRenderer<?> cellRenderer;
 
     /**
+     * When true, this column shows a selection checkbox for each row.
+     * See AG Grid docs: ColDef.checkboxSelection
+     */
+    @JsonProperty("checkboxSelection")
+    private Boolean checkboxSelection;
+
+    /**
+     * When true, the header will include a checkbox that selects/deselects all rows on the current page/group.
+     * See AG Grid docs: ColDef.headerCheckboxSelection
+     */
+    @JsonProperty("headerCheckboxSelection")
+    private Boolean headerCheckboxSelection;
+
+    /**
      * Chart data type for integrated/cross-filter charts: 'category' | 'series' | 'excluded'.
      * See AG Grid documentation.
      */
@@ -623,6 +637,40 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     public @org.jspecify.annotations.NonNull J setCellRenderer(ICellRenderer<?> cellRenderer)
     {
         this.cellRenderer = cellRenderer;
+        return (J) this;
+    }
+
+    /**
+     * @return whether this column renders selection checkboxes.
+     */
+    public Boolean getCheckboxSelection()
+    {
+        return checkboxSelection;
+    }
+
+    /**
+     * Enable/disable selection checkboxes on this column.
+     */
+    public @org.jspecify.annotations.NonNull J setCheckboxSelection(Boolean checkboxSelection)
+    {
+        this.checkboxSelection = checkboxSelection;
+        return (J) this;
+    }
+
+    /**
+     * @return whether the header contains a master selection checkbox.
+     */
+    public Boolean getHeaderCheckboxSelection()
+    {
+        return headerCheckboxSelection;
+    }
+
+    /**
+     * Enable/disable the master selection checkbox in the header for this column.
+     */
+    public @org.jspecify.annotations.NonNull J setHeaderCheckboxSelection(Boolean headerCheckboxSelection)
+    {
+        this.headerCheckboxSelection = headerCheckboxSelection;
         return (J) this;
     }
 

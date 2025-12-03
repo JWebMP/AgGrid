@@ -59,6 +59,19 @@ public class RowGroupingOptions<J extends RowGroupingOptions<J>> extends JavaScr
     @JsonProperty("groupHideOpenParents")
     private Boolean groupHideOpenParents;
 
+    /**
+     * When selecting a group node, also select its children.
+     * See AG Grid: groupSelectsChildren
+     */
+    @JsonProperty("groupSelectsChildren")
+    private Boolean groupSelectsChildren;
+
+    /**
+     * When true, select/deselect only filtered children when using group selection.
+     */
+    @JsonProperty("groupSelectsFiltered")
+    private Boolean groupSelectsFiltered;
+
     // ===== [2] GROUPING EXPANSION & BEHAVIOR =====
 
     /**
@@ -298,6 +311,34 @@ public class RowGroupingOptions<J extends RowGroupingOptions<J>> extends JavaScr
     public @org.jspecify.annotations.NonNull J setGroupHideOpenParents(Boolean groupHideOpenParents)
     {
         this.groupHideOpenParents = groupHideOpenParents;
+        return (J) this;
+    }
+
+    /**
+     * @return whether selecting a group selects its children
+     */
+    public Boolean getGroupSelectsChildren()
+    {
+        return groupSelectsChildren;
+    }
+
+    public @org.jspecify.annotations.NonNull J setGroupSelectsChildren(Boolean groupSelectsChildren)
+    {
+        this.groupSelectsChildren = groupSelectsChildren;
+        return (J) this;
+    }
+
+    /**
+     * @return whether group selection applies only to filtered children
+     */
+    public Boolean getGroupSelectsFiltered()
+    {
+        return groupSelectsFiltered;
+    }
+
+    public @org.jspecify.annotations.NonNull J setGroupSelectsFiltered(Boolean groupSelectsFiltered)
+    {
+        this.groupSelectsFiltered = groupSelectsFiltered;
         return (J) this;
     }
 

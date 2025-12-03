@@ -547,6 +547,12 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
                     addAttribute("[defaultColDef]", "defaultColDef");
                 }
 
+                // Bind suppressAggFuncInHeader when provided so it reflects in the template/TS
+                if (options.getSuppressAggFuncInHeader() != null)
+                {
+                    addAttribute("[suppressAggFuncInHeader]", "suppressAggFuncInHeader");
+                }
+
                 if (!Strings.isNullOrEmpty(getRowIdFieldName()))
                 {
                     addAttribute("[getRowId]", "getRowId");
@@ -634,8 +640,16 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
         // Add default column definition field
         if (options != null && options.getDefaultColDef() != null)
         {
-            fields.add("defaultColDef: ColDef = " + options.getDefaultColDef()
-                                                           .toString() + ";");
+            String defCol = String.valueOf(options.getDefaultColDef());
+            if (Strings.isNullOrEmpty(defCol) || "{}".equals(defCol.trim()))
+            {
+                fields.add("defaultColDef: ColDef = { sortable: true, filter: true, resizable: true };");
+            }
+            else
+            {
+                fields.add("defaultColDef: ColDef = " + defCol + ";");
+            }
+            addAttribute("[defaultColDef]", "defaultColDef");
         }
         else
         {
@@ -655,6 +669,12 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
         {
             fields.add("rowSelection: any = " + options.getRowSelection()
                                                        .toString() + ";");
+        }
+
+        // Add suppressAggFuncInHeader field if requested so it appears in generated TS
+        if (options != null && options.getSuppressAggFuncInHeader() != null)
+        {
+            fields.add("suppressAggFuncInHeader: boolean = " + options.getSuppressAggFuncInHeader() + ";");
         }
 
         fields.add("@ViewChild('" + getID() + "') " + getID() + "? : AgGridAngular;");
