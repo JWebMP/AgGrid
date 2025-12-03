@@ -12,7 +12,7 @@ By participating in this project, you agree to maintain a respectful, inclusive 
 
 ### Prerequisites
 
-- **Java 25 LTS** (minimum 21 LTS)
+- **Java 25 LTS** (required)
 - **Maven 3.8+**
 - **Git**
 - **IDE**: IntelliJ IDEA, Eclipse, or VS Code with Java extensions

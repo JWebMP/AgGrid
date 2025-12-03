@@ -114,7 +114,7 @@ List performance enhancements and benchmarks if available.
 ### Compatibility Matrix
 | Component | Version | Status |
 |-----------|---------|--------|
-| Java | 25 LTS (21+ required) | ✅ Tested |
+| Java | 25 LTS (required) | ✅ Tested |
 | AG Grid | 34.2.0+ | ✅ Supported |
 | Angular | 20+ | ✅ Compatible |
 | Maven | 3.8+ | ✅ Required |

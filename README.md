@@ -30,7 +30,7 @@ This plugin provides a **server-driven, type-safe, fluent API** for building rea
 
 ### Prerequisites
 
-- **Java 25 LTS** (or 21 LTS)
+- **Java 25 LTS** (required)
 - **Maven 3.8+**
 - **Node.js 18+** (for frontend builds)
 - **Angular 20+** (auto-integrated via JWebMP)
@@ -391,7 +391,7 @@ Please use [GitHub Issues](https://github.com/JWebMP/JWebMP-AgGrid/issues) with:
 |--------|--------|
 | **Version** | 2.0.0-SNAPSHOT |
 | **AG Grid** | v34.2.0+ supported |
-| **Java** | 25 LTS (minimum 21 LTS) |
+| **Java** | 25 LTS (required) |
 | **Build** | ✅ Passing |
 | **Coverage** | ≥80% (Jacoco enforced) |
 | **License** | Apache 2.0 |
