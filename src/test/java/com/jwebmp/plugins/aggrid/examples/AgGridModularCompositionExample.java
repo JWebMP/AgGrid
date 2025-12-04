@@ -182,9 +182,11 @@ public class AgGridModularCompositionExample
                .setPivotMaxGeneratedColumns(30);
         
         // Top-level properties
-        options.setRowSelection(RowSelectionMode.MULTIPLE)
+        options
                .setDomLayout(DomLayoutType.AUTO_HEIGHT)
-               .setEditType(EditType.DOUBLE_CLICK);
+               .setEditType(EditType.DOUBLE_CLICK)
+									.configureSelection().setRowSelection(RowSelectionMode.MULTIPLE)
+								;
         
         // JSON Output: All properties flattened in parent object
     }
@@ -396,8 +398,8 @@ public class AgGridModularCompositionExample
                .setPivotMaxGeneratedColumns(20);
         
         // User interaction
-        options.setRowSelection(RowSelectionMode.MULTIPLE)
-               .setEditType(EditType.DOUBLE_CLICK);
+        options.setEditType(EditType.DOUBLE_CLICK)
+								.configureSelection().setRowSelection(RowSelectionMode.MULTIPLE);
         
         return options;
     }

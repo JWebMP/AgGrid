@@ -3,6 +3,7 @@ package com.jwebmp.plugins.aggrid.options;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -17,7 +18,7 @@ import org.jspecify.annotations.Nullable;
 public class SelectionOptionsExpanded<J extends SelectionOptionsExpanded<J>>
 {
     @JsonProperty("rowSelection")
-    private @Nullable String rowSelection;
+    private @Nullable RowSelectionMode rowSelection;
 
     @JsonProperty("cellSelection")
     private @Nullable String cellSelection;
@@ -39,7 +40,7 @@ public class SelectionOptionsExpanded<J extends SelectionOptionsExpanded<J>>
 
     // Getters
 
-    public @Nullable String getRowSelection()
+    public @Nullable RowSelectionMode getRowSelection()
     {
         return rowSelection;
     }
@@ -77,7 +78,7 @@ public class SelectionOptionsExpanded<J extends SelectionOptionsExpanded<J>>
     // Setters with CRTP return type
 
     @SuppressWarnings("unchecked")
-    public J setRowSelection(@Nullable String rowSelection)
+    public J setRowSelection(@Nullable RowSelectionMode rowSelection)
     {
         this.rowSelection = rowSelection;
         return (J) this;

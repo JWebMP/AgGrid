@@ -1,9 +1,6 @@
 package com.jwebmp.plugins.aggrid.options;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.plugins.aggrid.options.enums.*;
 import org.jspecify.annotations.Nullable;
@@ -143,13 +140,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      */
     @JsonUnwrapped
     private SelectionOptionsExpanded<?> selectionExpanded = new SelectionOptionsExpanded<>();
-
-    /**
-     * Row selection mode - single vs multiple.
-     */
-    @JsonProperty("rowSelection")
-    private @Nullable RowSelectionMode rowSelection;
-
+				
     /**
      * Cell selection mode (NEW v34.2.0).
      * Determines whether cells or rows are selected.
@@ -229,11 +220,6 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     public SelectionOptionsExpanded<?> getSelectionExpanded()
     {
         return selectionExpanded;
-    }
-
-    public @Nullable RowSelectionMode getRowSelection()
-    {
-        return rowSelection;
     }
 
     public @Nullable CellSelectionMode getCellSelection()
@@ -336,13 +322,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         this.selectionExpanded = selectionExpanded;
         return (J) this;
     }
-
-    @SuppressWarnings("unchecked")
-    public J setRowSelection(@Nullable RowSelectionMode rowSelection)
-    {
-        this.rowSelection = rowSelection;
-        return (J) this;
-    }
+				
 
     @SuppressWarnings("unchecked")
     public J setCellSelection(@Nullable CellSelectionMode cellSelection)
@@ -506,6 +486,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      * Default Column Definition applied to all columns unless overridden per-column.
      */
     @JsonProperty("defaultColDef")
+				@JsonIgnore
     private com.jwebmp.plugins.aggrid.options.AgGridColumnDef<?> defaultColDef;
 
     /**
@@ -635,20 +616,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         this.headerSizing.setRowHeight(rowHeight);
         return (J) this;
     }
-
-    /**
-     * Convenience method to set row selection using enum
-     */
-    @SuppressWarnings("unchecked")
-    public J setRowSelectionMode(com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode mode)
-    {
-        if (mode != null)
-        {
-            this.rowSelection = mode;
-        }
-        return (J) this;
-    }
-
+				
     /**
      * Enable classic checkbox selection using the Auto Group Column with new modular options.
      * - Sets rowSelection to MULTIPLE
@@ -661,9 +629,6 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     @SuppressWarnings("unchecked")
     public J enableGroupCheckboxSelection(boolean headerCheckbox, boolean rowCheckbox, boolean selectChildren, boolean selectFiltered)
     {
-        // Ensure multiple selection for checkbox UX
-        this.rowSelection = com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode.MULTIPLE;
-
         // Configure auto group column definition
         RowGroupingOptions<?> rg = this.rowGrouping != null ? this.rowGrouping : (this.rowGrouping = new RowGroupingOptions<>());
         AgGridColumnDef<?> auto = rg.getAutoGroupColumnDef();
@@ -679,41 +644,6 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         rg.setGroupSelectsChildren(selectChildren);
         rg.setGroupSelectsFiltered(selectFiltered);
 
-        return (J) this;
-    }
-
-    /**
-     * Convenience getter mirroring legacy suppressAggHeader flag.
-     * Maps to AG Grid's suppressAggFuncInHeader on the row grouping module.
-     */
-    public Boolean getSuppressAggFuncInHeader()
-    {
-        return rowGrouping != null ? rowGrouping.getSuppressAggFuncInHeader() : null;
-    }
-
-    /**
-     * Convenience setter mirroring legacy suppressAggHeader flag.
-     * Delegates to RowGroupingOptions#setSuppressAggFuncInHeader(Boolean).
-     */
-    @SuppressWarnings("unchecked")
-    public J setSuppressAggFuncInHeader(Boolean suppress)
-    {
-        if (this.rowGrouping == null)
-        {
-            this.rowGrouping = new RowGroupingOptions<>();
-        }
-        this.rowGrouping.setSuppressAggFuncInHeader(suppress);
-        return (J) this;
-    }
-
-    /**
-     * Convenience method to set enable cell change flash
-     */
-    @SuppressWarnings("unchecked")
-    public J setEnableCellChangeFlash(Boolean enableCellChangeFlash)
-    {
-        // This would be added to a RenderingOptions or similar if needed
-        // For now just return for compatibility
         return (J) this;
     }
 }
