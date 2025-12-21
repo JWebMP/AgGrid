@@ -1,5 +1,7 @@
 package com.jwebmp.plugins.aggrid.options;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
@@ -13,6 +15,8 @@ import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
  * @author YourName
  * @since 2025
  */
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RowGroupingOptions<J extends RowGroupingOptions<J>> extends JavaScriptPart<J>
 {
     // ===== [1] GROUPING DISPLAY & RENDERING =====
