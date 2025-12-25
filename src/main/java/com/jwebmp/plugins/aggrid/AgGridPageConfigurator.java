@@ -37,8 +37,8 @@ import jakarta.validation.constraints.NotNull;
         pluginStatus = PluginStatus.Released
 )
 
-@TsDependency(value = "ag-grid-community", version = "^34.2.0")
-@TsDependency(value = "ag-grid-angular", version = "^34.2.0")
+@TsDependency(value = "ag-grid-community", version = "^35.0.0")
+@TsDependency(value = "ag-grid-angular", version = "^35.0.0")
 
 
 /*@NgScript(name = "AG Grid", value = "node_modules/ag-grid-community/dist/ag-grid-community.min.js")*/

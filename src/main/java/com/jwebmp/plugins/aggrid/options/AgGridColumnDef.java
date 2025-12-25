@@ -36,6 +36,451 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     private String field;
 
     /**
+     * The unique ID for the column
+     */
+    @JsonProperty("colId")
+    @Getter
+    @Setter
+    protected String colId;
+
+    /**
+     * The type of the column.
+     * Can be a string or an array of strings.
+     */
+    @JsonProperty("type")
+    protected Object type;
+
+    /**
+     * Whether the column is editable.
+     * Can be a boolean or a function.
+     */
+    @JsonProperty("editable")
+    protected Object editable;
+
+    /**
+     * The cell style.
+     * Can be an object (Map) or a function.
+     */
+    @JsonProperty("cellStyle")
+    protected Object cellStyle;
+
+    /**
+     * The value parser.
+     * Function to parse the value after editing.
+     */
+    @JsonProperty("valueParser")
+    @JsonRawValue
+    protected String valueParser;
+
+    /**
+     * The value setter.
+     * Function to set the value after editing.
+     */
+    @JsonProperty("valueSetter")
+    @JsonRawValue
+    protected String valueSetter;
+
+    /**
+     * The row span.
+     * Can be a number or a function.
+     */
+    @JsonProperty("rowSpan")
+    protected Object rowSpan;
+
+    /**
+     * The aggregation function.
+     * Can be a string or a function.
+     */
+    @JsonProperty("aggFunc")
+    protected Object aggFunc;
+
+    /**
+     * The unique ID for the column
+     *
+     * @return The unique ID
+     */
+    public String getColId()
+    {
+        return colId;
+    }
+
+    /**
+     * The unique ID for the column
+     *
+     * @param colId The unique ID
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setColId(String colId)
+    {
+        this.colId = colId;
+        return (J) this;
+    }
+
+    /**
+     * The type of the column.
+     * Can be a string or an array of strings.
+     *
+     * @return The type
+     */
+    public Object getType()
+    {
+        return type;
+    }
+
+    /**
+     * Sets the type of the column.
+     * Can be a string or an array of strings.
+     *
+     * @param type The type
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setType(Object type)
+    {
+        this.type = type;
+        return (J) this;
+    }
+
+    /**
+     * Sets the type of the column as a single string.
+     *
+     * @param type The type string
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setType(String type)
+    {
+        this.type = type;
+        return (J) this;
+    }
+
+    /**
+     * Sets the type of the column as a list of strings.
+     *
+     * @param types The list of type strings
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setType(List<String> types)
+    {
+        this.type = types;
+        return (J) this;
+    }
+
+    /**
+     * Whether the column is editable.
+     * Can be a boolean or a function.
+     *
+     * @return The editable value or function
+     */
+    public Object getEditable()
+    {
+        return editable;
+    }
+
+    /**
+     * Sets whether the column is editable.
+     * Can be a boolean or a function.
+     *
+     * @param editable The editable value or function
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setEditable(Object editable)
+    {
+        this.editable = editable;
+        return (J) this;
+    }
+
+    /**
+     * Sets whether the column is editable as a boolean.
+     *
+     * @param editable Whether the column is editable
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setEditable(Boolean editable)
+    {
+        this.editable = editable;
+        return (J) this;
+    }
+
+    /**
+     * Sets whether the column is editable as a raw JavaScript function.
+     *
+     * @param editableRaw The raw JavaScript function string
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setEditableRaw(String editableRaw)
+    {
+        this.editable = new RawJsFunction(editableRaw);
+        return (J) this;
+    }
+
+    /**
+     * The cell style.
+     * Can be an object (Map) or a function.
+     *
+     * @return The cell style
+     */
+    public Object getCellStyle()
+    {
+        return cellStyle;
+    }
+
+    /**
+     * Sets the cell style.
+     * Can be an object (Map) or a function.
+     *
+     * @param cellStyle The cell style
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setCellStyle(Object cellStyle)
+    {
+        this.cellStyle = cellStyle;
+        return (J) this;
+    }
+
+    /**
+     * Sets the cell style as a map of CSS properties.
+     *
+     * @param cellStyle The cell style map
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setCellStyle(java.util.Map<String, String> cellStyle)
+    {
+        this.cellStyle = cellStyle;
+        return (J) this;
+    }
+
+    /**
+     * Sets the cell style as a raw JavaScript function.
+     *
+     * @param cellStyleRaw The raw JavaScript function string
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setCellStyleRaw(String cellStyleRaw)
+    {
+        this.cellStyle = new RawJsFunction(cellStyleRaw);
+        return (J) this;
+    }
+
+    /**
+     * The value parser.
+     * Function to parse the value after editing.
+     *
+     * @return The value parser function
+     */
+    public String getValueParser()
+    {
+        return valueParser;
+    }
+
+    /**
+     * Sets the value parser function.
+     *
+     * @param valueParserRaw The raw JavaScript function string
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setValueParserRaw(String valueParserRaw)
+    {
+        this.valueParser = valueParserRaw;
+        return (J) this;
+    }
+
+    /**
+     * The value setter.
+     * Function to set the value after editing.
+     *
+     * @return The value setter function
+     */
+    public String getValueSetter()
+    {
+        return valueSetter;
+    }
+
+    /**
+     * Sets the value setter function.
+     *
+     * @param valueSetterRaw The raw JavaScript function string
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setValueSetterRaw(String valueSetterRaw)
+    {
+        this.valueSetter = valueSetterRaw;
+        return (J) this;
+    }
+
+    /**
+     * The row span.
+     * Can be a number or a function.
+     *
+     * @return The row span
+     */
+    public Object getRowSpan()
+    {
+        return rowSpan;
+    }
+
+    /**
+     * Sets the row span.
+     * Can be a number or a function.
+     *
+     * @param rowSpan The row span
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setRowSpan(Object rowSpan)
+    {
+        this.rowSpan = rowSpan;
+        return (J) this;
+    }
+
+    /**
+     * Sets the row span as a fixed number.
+     *
+     * @param rowSpan The row span number
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setRowSpan(Integer rowSpan)
+    {
+        this.rowSpan = rowSpan;
+        return (J) this;
+    }
+
+    /**
+     * Sets the row span as a raw JavaScript function.
+     *
+     * @param rowSpanRaw The raw JavaScript function string
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setRowSpanRaw(String rowSpanRaw)
+    {
+        this.rowSpan = new RawJsFunction(rowSpanRaw);
+        return (J) this;
+    }
+
+    /**
+     * The aggregation function.
+     * Can be a string or a function.
+     *
+     * @return The aggregation function
+     */
+    public Object getAggFunc()
+    {
+        return aggFunc;
+    }
+
+    /**
+     * Sets the aggregation function as a predefined string (e.g., 'sum', 'min', 'max').
+     *
+     * @param aggFunc The aggregation function name
+     * @return This object
+     */
+    /**
+     * Sets the aggregation function.
+     * Can be a string or a function.
+     *
+     * @param aggFunc The aggregation function
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setAggFunc(Object aggFunc)
+    {
+        this.aggFunc = aggFunc;
+        return (J) this;
+    }
+
+    public @org.jspecify.annotations.NonNull J setAggFunc(String aggFunc)
+    {
+        this.aggFunc = aggFunc;
+        return (J) this;
+    }
+
+    /**
+     * Sets the aggregation function as a raw JavaScript function.
+     *
+     * @param aggFuncRaw The raw JavaScript function string
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setAggFuncRaw(String aggFuncRaw)
+    {
+        this.aggFunc = new RawJsFunction(aggFuncRaw);
+        return (J) this;
+    }
+
+    /**
+     * Whether the column is pivoted
+     */
+    @JsonProperty("pivot")
+    @Getter
+    protected Boolean pivot;
+
+    public J setPivot(Boolean pivot)
+    {
+        this.pivot = pivot;
+        return (J) this;
+    }
+
+    /**
+     * The pivot index
+     */
+    @JsonProperty("pivotIndex")
+    @Getter
+    protected Integer pivotIndex;
+
+    public J setPivotIndex(Integer pivotIndex)
+    {
+        this.pivotIndex = pivotIndex;
+        return (J) this;
+    }
+
+    /**
+     * Whether pivot is enabled
+     */
+    @JsonProperty("enablePivot")
+    @Getter
+    protected Boolean enablePivot;
+
+    public J setEnablePivot(Boolean enablePivot)
+    {
+        this.enablePivot = enablePivot;
+        return (J) this;
+    }
+
+    /**
+     * Whether row drag is enabled
+     */
+    @JsonProperty("rowDrag")
+    @Getter
+    protected Object rowDrag;
+
+    public J setRowDrag(Object rowDrag)
+    {
+        this.rowDrag = rowDrag;
+        return (J) this;
+    }
+
+    /**
+     * Whether the column is a DND source
+     */
+    @JsonProperty("dndSource")
+    @Getter
+    protected Object dndSource;
+
+    public J setDndSource(Object dndSource)
+    {
+        this.dndSource = dndSource;
+        return (J) this;
+    }
+
+    /**
+     * The tool panel class
+     */
+    @JsonProperty("toolPanelClass")
+    @Getter
+    protected Object toolPanelClass;
+
+    public J setToolPanelClass(Object toolPanelClass)
+    {
+        this.toolPanelClass = toolPanelClass;
+        return (J) this;
+    }
+
+    /**
      * The column header
      */
     @JsonProperty("headerName")
@@ -488,6 +933,18 @@ public class AgGridColumnDef<J extends AgGridColumnDef<J>> extends JavaScriptPar
     public Boolean getFilter()
     {
         return (filter instanceof Boolean) ? (Boolean) filter : null;
+    }
+
+    /**
+     * Set the filter for this column.
+     *
+     * @param filter The filter value
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setFilter(Object filter)
+    {
+        this.filter = filter;
+        return (J) this;
     }
 
     /**

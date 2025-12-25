@@ -11,6 +11,7 @@ module com.jwebmp.plugins.aggrid {
     exports com.jwebmp.plugins.aggrid.options.selectors;
     exports com.jwebmp.plugins.aggrid.options.filters;
     exports com.jwebmp.plugins.aggrid.options.locale;
+    exports com.jwebmp.plugins.aggrid.options.state;
 
     requires com.jwebmp.core;
     requires com.jwebmp.client;
@@ -36,5 +37,6 @@ module com.jwebmp.plugins.aggrid {
     opens com.jwebmp.plugins.aggrid.options.locale to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice, org.mapstruct;
     opens com.jwebmp.plugins.aggrid.headers to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice, org.mapstruct;
     opens com.jwebmp.plugins.aggrid.cellrenderers to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice, org.mapstruct;
+    opens com.jwebmp.plugins.aggrid.options.state to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice, org.mapstruct;
     opens com.jwebmp.plugins.aggrid.implementations to com.google.guice, org.mapstruct;
 }

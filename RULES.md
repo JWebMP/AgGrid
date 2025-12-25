@@ -136,6 +136,31 @@ new MyGrid()
   - Typed grid API usage: `GridApi`, `GridOptions`, `ColDef` from `ag-grid-community`
   - Module imports via `@NgImportModule`, `@NgImportReference` (JWebMP codegen annotations)
 
+### TypeScript Component Methods
+The generated Angular component for `AgGrid` includes several TypeScript methods for grid management and event handling:
+- `onGridReady(params: any): void`: Standard AG Grid ready handler; initializes `gridApi`.
+- `onSizeColumnsToFit(): void`: Helper to trigger `gridApi.sizeColumnsToFit()` safely.
+- `onFirstDataRendered(): void`: Automatically fits columns when data is first rendered.
+- `onGridSizeChanged(): void`: Automatically fits columns when the grid container size changes.
+- `onWindowResize(event: any): void`: `@HostListener` that fits columns on browser window resize.
+
+### onGridReady Logic Injection
+JWebMP AgGrid components use a standardized `onGridReady` method in the generated TypeScript. Developers can inject custom TypeScript logic into this method from Java.
+
+- **Java Override**: Override `public List<String> onGridReady()` in your `AgGrid` subclass.
+- **Content**: Return a list of TypeScript strings. Each string is added to the `onGridReady(params: any)` body.
+- **Context**: The `gridApi` is already assigned to `this.gridApi` before your custom logic executes.
+- **Example**:
+  ```java
+  @Override
+  public List<String> onGridReady() {
+      var strings = super.onGridReady();
+      strings.add("console.log('Grid is ready!');");
+      strings.add("this.gridApi.sizeColumnsToFit();");
+      return strings;
+  }
+  ```
+
 ### TypeScript
 - **Version**: Latest (from Angular 20)
 - **Reference Rules**: [rules/generative/language/typescript/README.md](./rules/generative/language/typescript/README.md)

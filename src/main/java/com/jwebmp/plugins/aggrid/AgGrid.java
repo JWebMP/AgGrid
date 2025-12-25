@@ -109,36 +109,98 @@ import java.util.List;
 @NgImportReference(value = "GridReadyEvent", reference = "ag-grid-community")
 @NgField("gridApi?: GridApi;")
 
-// Constructor for HTTP client
-//@NgConstructorParameter("private http: HttpClient")
-//@NgConstructorBody("// Register AG Grid modules\nModuleRegistry.registerModules([AllCommunityModule]);")
-
-// Method for grid ready event
-/*@NgMethod("""
-            onGridReady(params: GridReadyEvent) {
-                this.gridApi = params.api;
-                this.columnApi = params.columnApi;
-
-                // Emit the grid ready event
-                this.gridReady.emit(params);
-
-                // Auto-size columns if needed
-                if (this.gridApi) {
-                    this.gridApi.sizeColumnsToFit();
-                }
-            }
-        """)*/
-
-// Method for cell value changed event
-/*@NgMethod("""
-            onCellValueChanged(event: CellValueChangedEvent) {
-                console.log('Cell value changed:', event);
-                this.cellValueChanged.emit(event);
-            }
-        """)*/
+@NgImportReference(value = "HostListener", reference = "@angular/core")
 
 public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implements INgComponent<J>
 {
+		private static final String GRID_READY_STRING = """
+	// Save the grid API when the grid is ready
+	  onGridReady(params: any): void {
+	    this.gridApi = params.api;
+	    %s
+	    this.onSizeColumnsToFit(); // Automatically fit columns on load
+	  }
+	
+	  // Adjust column sizes to fit the grid width
+	  onSizeColumnsToFit(): void {
+	    if (this.gridApi) {
+	      // Defer to avoid AG Grid error #252 (calling API during render cycle)
+	      setTimeout(() => this.gridApi?.sizeColumnsToFit(), 0);
+	    }
+	  }
+	
+	  // Fit columns when first data is rendered
+	  onFirstDataRendered(): void {
+	    this.onSizeColumnsToFit();
+	  }
+	
+	  // Fit columns when grid size changes (e.g., window resize, container layout)
+	  onGridSizeChanged(): void {
+	    this.onSizeColumnsToFit();
+	  }
+	
+	  // Handle browser window resize
+	  @HostListener('window:resize', ['$event'])
+	  onWindowResize(event: any): void {
+	    this.onSizeColumnsToFit();
+	  }
+	
+	""";
+		
+		
+		
+			private static final String updateDataString = """
+			this.subscription = this.eventBusService.listen(this.listenerName, this.handlerId)
+			  .subscribe({
+			      next: (message: any) => {
+			          if (message) {
+			              let _rows: any[] = [];
+			              if (Array.isArray(message)) {
+			                  for (let m of message) {
+			                      if (typeof m === 'string') {
+			                          try { _rows.push(...(JSON.parse(m) ?? [])); } catch {}
+			                      } else {
+			                          _rows.push(m);
+			                      }
+			                  }
+			              } else {
+			                  if (typeof message === 'string') {
+			                      try { _rows = JSON.parse(message); } catch {}
+			                  } else {
+			                      _rows = Array.isArray(message) ? message : [message];
+			                  }
+			              }
+			              if (_rows) {
+			                  [[ROW_DATA_VARIABLE_ASSIGNMENT]]
+			                  if (this.[[TABLE_ID]]?.api) {
+			                      this.[[TABLE_ID]].api.setGridOption('rowData', [[ROW_DATA_VARIABLE]]);
+			                  } else if (this.[[TABLE_ID]]) {
+			                      this.[[TABLE_ID]].rowData = [[ROW_DATA_VARIABLE]];
+			                  }
+			              }
+			          } else {
+			              if (this.[[TABLE_ID]]?.api) {
+			                  this.[[TABLE_ID]].api.setGridOption('rowData', []);
+			              } else if (this.[[TABLE_ID]]) {
+			                  this.[[TABLE_ID]].rowData = [];
+			              }
+			              [[ROW_DATA_VARIABLE_CLEAR_ASSIGNMENT]]
+			          }
+			      },
+			      error: (error: any) => {
+			          console.log(error);
+			      },
+			  });
+			""";
+			
+			
+		public static final String REFRESH_HEADER_S = """
+			rowSelected($event: RowSelectedEvent<any>) {
+			    this.%s?.api.refreshHeader();
+			    %s
+			}""";
+		
+		
 		/**
 			* The options for the grid
 			*/
@@ -154,8 +216,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
 				addAttribute("style", "width: 100%; height: 500px;");
 				addAttribute("[context]", "{ componentParent: this }");
 				
-				// addAttribute("(gridReady)", "onGridReady($event)");
-				//  addAttribute("(cellValueChanged)", "onCellValueChanged($event)");
+				addAttribute("(gridReady)", "onGridReady($event)");
+				addAttribute("(firstDataRendered)", "onFirstDataRendered()");
+				addAttribute("(gridSizeChanged)", "onGridSizeChanged()");
+				
 				options = new AgGridOptions<>();
 		}
 		
@@ -165,6 +229,26 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
 				{
 						IGuicedWebSocket.addWebSocketMessageReceiver(new AgGridFetchDataReceiver(getListenerName(), (Class<? extends AgGrid<?>>) getClass()));
 				}
+		}
+		
+		public List<String> onGridReady()
+		{
+				var strings = new ArrayList<String>();
+				return strings;
+		}
+		
+		@Override
+		public List<String> methods()
+		{
+				var s = INgComponent.super.componentMethods();
+				var onGridReady = String.join("\n    ", onGridReady());
+				s.add(GRID_READY_STRING.formatted(onGridReady));
+				
+				var strings = onRowSelectJS();
+				
+				s.add(REFRESH_HEADER_S.formatted(getID(), String.join("\n\t\t", strings)));
+				
+				return s;
 		}
 		
 		protected String getListenerName()
@@ -310,10 +394,10 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
 			*/
 		public J enableRowSelection(RowSelectionMode selectionMode)
 		{
-						getOptions()
-							.configureSelection()
-							.setRowSelection(selectionMode)
-						;
+				getOptions()
+					.configureSelection()
+					.setRowSelection(selectionMode)
+				;
 				// Attribute binding will be handled in init() using a component field instead of inlining
 				return (J) this;
 		}
@@ -684,84 +768,97 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
 		}
 		
 		@Override
-		public List<String> methods()
-		{
-				var s = INgComponent.super.methods();
-				var strings = onRowSelectJS();
-				
-				s.add("""
-											rowSelected($event: RowSelectedEvent<any>) {
-											    this.%s?.api.refreshHeader();
-											    %s
-											}""".formatted(getID(), String.join("\n\t\t", strings)));
-				return s;
-		}
-		
-		private static final String updateDataString = """
-			this.subscription = this.eventBusService.listen(this.listenerName, this.handlerId)
-			  .subscribe({
-			      next: (message: any) => {
-			          if (message) {
-			              if (Array.isArray(message)) {
-			                  // message is an array of items (or strings)
-			                  const rows: any[] = [];
-			                  for (let m of message) {
-			                      if (typeof m === 'string') {
-			                          try { rows.push(...(JSON.parse(m) ?? [])); } catch {}
-			                      } else {
-			                          rows.push(m);
-			                      }
-			                  }
-			                  if (this.TABLE_ID?.api) {
-			                      this.TABLE_ID.api.setGridOption('rowData', rows);
-			                  } else if (this.TABLE_ID) {
-			                      this.TABLE_ID.rowData = rows;
-			                  }
-			              } else {
-			                  // single message
-			                  let rows: any[] | undefined;
-			                  if (typeof message === 'string') {
-			                      try { rows = JSON.parse(message); } catch {}
-			                  } else {
-			                      rows = Array.isArray(message) ? message : [message];
-			                  }
-			                  if (rows) {
-			                      if (this.TABLE_ID?.api) {
-			                          this.TABLE_ID.api.setGridOption('rowData', rows);
-			                      } else if (this.TABLE_ID) {
-			                          this.TABLE_ID.rowData = rows;
-			                      }
-			                  }
-			              }
-			          } else {
-			              // message is falsy -> clear data
-			              if (this.TABLE_ID?.api) {
-			                  this.TABLE_ID.api.setGridOption('rowData', []);
-			              } else if (this.TABLE_ID) {
-			                  this.TABLE_ID.rowData = [];
-			              }
-			          }
-			      },
-			      error: (error: any) => {
-			          console.log(error);
-			      },
-			  })
-			""";
-		
-		@Override
 		public List<String> constructorBody()
 		{
 				var out = INgComponent.super.constructorBody();
 				// Dynamically target the ViewChild reference based on this component's ID
-				// Replace the placeholder identifier 'TABLE_ID' in updateDataString with the actual ID
+				// Replace the placeholder identifiers with actual values
 				String viewChildId = getID();
-				String dynamicUpdateData = updateDataString.replace("TABLE_ID", viewChildId);
-				out.add(dynamicUpdateData);
-				return out;
-		}
-		
-		public List<String> onRowSelectJS()
-		{
-				return new ArrayList<>();
-		}
-}
+  		String rowDataVar = onUpdateSetRowDataString();
+  		String receiveVar = onUpdateReceiveRowsVariable();
+
+  		// Balance parentheses in rowDataVar if it's a method call
+  		if (rowDataVar != null && rowDataVar.contains("("))
+  		{
+  			int openCount = 0;
+  			for (int i = 0; i < rowDataVar.length(); i++)
+  			{
+  				if (rowDataVar.charAt(i) == '(')
+  				{
+  					openCount++;
+  				}
+  				else if (rowDataVar.charAt(i) == ')')
+  				{
+  					openCount--;
+  				}
+  			}
+  			// If we have more closing than opening, remove trailing ones
+  			while (openCount < 0 && rowDataVar.endsWith(")"))
+  			{
+  				rowDataVar = rowDataVar.substring(0, rowDataVar.length() - 1);
+  				openCount++;
+  			}
+  			// If we have more opening than closing, add them (optional, but good for completeness)
+  			while (openCount > 0)
+  			{
+  				rowDataVar += ")";
+  				openCount--;
+  			}
+  		}
+
+  		boolean isMethodCall = rowDataVar.contains("(");
+  		boolean isMemberVar = receiveVar.contains(".");
+
+  		String assignment = "";
+  		String clearAssignment = "";
+
+  		if (isMemberVar)
+  		{
+  			// Member variable: this.rows = _rows;
+  			assignment = receiveVar + " = _rows;";
+  			clearAssignment = receiveVar + " = [];";
+  		}
+  		else
+  		{
+  			// Local variable: let rows = _rows;
+  			assignment = "let " + receiveVar + " = _rows;";
+  			clearAssignment = "let " + receiveVar + " = [];";
+  		}
+
+  		String dynamicUpdateData = updateDataString.replace("[[TABLE_ID]]", viewChildId)
+  		                                           .replace("[[ROW_DATA_VARIABLE]]", rowDataVar)
+  		                                           .replace("[[ROW_DATA_VARIABLE_ASSIGNMENT]]", assignment)
+  		                                           .replace("[[ROW_DATA_VARIABLE_CLEAR_ASSIGNMENT]]", clearAssignment);
+  		out.add(dynamicUpdateData);
+  		return out;
+  	}
+
+  	public List<String> onRowSelectJS()
+  	{
+  		return new ArrayList<>();
+  	}
+
+  	/**
+  	 * The expression that will be used as the data source when updating the grid.
+  	 * Defaults to the value returned by {@link #onUpdateReceiveRowsVariable()}.
+  	 *
+  	 * e.g. = this.TABLE_ID.api.setGridOption('rowData', this.filterRows(this.rows));
+  	 *
+  	 * @return The expression to use for row data in the grid API
+  	 */
+  	public String onUpdateSetRowDataString()
+  	{
+  		return onUpdateReceiveRowsVariable();
+  	}
+
+  	/**
+  	 * The name of the variable or field that will receive the incoming row data from the event bus.
+  	 * Defaults to 'rows'.
+  	 *
+  	 * @return The variable name to store incoming row data
+  	 */
+  	public String onUpdateReceiveRowsVariable()
+  	{
+  		return "rows";
+  	}
+  }

@@ -3,6 +3,7 @@ package com.jwebmp.plugins.aggrid.options;
 import com.fasterxml.jackson.annotation.*;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.plugins.aggrid.options.enums.*;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -140,7 +141,19 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
      */
     @JsonUnwrapped
     private SelectionOptionsExpanded<?> selectionExpanded = new SelectionOptionsExpanded<>();
-				
+
+    /**
+     * Tree Data options - treeData, getDataPath, children/parent fields.
+     * Properties are unwrapped into parent JSON.
+     */
+    @JsonUnwrapped
+    private TreeDataOptions<?> treeDataOptions = new TreeDataOptions<>();
+    /**
+     * Grid state options - initialState.
+     * Properties are unwrapped into parent JSON.
+     */
+    @JsonUnwrapped
+    private GridStateOptions<?> gridState = new GridStateOptions<>();
     /**
      * Cell selection mode (NEW v34.2.0).
      * Determines whether cells or rows are selected.
@@ -187,7 +200,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return rowPivoting;
     }
 
-    public PaginationOptions<?> getPagination()
+    public PaginationOptions<?> getPaginationOptions()
     {
         return pagination;
     }
@@ -220,6 +233,16 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     public SelectionOptionsExpanded<?> getSelectionExpanded()
     {
         return selectionExpanded;
+    }
+
+    public TreeDataOptions<?> getTreeDataOptions()
+    {
+        return treeDataOptions;
+    }
+
+    public GridStateOptions<?> getGridState()
+    {
+        return gridState;
     }
 
     public @Nullable CellSelectionMode getCellSelection()
@@ -275,7 +298,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     }
 
     @SuppressWarnings("unchecked")
-    public J setPagination(PaginationOptions<?> pagination)
+    public J setPaginationOptions(PaginationOptions<?> pagination)
     {
         this.pagination = pagination;
         return (J) this;
@@ -322,12 +345,29 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         this.selectionExpanded = selectionExpanded;
         return (J) this;
     }
-				
+
+    @SuppressWarnings("unchecked")
+    public J setTreeDataOptions(TreeDataOptions<?> treeDataOptions)
+    {
+        this.treeDataOptions = treeDataOptions;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setGridState(GridStateOptions<?> gridState)
+    {
+        this.gridState = gridState;
+        return (J) this;
+    }
 
     @SuppressWarnings("unchecked")
     public J setCellSelection(@Nullable CellSelectionMode cellSelection)
     {
         this.cellSelection = cellSelection;
+        if (selectionExpanded != null)
+        {
+            selectionExpanded.setCellSelection(cellSelection != null ? cellSelection.toString() : null);
+        }
         return (J) this;
     }
 
@@ -342,6 +382,10 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     public J setEditType(@Nullable EditType editType)
     {
         this.editType = editType;
+        if (editing != null)
+        {
+            editing.setEditType(editType != null ? editType.toString() : null);
+        }
         return (J) this;
     }
 
@@ -467,6 +511,1212 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     public <S extends SelectionOptionsExpanded<S>> S configureSelection()
     {
         return (S) selectionExpanded;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T extends TreeDataOptions<T>> T configureTreeData()
+    {
+        return (T) treeDataOptions;
+    }
+
+    /**
+     * Configure grid state options fluently.
+     *
+     * @return The GridStateOptions instance.
+     */
+    @SuppressWarnings("unchecked")
+    public <GS extends GridStateOptions<GS>> GS configureGridState()
+    {
+        return (GS) gridState;
+    }
+
+    /**
+     * Get whether Tree Data mode is enabled.
+     */
+    public Boolean getTreeData()
+    {
+        return treeDataOptions.getTreeData();
+    }
+
+    /**
+     * Enable/disable Tree Data mode.
+     */
+    @SuppressWarnings("unchecked")
+    public @NonNull J setTreeData(Boolean treeData)
+    {
+        treeDataOptions.setTreeData(treeData);
+        return (J) this;
+    }
+
+    /**
+     * Set the getDataPath callback using a raw JavaScript function or arrow function.
+     * Example: "(data) => data.path"
+     */
+    @SuppressWarnings("unchecked")
+    public @NonNull J setGetDataPathRaw(String getDataPathRawJs)
+    {
+        treeDataOptions.setGetDataPathRaw(getDataPathRawJs);
+        return (J) this;
+    }
+
+    /**
+     * Convenience method to set the initial filter model.
+     * This wraps the provided model into gridOptions.initialState.filter.filterModel.
+     *
+     * @param filterModel The filter model to set.
+     * @return This options instance.
+     */
+    @SuppressWarnings("unchecked")
+    public J setInitialFilterModel(java.util.Map<String, Object> filterModel)
+    {
+        configureGridState()
+                .getInitialState()
+                .setFilter(new com.jwebmp.plugins.aggrid.options.state.FilterState<>().setFilterModel(filterModel));
+        return (J) this;
+    }
+
+    /**
+     * Set to false to disable row animation which is enabled by default.
+     */
+    public @Nullable Boolean getAnimateRows()
+    {
+        return rendering.getAnimateRows();
+    }
+
+    /**
+     * Set to false to disable row animation which is enabled by default.
+     */
+    @SuppressWarnings("unchecked")
+    public J setAnimateRows(@Nullable Boolean animateRows)
+    {
+        rendering.setAnimateRows(animateRows);
+        return (J) this;
+    }
+
+    /**
+     * Duration in milliseconds that a cell remains in the flashed state after changes.
+     */
+    public @Nullable Integer getCellFlashDuration()
+    {
+        return rendering.getCellFlashDuration();
+    }
+
+    /**
+     * Duration in milliseconds that a cell remains in the flashed state after changes.
+     */
+    @SuppressWarnings("unchecked")
+    public J setCellFlashDuration(@Nullable Integer cellFlashDuration)
+    {
+        rendering.setCellFlashDuration(cellFlashDuration);
+        return (J) this;
+    }
+
+    /**
+     * Duration in milliseconds for the fade-out of the flashed state.
+     */
+    public @Nullable Integer getCellFadeDuration()
+    {
+        return rendering.getCellFadeDuration();
+    }
+
+    /**
+     * Duration in milliseconds for the fade-out of the flashed state.
+     */
+    @SuppressWarnings("unchecked")
+    public J setCellFadeDuration(@Nullable Integer cellFadeDuration)
+    {
+        rendering.setCellFadeDuration(cellFadeDuration);
+        return (J) this;
+    }
+
+    /**
+     * When true, allow cells to flash even when the change was caused by filtering.
+     */
+    public @Nullable Boolean getAllowShowChangeAfterFilter()
+    {
+        return rendering.getAllowShowChangeAfterFilter();
+    }
+
+    /**
+     * When true, allow cells to flash even when the change was caused by filtering.
+     */
+    @SuppressWarnings("unchecked")
+    public J setAllowShowChangeAfterFilter(@Nullable Boolean allowShowChangeAfterFilter)
+    {
+        rendering.setAllowShowChangeAfterFilter(allowShowChangeAfterFilter);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to enable pagination.
+     */
+    public @Nullable Boolean getPagination()
+    {
+        return pagination.getPagination();
+    }
+
+    /**
+     * Set to true to enable pagination.
+     */
+    @SuppressWarnings("unchecked")
+    public J setPagination(@Nullable Boolean pagination)
+    {
+        this.pagination.setPagination(pagination);
+        return (J) this;
+    }
+
+    /**
+     * Set the pagination page size.
+     */
+    @SuppressWarnings("unchecked")
+    public J setPaginationPageSize(@Nullable Integer paginationPageSize)
+    {
+        this.pagination.setPaginationPageSize(paginationPageSize);
+        return (J) this;
+    }
+
+    /**
+     * Set the pagination page size selector.
+     */
+    public @Nullable Object getPaginationPageSizeSelector()
+    {
+        return pagination.getPaginationPageSizeSelector();
+    }
+
+    /**
+     * Set the pagination page size selector.
+     */
+    @SuppressWarnings("unchecked")
+    public J setPaginationPageSizeSelector(@Nullable Object paginationPageSizeSelector)
+    {
+        this.pagination.setPaginationPageSizeSelector(paginationPageSizeSelector);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress the pagination panel.
+     */
+    public @Nullable Boolean getSuppressPaginationPanel()
+    {
+        return pagination.getSuppressPaginationPanel();
+    }
+
+    /**
+     * Set to true to suppress the pagination panel.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressPaginationPanel(@Nullable Boolean suppressPaginationPanel)
+    {
+        this.pagination.setSuppressPaginationPanel(suppressPaginationPanel);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress pagination get rows.
+     */
+    public @Nullable Boolean getSuppressPaginationGetRows()
+    {
+        return pagination.getSuppressPaginationGetRows();
+    }
+
+    /**
+     * Set to true to suppress pagination get rows.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressPaginationGetRows(@Nullable Boolean suppressPaginationGetRows)
+    {
+        this.pagination.setSuppressPaginationGetRows(suppressPaginationGetRows);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress the column move animation.
+     */
+    public @Nullable Boolean getSuppressColumnMoveAnimation()
+    {
+        return columnManagement.getSuppressColumnMoveAnimation();
+    }
+
+    /**
+     * Set to true to suppress the column move animation.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressColumnMoveAnimation(@Nullable Boolean suppressColumnMoveAnimation)
+    {
+        this.columnManagement.setSuppressColumnMoveAnimation(suppressColumnMoveAnimation);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress drag leave hides columns.
+     */
+    public @Nullable Boolean getSuppressDragLeaveHidesColumns()
+    {
+        return columnManagement.getSuppressDragLeaveHidesColumns();
+    }
+
+    /**
+     * Set to true to suppress drag leave hides columns.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressDragLeaveHidesColumns(@Nullable Boolean suppressDragLeaveHidesColumns)
+    {
+        this.columnManagement.setSuppressDragLeaveHidesColumns(suppressDragLeaveHidesColumns);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress move when column dragging.
+     */
+    public @Nullable Boolean getSuppressMoveWhenColumnDragging()
+    {
+        return columnManagement.getSuppressMoveWhenColumnDragging();
+    }
+
+    /**
+     * Set to true to suppress move when column dragging.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressMoveWhenColumnDragging(@Nullable Boolean suppressMoveWhenColumnDragging)
+    {
+        this.columnManagement.setSuppressMoveWhenColumnDragging(suppressMoveWhenColumnDragging);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress drag column into group.
+     */
+    public @Nullable Boolean getSuppressDragColumnIntoGroup()
+    {
+        return columnManagement.getSuppressDragColumnIntoGroup();
+    }
+
+    /**
+     * Set to true to suppress drag column into group.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressDragColumnIntoGroup(@Nullable Boolean suppressDragColumnIntoGroup)
+    {
+        this.columnManagement.setSuppressDragColumnIntoGroup(suppressDragColumnIntoGroup);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress cut on key.
+     */
+    public @Nullable Boolean getSuppressCutOnKey()
+    {
+        return columnManagement.getSuppressCutOnKey();
+    }
+
+    /**
+     * Set to true to suppress cut on key.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressCutOnKey(@Nullable Boolean suppressCutOnKey)
+    {
+        this.columnManagement.setSuppressCutOnKey(suppressCutOnKey);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress clipboard paste.
+     */
+    public @Nullable Boolean getSuppressClipboardPaste()
+    {
+        return columnManagement.getSuppressClipboardPaste();
+    }
+
+    /**
+     * Set to true to suppress clipboard paste.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressClipboardPaste(@Nullable Boolean suppressClipboardPaste)
+    {
+        this.columnManagement.setSuppressClipboardPaste(suppressClipboardPaste);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress last empty line persistence.
+     */
+    public @Nullable Boolean getSuppressLastEmptyLinePeristance()
+    {
+        return columnManagement.getSuppressLastEmptyLinePeristance();
+    }
+
+    /**
+     * Set to true to suppress last empty line persistence.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressLastEmptyLinePeristance(@Nullable Boolean suppressLastEmptyLinePeristance)
+    {
+        this.columnManagement.setSuppressLastEmptyLinePeristance(suppressLastEmptyLinePeristance);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress focus after filter changed.
+     */
+    public @Nullable Boolean getSuppressFocusAfterFilterChanged()
+    {
+        return columnManagement.getSuppressFocusAfterFilterChanged();
+    }
+
+    /**
+     * Set to true to suppress focus after filter changed.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressFocusAfterFilterChanged(@Nullable Boolean suppressFocusAfterFilterChanged)
+    {
+        this.columnManagement.setSuppressFocusAfterFilterChanged(suppressFocusAfterFilterChanged);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress row click selection.
+     */
+    public @Nullable Boolean getSuppressRowClickSelection()
+    {
+        return columnManagement.getSuppressRowClickSelection();
+    }
+
+    /**
+     * Set to true to suppress row click selection.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressRowClickSelection(@Nullable Boolean suppressRowClickSelection)
+    {
+        this.columnManagement.setSuppressRowClickSelection(suppressRowClickSelection);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress cell click selection.
+     */
+    public @Nullable Boolean getSuppressCellClickSelection()
+    {
+        return columnManagement.getSuppressCellClickSelection();
+    }
+
+    /**
+     * Set to true to suppress cell click selection.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressCellClickSelection(@Nullable Boolean suppressCellClickSelection)
+    {
+        this.columnManagement.setSuppressCellClickSelection(suppressCellClickSelection);
+        return (J) this;
+    }
+
+    /**
+     * Set the header height.
+     */
+    public @Nullable Integer getHeaderHeight()
+    {
+        return headerSizing.getHeaderHeight();
+    }
+
+    /**
+     * Set the header height.
+     */
+    @SuppressWarnings("unchecked")
+    public J setHeaderHeight(@Nullable Integer headerHeight)
+    {
+        this.headerSizing.setHeaderHeight(headerHeight);
+        return (J) this;
+    }
+
+    /**
+     * Set the group header height.
+     */
+    public @Nullable Integer getGroupHeaderHeight()
+    {
+        return headerSizing.getGroupHeaderHeight();
+    }
+
+    /**
+     * Set the group header height.
+     */
+    @SuppressWarnings("unchecked")
+    public J setGroupHeaderHeight(@Nullable Integer groupHeaderHeight)
+    {
+        this.headerSizing.setGroupHeaderHeight(groupHeaderHeight);
+        return (J) this;
+    }
+
+    /**
+     * Set the floating filters height.
+     */
+    public @Nullable Integer getFloatingFiltersHeight()
+    {
+        return headerSizing.getFloatingFiltersHeight();
+    }
+
+    /**
+     * Set the floating filters height.
+     */
+    @SuppressWarnings("unchecked")
+    public J setFloatingFiltersHeight(@Nullable Integer floatingFiltersHeight)
+    {
+        this.headerSizing.setFloatingFiltersHeight(floatingFiltersHeight);
+        return (J) this;
+    }
+
+    /**
+     * Set the pivot header height.
+     */
+    public @Nullable Integer getPivotHeaderHeight()
+    {
+        return headerSizing.getPivotHeaderHeight();
+    }
+
+    /**
+     * Set the pivot header height.
+     */
+    @SuppressWarnings("unchecked")
+    public J setPivotHeaderHeight(@Nullable Integer pivotHeaderHeight)
+    {
+        this.headerSizing.setPivotHeaderHeight(pivotHeaderHeight);
+        return (J) this;
+    }
+
+    /**
+     * Set the pivot group header height.
+     */
+    public @Nullable Integer getPivotGroupHeaderHeight()
+    {
+        return headerSizing.getPivotGroupHeaderHeight();
+    }
+
+    /**
+     * Set the pivot group header height.
+     */
+    @SuppressWarnings("unchecked")
+    public J setPivotGroupHeaderHeight(@Nullable Integer pivotGroupHeaderHeight)
+    {
+        this.headerSizing.setPivotGroupHeaderHeight(pivotGroupHeaderHeight);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to enable auto header height.
+     */
+    public @Nullable Boolean getAutoHeaderHeight()
+    {
+        return headerSizing.getAutoHeaderHeight();
+    }
+
+    /**
+     * Set to true to enable auto header height.
+     */
+    @SuppressWarnings("unchecked")
+    public J setAutoHeaderHeight(@Nullable Boolean autoHeaderHeight)
+    {
+        this.headerSizing.setAutoHeaderHeight(autoHeaderHeight);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to hide padded header rows.
+     */
+    public @Nullable Boolean getHidePaddedHeaderRows()
+    {
+        return headerSizing.getHidePaddedHeaderRows();
+    }
+
+    /**
+     * Set to true to hide padded header rows.
+     */
+    @SuppressWarnings("unchecked")
+    public J setHidePaddedHeaderRows(@Nullable Boolean hidePaddedHeaderRows)
+    {
+        this.headerSizing.setHidePaddedHeaderRows(hidePaddedHeaderRows);
+        return (J) this;
+    }
+
+    /**
+     * Set the single click edit behavior.
+     */
+    public @Nullable Boolean getSingleClickEdit()
+    {
+        return editing.getSingleClickEdit();
+    }
+
+    /**
+     * Set the single click edit behavior.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSingleClickEdit(@Nullable Boolean singleClickEdit)
+    {
+        this.editing.setSingleClickEdit(singleClickEdit);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress click edit.
+     */
+    public @Nullable Boolean getSuppressClickEdit()
+    {
+        return editing.getSuppressClickEdit();
+    }
+
+    /**
+     * Set to true to suppress click edit.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressClickEdit(@Nullable Boolean suppressClickEdit)
+    {
+        this.editing.setSuppressClickEdit(suppressClickEdit);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to stop editing when cells lose focus.
+     */
+    public @Nullable Boolean getStopEditingWhenCellsLoseFocus()
+    {
+        return editing.getStopEditingWhenCellsLoseFocus();
+    }
+
+    /**
+     * Set to true to stop editing when cells lose focus.
+     */
+    @SuppressWarnings("unchecked")
+    public J setStopEditingWhenCellsLoseFocus(@Nullable Boolean stopEditingWhenCellsLoseFocus)
+    {
+        this.editing.setStopEditingWhenCellsLoseFocus(stopEditingWhenCellsLoseFocus);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to stop editing when grid loses focus.
+     */
+    public @Nullable Boolean getStopEditingWhenGridLosesFocus()
+    {
+        return editing.getStopEditingWhenGridLosesFocus();
+    }
+
+    /**
+     * Set to true to stop editing when grid loses focus.
+     */
+    @SuppressWarnings("unchecked")
+    public J setStopEditingWhenGridLosesFocus(@Nullable Boolean stopEditingWhenGridLosesFocus)
+    {
+        this.editing.setStopEditingWhenGridLosesFocus(stopEditingWhenGridLosesFocus);
+        return (J) this;
+    }
+
+    /**
+     * Set to true if enter moves focus down.
+     */
+    public @Nullable Boolean getEnterMovesDown()
+    {
+        return editing.getEnterMovesDown();
+    }
+
+    /**
+     * Set to true if enter moves focus down.
+     */
+    @SuppressWarnings("unchecked")
+    public J setEnterMovesDown(@Nullable Boolean enterMovesDown)
+    {
+        this.editing.setEnterMovesDown(enterMovesDown);
+        return (J) this;
+    }
+
+    /**
+     * Set to true if enter moves focus down after edit.
+     */
+    public @Nullable Boolean getEnterMovesDownAfterEdit()
+    {
+        return editing.getEnterMovesDownAfterEdit();
+    }
+
+    /**
+     * Set to true if enter moves focus down after edit.
+     */
+    @SuppressWarnings("unchecked")
+    public J setEnterMovesDownAfterEdit(@Nullable Boolean enterMovesDownAfterEdit)
+    {
+        this.editing.setEnterMovesDownAfterEdit(enterMovesDownAfterEdit);
+        return (J) this;
+    }
+
+    /**
+     * Set the suppress keyboard event callback.
+     */
+    public @Nullable String getSuppressKeyboardEvent()
+    {
+        return editing.getSuppressKeyboardEvent();
+    }
+
+    /**
+     * Set the suppress keyboard event callback.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressKeyboardEvent(@Nullable String suppressKeyboardEvent)
+    {
+        this.editing.setSuppressKeyboardEvent(suppressKeyboardEvent);
+        return (J) this;
+    }
+
+    /**
+     * Set the quick filter text.
+     */
+    public @Nullable String getQuickFilterText()
+    {
+        return filtering.getQuickFilterText();
+    }
+
+    /**
+     * Set the quick filter text.
+     */
+    @SuppressWarnings("unchecked")
+    public J setQuickFilterText(@Nullable String quickFilterText)
+    {
+        this.filtering.setQuickFilterText(quickFilterText);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to enable case insensitive sort.
+     */
+    public @Nullable Boolean getCaseInsensitiveSort()
+    {
+        return filtering.getCaseInsensitiveSort();
+    }
+
+    /**
+     * Set to true to enable case insensitive sort.
+     */
+    @SuppressWarnings("unchecked")
+    public J setCaseInsensitiveSort(@Nullable Boolean caseInsensitiveSort)
+    {
+        this.filtering.setCaseInsensitiveSort(caseInsensitiveSort);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to enable floating filter.
+     */
+    public @Nullable Boolean getFloatingFilter()
+    {
+        return filtering.getFloatingFilter();
+    }
+
+    /**
+     * Set to true to enable floating filter.
+     */
+    @SuppressWarnings("unchecked")
+    public J setFloatingFilter(@Nullable Boolean floatingFilter)
+    {
+        this.filtering.setFloatingFilter(floatingFilter);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to enable RTL.
+     */
+    public @Nullable Boolean getEnableRtl()
+    {
+        return filtering.getEnableRtl();
+    }
+
+    /**
+     * Set to true to enable RTL.
+     */
+    @SuppressWarnings("unchecked")
+    public J setEnableRtl(@Nullable Boolean enableRtl)
+    {
+        this.filtering.setEnableRtl(enableRtl);
+        return (J) this;
+    }
+
+    /**
+     * Set the external filter changed callback.
+     */
+    public @Nullable String getExternalFilterChanged()
+    {
+        return filtering.getExternalFilterChanged();
+    }
+
+    /**
+     * Set the external filter changed callback.
+     */
+    @SuppressWarnings("unchecked")
+    public J setExternalFilterChanged(@Nullable String externalFilterChanged)
+    {
+        this.filtering.setExternalFilterChanged(externalFilterChanged);
+        return (J) this;
+    }
+
+    /**
+     * Set the is external filter present callback.
+     */
+    public @Nullable String getIsExternalFilterPresent()
+    {
+        return filtering.getIsExternalFilterPresent();
+    }
+
+    /**
+     * Set the is external filter present callback.
+     */
+    @SuppressWarnings("unchecked")
+    public J setIsExternalFilterPresent(@Nullable String isExternalFilterPresent)
+    {
+        this.filtering.setIsExternalFilterPresent(isExternalFilterPresent);
+        return (J) this;
+    }
+
+    /**
+     * Set the does external filter pass callback.
+     */
+    public @Nullable String getDoesExternalFilterPass()
+    {
+        return filtering.getDoesExternalFilterPass();
+    }
+
+    /**
+     * Set the does external filter pass callback.
+     */
+    @SuppressWarnings("unchecked")
+    public J setDoesExternalFilterPass(@Nullable String doesExternalFilterPass)
+    {
+        this.filtering.setDoesExternalFilterPass(doesExternalFilterPass);
+        return (J) this;
+    }
+
+    /**
+     * Set the on filter changed callback.
+     */
+    public @Nullable String getOnFilterChanged()
+    {
+        return filtering.getOnFilterChanged();
+    }
+
+    /**
+     * Set the on filter changed callback.
+     */
+    @SuppressWarnings("unchecked")
+    public J setOnFilterChanged(@Nullable String onFilterChanged)
+    {
+        this.filtering.setOnFilterChanged(onFilterChanged);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress Excel export.
+     */
+    public @Nullable Boolean getSuppressExcelExport()
+    {
+        return export.getSuppressExcelExport();
+    }
+
+    /**
+     * Set to true to suppress Excel export.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressExcelExport(@Nullable Boolean suppressExcelExport)
+    {
+        this.export.setSuppressExcelExport(suppressExcelExport);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress CSV export.
+     */
+    public @Nullable Boolean getSuppressCsvExport()
+    {
+        return export.getSuppressCsvExport();
+    }
+
+    /**
+     * Set to true to suppress CSV export.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressCsvExport(@Nullable Boolean suppressCsvExport)
+    {
+        this.export.setSuppressCsvExport(suppressCsvExport);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress PDF export.
+     */
+    public @Nullable Boolean getSuppressPdfExport()
+    {
+        return export.getSuppressPdfExport();
+    }
+
+    /**
+     * Set to true to suppress PDF export.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressPdfExport(@Nullable Boolean suppressPdfExport)
+    {
+        this.export.setSuppressPdfExport(suppressPdfExport);
+        return (J) this;
+    }
+
+    /**
+     * Set the column separator for export.
+     */
+    public @Nullable String getColumnSeparator()
+    {
+        return export.getColumnSeparator();
+    }
+
+    /**
+     * Set the column separator for export.
+     */
+    @SuppressWarnings("unchecked")
+    public J setColumnSeparator(@Nullable String columnSeparator)
+    {
+        this.export.setColumnSeparator(columnSeparator);
+        return (J) this;
+    }
+
+    /**
+     * Set the row selection mode.
+     */
+    public @Nullable RowSelectionMode getRowSelection()
+    {
+        return selectionExpanded.getRowSelection();
+    }
+
+    /**
+     * Set the row selection mode.
+     */
+    @SuppressWarnings("unchecked")
+    public J setRowSelection(@Nullable RowSelectionMode rowSelection)
+    {
+        this.selectionExpanded.setRowSelection(rowSelection);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to enable row multi select with click.
+     */
+    public @Nullable Boolean getRowMultiSelectWithClick()
+    {
+        return selectionExpanded.getRowMultiSelectWithClick();
+    }
+
+    /**
+     * Set to true to enable row multi select with click.
+     */
+    @SuppressWarnings("unchecked")
+    public J setRowMultiSelectWithClick(@Nullable Boolean rowMultiSelectWithClick)
+    {
+        this.selectionExpanded.setRowMultiSelectWithClick(rowMultiSelectWithClick);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress row deselection.
+     */
+    public @Nullable Boolean getSuppressRowDeselection()
+    {
+        return selectionExpanded.getSuppressRowDeselection();
+    }
+
+    /**
+     * Set to true to suppress row deselection.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressRowDeselection(@Nullable Boolean suppressRowDeselection)
+    {
+        this.selectionExpanded.setSuppressRowDeselection(suppressRowDeselection);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress cell selection.
+     */
+    public @Nullable Boolean getSuppressCellSelection()
+    {
+        return selectionExpanded.getSuppressCellSelection();
+    }
+
+    /**
+     * Set to true to suppress cell selection.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressCellSelection(@Nullable Boolean suppressCellSelection)
+    {
+        this.selectionExpanded.setSuppressCellSelection(suppressCellSelection);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress multi range selection.
+     */
+    public @Nullable Boolean getSuppressMultiRangeSelection()
+    {
+        return selectionExpanded.getSuppressMultiRangeSelection();
+    }
+
+    /**
+     * Set to true to suppress multi range selection.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressMultiRangeSelection(@Nullable Boolean suppressMultiRangeSelection)
+    {
+        this.selectionExpanded.setSuppressMultiRangeSelection(suppressMultiRangeSelection);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress multi sort.
+     */
+    public @Nullable Boolean getSuppressMultiSort()
+    {
+        return selectionExpanded.getSuppressMultiSort();
+    }
+
+    /**
+     * Set to true to suppress multi sort.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressMultiSort(@Nullable Boolean suppressMultiSort)
+    {
+        this.selectionExpanded.setSuppressMultiSort(suppressMultiSort);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to enable advanced filter.
+     */
+    public @Nullable Boolean getEnableAdvancedFilter()
+    {
+        return advancedFilter.getEnableAdvancedFilter();
+    }
+
+    /**
+     * Set to true to enable advanced filter.
+     */
+    @SuppressWarnings("unchecked")
+    public J setEnableAdvancedFilter(@Nullable Boolean enableAdvancedFilter)
+    {
+        this.advancedFilter.setEnableAdvancedFilter(enableAdvancedFilter);
+        return (J) this;
+    }
+
+    /**
+     * Set the advanced filter builder params.
+     */
+    public @Nullable String getAdvancedFilterBuilderParams()
+    {
+        return advancedFilter.getAdvancedFilterBuilderParams();
+    }
+
+    /**
+     * Set the advanced filter builder params.
+     */
+    @SuppressWarnings("unchecked")
+    public J setAdvancedFilterBuilderParams(@Nullable String advancedFilterBuilderParams)
+    {
+        this.advancedFilter.setAdvancedFilterBuilderParams(advancedFilterBuilderParams);
+        return (J) this;
+    }
+
+    /**
+     * Set the advanced filter parent element.
+     */
+    public @Nullable String getAdvancedFilterParentElement()
+    {
+        return advancedFilter.getAdvancedFilterParentElement();
+    }
+
+    /**
+     * Set the advanced filter parent element.
+     */
+    @SuppressWarnings("unchecked")
+    public J setAdvancedFilterParentElement(@Nullable String advancedFilterParentElement)
+    {
+        this.advancedFilter.setAdvancedFilterParentElement(advancedFilterParentElement);
+        return (J) this;
+    }
+
+    /**
+     * Set the advanced filter class name.
+     */
+    public @Nullable String getAdvancedFilterClassName()
+    {
+        return advancedFilter.getAdvancedFilterClassName();
+    }
+
+    /**
+     * Set the advanced filter class name.
+     */
+    @SuppressWarnings("unchecked")
+    public J setAdvancedFilterClassName(@Nullable String advancedFilterClassName)
+    {
+        this.advancedFilter.setAdvancedFilterClassName(advancedFilterClassName);
+        return (J) this;
+    }
+
+    /**
+     * Set the on advanced filter changed callback.
+     */
+    public @Nullable String getOnAdvancedFilterChanged()
+    {
+        return advancedFilter.getOnAdvancedFilterChanged();
+    }
+
+    /**
+     * Set the on advanced filter changed callback.
+     */
+    @SuppressWarnings("unchecked")
+    public J setOnAdvancedFilterChanged(@Nullable String onAdvancedFilterChanged)
+    {
+        this.advancedFilter.setOnAdvancedFilterChanged(onAdvancedFilterChanged);
+        return (J) this;
+    }
+
+    /**
+     * Set the row group panel show behavior.
+     */
+    public @Nullable String getRowGroupPanelShow()
+    {
+        return rowGrouping.getRowGroupPanelShow();
+    }
+
+    /**
+     * Set the row group panel show behavior.
+     */
+    @SuppressWarnings("unchecked")
+    public J setRowGroupPanelShow(@Nullable String rowGroupPanelShow)
+    {
+        this.rowGrouping.setRowGroupPanelShow(rowGroupPanelShow);
+        return (J) this;
+    }
+
+    /**
+     * Set the pivot mode.
+     */
+    public @Nullable Boolean getPivotMode()
+    {
+        return rowPivoting.getPivotMode();
+    }
+
+    /**
+     * Set the pivot mode.
+     */
+    @SuppressWarnings("unchecked")
+    public J setPivotMode(@Nullable Boolean pivotMode)
+    {
+        this.rowPivoting.setPivotMode(pivotMode);
+        return (J) this;
+    }
+
+    /**
+     * Set the pivot panel show behavior.
+     */
+    public @Nullable String getPivotPanelShow()
+    {
+        return rowPivoting.getPivotPanelShow();
+    }
+
+    /**
+     * Set the pivot panel show behavior.
+     */
+    @SuppressWarnings("unchecked")
+    public J setPivotPanelShow(@Nullable String pivotPanelShow)
+    {
+        this.rowPivoting.setPivotPanelShow(pivotPanelShow);
+        return (J) this;
+    }
+
+    /**
+     * Set the server side datasource.
+     */
+    public @Nullable String getServerSideDatasource()
+    {
+        return serverSideRowModel.getServerSideDatasource();
+    }
+
+    /**
+     * Set the server side datasource.
+     */
+    @SuppressWarnings("unchecked")
+    public J setServerSideDatasource(@Nullable String serverSideDatasource)
+    {
+        this.serverSideRowModel.setServerSideDatasource(serverSideDatasource);
+        return (J) this;
+    }
+
+    /**
+     * Set the cache block size.
+     */
+    public @Nullable Integer getCacheBlockSize()
+    {
+        return serverSideRowModel.getCacheBlockSize();
+    }
+
+    /**
+     * Set the cache block size.
+     */
+    @SuppressWarnings("unchecked")
+    public J setCacheBlockSize(@Nullable Integer cacheBlockSize)
+    {
+        this.serverSideRowModel.setCacheBlockSize(cacheBlockSize);
+        return (J) this;
+    }
+
+    /**
+     * Set the max blocks in cache.
+     */
+    public @Nullable Integer getMaxBlocksInCache()
+    {
+        return serverSideRowModel.getMaxBlocksInCache();
+    }
+
+    /**
+     * Set the max blocks in cache.
+     */
+    @SuppressWarnings("unchecked")
+    public J setMaxBlocksInCache(@Nullable Integer maxBlocksInCache)
+    {
+        this.serverSideRowModel.setMaxBlocksInCache(maxBlocksInCache);
+        return (J) this;
+    }
+
+    /**
+     * Set the group display type.
+     */
+    public @Nullable String getGroupDisplayType()
+    {
+        return rowGrouping.getGroupDisplayType();
+    }
+
+    /**
+     * Set the group display type.
+     */
+    @SuppressWarnings("unchecked")
+    public J setGroupDisplayType(@Nullable String groupDisplayType)
+    {
+        this.rowGrouping.setGroupDisplayType(groupDisplayType);
+        return (J) this;
+    }
+
+    /**
+     * Set the group row renderer.
+     */
+    public @Nullable String getGroupRowRenderer()
+    {
+        return rowGrouping.getGroupRowRenderer();
+    }
+
+    /**
+     * Set the group row renderer.
+     */
+    @SuppressWarnings("unchecked")
+    public J setGroupRowRenderer(@Nullable String groupRowRenderer)
+    {
+        this.rowGrouping.setGroupRowRenderer(groupRowRenderer);
+        return (J) this;
     }
 
     // ============================================================
