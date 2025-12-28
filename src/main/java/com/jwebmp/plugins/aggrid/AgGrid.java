@@ -626,6 +626,11 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
 																														.configureSelection()
 																														.getRowSelection()
 																														.getValue() + "'");
+										addAttribute("(rowSelected)", "rowSelected($event)");
+								}
+								else if (!onRowSelectJS().isEmpty())
+								{
+										addAttribute("(rowSelected)", "rowSelected($event)");
 								}
 								if (options.getDefaultColDef() != null)
 								{
