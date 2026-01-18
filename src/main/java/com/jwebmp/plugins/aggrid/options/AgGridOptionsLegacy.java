@@ -208,6 +208,12 @@ public class AgGridOptionsLegacy<J extends AgGridOptionsLegacy<J>> extends JavaS
     @JsonProperty("suppressMoveWhenColumnDragging")
     private Boolean suppressMoveWhenColumnDragging;
 
+    /**
+     * Set to true to suppress tabbing.
+     */
+    @JsonProperty("suppressTabbing")
+    private Boolean suppressTabbing;
+
 
     /**
      * Function to process columns being removed from pinned sections when viewport is too small
@@ -1325,6 +1331,28 @@ public class AgGridOptionsLegacy<J extends AgGridOptionsLegacy<J>> extends JavaS
     public @org.jspecify.annotations.NonNull J setSuppressMoveWhenColumnDragging(Boolean suppressMoveWhenColumnDragging)
     {
         this.suppressMoveWhenColumnDragging = suppressMoveWhenColumnDragging;
+        return (J) this;
+    }
+
+    /**
+     * Gets whether to suppress tabbing
+     *
+     * @return Whether to suppress tabbing
+     */
+    public Boolean getSuppressTabbing()
+    {
+        return suppressTabbing;
+    }
+
+    /**
+     * Sets whether to suppress tabbing
+     *
+     * @param suppressTabbing Whether to suppress tabbing
+     * @return This object
+     */
+    public @org.jspecify.annotations.NonNull J setSuppressTabbing(Boolean suppressTabbing)
+    {
+        this.suppressTabbing = suppressTabbing;
         return (J) this;
     }
 

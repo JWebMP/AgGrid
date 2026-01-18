@@ -3,6 +3,7 @@ package com.jwebmp.plugins.aggrid.options;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jwebmp.plugins.aggrid.options.enums.AutoSizeStrategy;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -39,6 +40,25 @@ public class HeaderSizingOptions<J extends HeaderSizingOptions<J>>
 
     @JsonProperty("rowHeight")
     private @Nullable Integer rowHeight;
+
+    /**
+     * Auto-size strategy for columns
+     */
+    @JsonProperty("autoSizeStrategy")
+    private @Nullable AutoSizeStrategy autoSizeStrategy;
+
+    /**
+     * Default column resize behavior
+     * Can be 'normal' or 'shift'
+     */
+    @JsonProperty("colResizeDefault")
+    private @Nullable String colResizeDefault;
+
+    /**
+     * Whether to skip the header when auto-sizing columns
+     */
+    @JsonProperty("skipHeaderOnAutoSize")
+    private @Nullable Boolean skipHeaderOnAutoSize;
 
     // Getters
 
@@ -80,6 +100,21 @@ public class HeaderSizingOptions<J extends HeaderSizingOptions<J>>
     public @Nullable Integer getRowHeight()
     {
         return rowHeight;
+    }
+
+    public @Nullable AutoSizeStrategy getAutoSizeStrategy()
+    {
+        return autoSizeStrategy;
+    }
+
+    public @Nullable String getColResizeDefault()
+    {
+        return colResizeDefault;
+    }
+
+    public @Nullable Boolean getSkipHeaderOnAutoSize()
+    {
+        return skipHeaderOnAutoSize;
     }
 
     // Setters with CRTP return type
@@ -137,6 +172,27 @@ public class HeaderSizingOptions<J extends HeaderSizingOptions<J>>
     public J setRowHeight(@Nullable Integer rowHeight)
     {
         this.rowHeight = rowHeight;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setAutoSizeStrategy(@Nullable AutoSizeStrategy autoSizeStrategy)
+    {
+        this.autoSizeStrategy = autoSizeStrategy;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setColResizeDefault(@Nullable String colResizeDefault)
+    {
+        this.colResizeDefault = colResizeDefault;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setSkipHeaderOnAutoSize(@Nullable Boolean skipHeaderOnAutoSize)
+    {
+        this.skipHeaderOnAutoSize = skipHeaderOnAutoSize;
         return (J) this;
     }
 }

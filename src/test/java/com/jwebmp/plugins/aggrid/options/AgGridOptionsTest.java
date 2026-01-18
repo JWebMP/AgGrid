@@ -23,7 +23,72 @@ class AgGridOptionsTest
 				
 				System.out.println(options.toJson());
 		}
-		
+
+		@Test
+		void testVirtualisation()
+		{
+				AgGridOptions<?> options = new AgGridOptions<>();
+				options.setSuppressColumnVirtualisation(true)
+				       .setSuppressRowVirtualisation(true);
+
+				String json = options.toJson();
+				System.out.println("JSON Output (Virtualisation): " + json);
+				assertTrue(json.contains("\"suppressColumnVirtualisation\":true") || json.contains("\"suppressColumnVirtualisation\" : true"));
+				assertTrue(json.contains("\"suppressRowVirtualisation\":true") || json.contains("\"suppressRowVirtualisation\" : true"));
+
+				options.setSuppressHorizontalScroll(true)
+				       .setSuppressTabbing(true)
+				       .setSuppressScrollOnNewData(true);
+
+				json = options.toJson();
+				assertTrue(json.contains("\"suppressHorizontalScroll\":true") || json.contains("\"suppressHorizontalScroll\" : true"));
+				assertTrue(json.contains("\"suppressTabbing\":true") || json.contains("\"suppressTabbing\" : true"));
+				assertTrue(json.contains("\"suppressScrollOnNewData\":true") || json.contains("\"suppressScrollOnNewData\" : true"));
+		}
+
+		@Test
+		void testAnimation()
+		{
+				AgGridOptions<?> options = new AgGridOptions<>();
+				options.setAnimateRows(true)
+				       .setSuppressColumnMoveAnimation(true)
+				       .setSuppressAnimationFrame(true);
+
+				String json = options.toJson();
+				System.out.println("JSON Output (Animation): " + json);
+				assertTrue(json.contains("\"animateRows\":true") || json.contains("\"animateRows\" : true"));
+				assertTrue(json.contains("\"suppressColumnMoveAnimation\":true") || json.contains("\"suppressColumnMoveAnimation\" : true"));
+				assertTrue(json.contains("\"suppressAnimationFrame\":true") || json.contains("\"suppressAnimationFrame\" : true"));
+		}
+
+		@Test
+		void testSizing()
+		{
+				AgGridOptions<?> options = new AgGridOptions<>();
+				options.setRowHeight(25)
+				       .setAutoSizeStrategy(com.jwebmp.plugins.aggrid.options.enums.AutoSizeStrategy.FIT_GRID_WIDTH)
+				       .setColResizeDefault("shift")
+				       .setSkipHeaderOnAutoSize(true);
+
+				String json = options.toJson();
+				System.out.println("JSON Output (Sizing): " + json);
+				assertTrue(json.contains("\"rowHeight\":25") || json.contains("\"rowHeight\" : 25"));
+				assertTrue(json.contains("\"autoSizeStrategy\":\"fitGridWidth\"") || json.contains("\"autoSizeStrategy\" : \"fitGridWidth\""));
+				assertTrue(json.contains("\"colResizeDefault\":\"shift\"") || json.contains("\"colResizeDefault\" : \"shift\""));
+				assertTrue(json.contains("\"skipHeaderOnAutoSize\":true") || json.contains("\"skipHeaderOnAutoSize\" : true"));
+		}
+
+		@Test
+		void testMenuHide()
+		{
+				AgGridOptions<?> options = new AgGridOptions<>();
+				options.setSuppressMenuHide(true);
+
+				String json = options.toJson();
+				System.out.println("JSON Output (MenuHide): " + json);
+				assertTrue(json.contains("\"suppressMenuHide\":true") || json.contains("\"suppressMenuHide\" : true"));
+		}
+
 		@Test
 		void testTreeData()
 		{

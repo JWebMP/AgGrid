@@ -42,6 +42,48 @@ public class RenderingOptions<J extends RenderingOptions<J>>
     @JsonProperty("allowShowChangeAfterFilter")
     private @Nullable Boolean allowShowChangeAfterFilter;
 
+    /**
+     * Set to true to disable column virtualization.
+     */
+    @JsonProperty("suppressColumnVirtualisation")
+    private @Nullable Boolean suppressColumnVirtualisation;
+
+    /**
+     * Set to true to disable row virtualization.
+     */
+    @JsonProperty("suppressRowVirtualisation")
+    private @Nullable Boolean suppressRowVirtualisation;
+
+    /**
+     * Set to true to suppress row hover highlight.
+     */
+    @JsonProperty("suppressRowHoverHighlight")
+    private @Nullable Boolean suppressRowHoverHighlight;
+
+    /**
+     * Set to true to suppress horizontal scroll.
+     */
+    @JsonProperty("suppressHorizontalScroll")
+    private @Nullable Boolean suppressHorizontalScroll;
+
+    /**
+     * Set to true to suppress tabbing.
+     */
+    @JsonProperty("suppressTabbing")
+    private @Nullable Boolean suppressTabbing;
+
+    /**
+     * Set to true to suppress scroll on new data.
+     */
+    @JsonProperty("suppressScrollOnNewData")
+    private @Nullable Boolean suppressScrollOnNewData;
+
+    /**
+     * When true, the grid will not use animation frames when drawing rows while scrolling.
+     */
+    @JsonProperty("suppressAnimationFrame")
+    private @Nullable Boolean suppressAnimationFrame;
+
     // Getters
 
     public @Nullable Boolean getAnimateRows()
@@ -62,6 +104,41 @@ public class RenderingOptions<J extends RenderingOptions<J>>
     public @Nullable Boolean getAllowShowChangeAfterFilter()
     {
         return allowShowChangeAfterFilter;
+    }
+
+    public @Nullable Boolean getSuppressColumnVirtualisation()
+    {
+        return suppressColumnVirtualisation;
+    }
+
+    public @Nullable Boolean getSuppressRowVirtualisation()
+    {
+        return suppressRowVirtualisation;
+    }
+
+    public @Nullable Boolean getSuppressRowHoverHighlight()
+    {
+        return suppressRowHoverHighlight;
+    }
+
+    public @Nullable Boolean getSuppressHorizontalScroll()
+    {
+        return suppressHorizontalScroll;
+    }
+
+    public @Nullable Boolean getSuppressTabbing()
+    {
+        return suppressTabbing;
+    }
+
+    public @Nullable Boolean getSuppressScrollOnNewData()
+    {
+        return suppressScrollOnNewData;
+    }
+
+    public @Nullable Boolean getSuppressAnimationFrame()
+    {
+        return suppressAnimationFrame;
     }
 
     // Setters with CRTP return type
@@ -91,6 +168,55 @@ public class RenderingOptions<J extends RenderingOptions<J>>
     public J setAllowShowChangeAfterFilter(@Nullable Boolean allowShowChangeAfterFilter)
     {
         this.allowShowChangeAfterFilter = allowShowChangeAfterFilter;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setSuppressColumnVirtualisation(@Nullable Boolean suppressColumnVirtualisation)
+    {
+        this.suppressColumnVirtualisation = suppressColumnVirtualisation;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setSuppressRowVirtualisation(@Nullable Boolean suppressRowVirtualisation)
+    {
+        this.suppressRowVirtualisation = suppressRowVirtualisation;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setSuppressRowHoverHighlight(@Nullable Boolean suppressRowHoverHighlight)
+    {
+        this.suppressRowHoverHighlight = suppressRowHoverHighlight;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setSuppressHorizontalScroll(@Nullable Boolean suppressHorizontalScroll)
+    {
+        this.suppressHorizontalScroll = suppressHorizontalScroll;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setSuppressTabbing(@Nullable Boolean suppressTabbing)
+    {
+        this.suppressTabbing = suppressTabbing;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setSuppressScrollOnNewData(@Nullable Boolean suppressScrollOnNewData)
+    {
+        this.suppressScrollOnNewData = suppressScrollOnNewData;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setSuppressAnimationFrame(@Nullable Boolean suppressAnimationFrame)
+    {
+        this.suppressAnimationFrame = suppressAnimationFrame;
         return (J) this;
     }
 }

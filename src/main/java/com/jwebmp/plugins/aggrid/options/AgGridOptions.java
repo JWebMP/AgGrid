@@ -143,6 +143,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     private SelectionOptionsExpanded<?> selectionExpanded = new SelectionOptionsExpanded<>();
 
     /**
+     * Row Selection options - checkboxes, location, click selection (NEW v34.2.0).
+     * Properties are unwrapped into parent JSON.
+     */
+    @JsonUnwrapped
+    private RowSelectionOptions<?> rowSelectionOptions = new RowSelectionOptions<>();
+
+    /**
      * Tree Data options - treeData, getDataPath, children/parent fields.
      * Properties are unwrapped into parent JSON.
      */
@@ -233,6 +240,11 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     public SelectionOptionsExpanded<?> getSelectionExpanded()
     {
         return selectionExpanded;
+    }
+
+    public RowSelectionOptions<?> getRowSelectionOptions()
+    {
+        return rowSelectionOptions;
     }
 
     public TreeDataOptions<?> getTreeDataOptions()
@@ -343,6 +355,13 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     public J setSelectionExpanded(SelectionOptionsExpanded<?> selectionExpanded)
     {
         this.selectionExpanded = selectionExpanded;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setRowSelectionOptions(RowSelectionOptions<?> rowSelectionOptions)
+    {
+        this.rowSelectionOptions = rowSelectionOptions;
         return (J) this;
     }
 
@@ -648,6 +667,132 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     }
 
     /**
+     * Set to true to disable column virtualization.
+     */
+    public @Nullable Boolean getSuppressColumnVirtualisation()
+    {
+        return rendering.getSuppressColumnVirtualisation();
+    }
+
+    /**
+     * Set to true to disable column virtualization.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressColumnVirtualisation(@Nullable Boolean suppressColumnVirtualisation)
+    {
+        rendering.setSuppressColumnVirtualisation(suppressColumnVirtualisation);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to disable row virtualization.
+     */
+    public @Nullable Boolean getSuppressRowVirtualisation()
+    {
+        return rendering.getSuppressRowVirtualisation();
+    }
+
+    /**
+     * Set to true to disable row virtualization.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressRowVirtualisation(@Nullable Boolean suppressRowVirtualisation)
+    {
+        rendering.setSuppressRowVirtualisation(suppressRowVirtualisation);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress row hover highlight.
+     */
+    public @Nullable Boolean getSuppressRowHoverHighlight()
+    {
+        return rendering.getSuppressRowHoverHighlight();
+    }
+
+    /**
+     * Set to true to suppress row hover highlight.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressRowHoverHighlight(@Nullable Boolean suppressRowHoverHighlight)
+    {
+        rendering.setSuppressRowHoverHighlight(suppressRowHoverHighlight);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress horizontal scroll.
+     */
+    public @Nullable Boolean getSuppressHorizontalScroll()
+    {
+        return rendering.getSuppressHorizontalScroll();
+    }
+
+    /**
+     * Set to true to suppress horizontal scroll.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressHorizontalScroll(@Nullable Boolean suppressHorizontalScroll)
+    {
+        rendering.setSuppressHorizontalScroll(suppressHorizontalScroll);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress tabbing.
+     */
+    public @Nullable Boolean getSuppressTabbing()
+    {
+        return rendering.getSuppressTabbing();
+    }
+
+    /**
+     * Set to true to suppress tabbing.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressTabbing(@Nullable Boolean suppressTabbing)
+    {
+        rendering.setSuppressTabbing(suppressTabbing);
+        return (J) this;
+    }
+
+    /**
+     * Set to true to suppress scroll on new data.
+     */
+    public @Nullable Boolean getSuppressScrollOnNewData()
+    {
+        return rendering.getSuppressScrollOnNewData();
+    }
+
+    /**
+     * Set to true to suppress scroll on new data.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressScrollOnNewData(@Nullable Boolean suppressScrollOnNewData)
+    {
+        rendering.setSuppressScrollOnNewData(suppressScrollOnNewData);
+        return (J) this;
+    }
+
+    /**
+     * When true, the grid will not use animation frames when drawing rows while scrolling.
+     */
+    public @Nullable Boolean getSuppressAnimationFrame()
+    {
+        return rendering.getSuppressAnimationFrame();
+    }
+
+    /**
+     * When true, the grid will not use animation frames when drawing rows while scrolling.
+     */
+    @SuppressWarnings("unchecked")
+    public J setSuppressAnimationFrame(@Nullable Boolean suppressAnimationFrame)
+    {
+        rendering.setSuppressAnimationFrame(suppressAnimationFrame);
+        return (J) this;
+    }
+
+    /**
      * Set to true to enable pagination.
      */
     public @Nullable Boolean getPagination()
@@ -748,20 +893,20 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     }
 
     /**
-     * Set to true to suppress drag leave hides columns.
+     * Set to true to suppress the column menu button when the mouse is over the header.
      */
-    public @Nullable Boolean getSuppressDragLeaveHidesColumns()
+    public @Nullable Boolean getSuppressMenuHide()
     {
-        return columnManagement.getSuppressDragLeaveHidesColumns();
+        return columnManagement.getSuppressMenuHide();
     }
 
     /**
-     * Set to true to suppress drag leave hides columns.
+     * Set to true to suppress the column menu button when the mouse is over the header.
      */
     @SuppressWarnings("unchecked")
-    public J setSuppressDragLeaveHidesColumns(@Nullable Boolean suppressDragLeaveHidesColumns)
+    public J setSuppressMenuHide(@Nullable Boolean suppressMenuHide)
     {
-        this.columnManagement.setSuppressDragLeaveHidesColumns(suppressDragLeaveHidesColumns);
+        this.columnManagement.setSuppressMenuHide(suppressMenuHide);
         return (J) this;
     }
 
@@ -1864,6 +2009,60 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
             this.headerSizing = new HeaderSizingOptions<>();
         }
         this.headerSizing.setRowHeight(rowHeight);
+        return (J) this;
+    }
+
+    /**
+     * Gets the auto-size strategy for columns
+     */
+    public @Nullable AutoSizeStrategy getAutoSizeStrategy()
+    {
+        return headerSizing.getAutoSizeStrategy();
+    }
+
+    /**
+     * Sets the auto-size strategy for columns
+     */
+    @SuppressWarnings("unchecked")
+    public J setAutoSizeStrategy(@Nullable AutoSizeStrategy autoSizeStrategy)
+    {
+        headerSizing.setAutoSizeStrategy(autoSizeStrategy);
+        return (J) this;
+    }
+
+    /**
+     * Gets the default column resize behavior
+     */
+    public @Nullable String getColResizeDefault()
+    {
+        return headerSizing.getColResizeDefault();
+    }
+
+    /**
+     * Sets the default column resize behavior
+     */
+    @SuppressWarnings("unchecked")
+    public J setColResizeDefault(@Nullable String colResizeDefault)
+    {
+        headerSizing.setColResizeDefault(colResizeDefault);
+        return (J) this;
+    }
+
+    /**
+     * Gets whether to skip the header when auto-sizing columns
+     */
+    public @Nullable Boolean getSkipHeaderOnAutoSize()
+    {
+        return headerSizing.getSkipHeaderOnAutoSize();
+    }
+
+    /**
+     * Sets whether to skip the header when auto-sizing columns
+     */
+    @SuppressWarnings("unchecked")
+    public J setSkipHeaderOnAutoSize(@Nullable Boolean skipHeaderOnAutoSize)
+    {
+        headerSizing.setSkipHeaderOnAutoSize(skipHeaderOnAutoSize);
         return (J) this;
     }
 				

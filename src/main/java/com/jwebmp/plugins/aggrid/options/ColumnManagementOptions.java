@@ -19,9 +19,6 @@ public class ColumnManagementOptions<J extends ColumnManagementOptions<J>>
     @JsonProperty("suppressColumnMoveAnimation")
     private @Nullable Boolean suppressColumnMoveAnimation;
 
-    @JsonProperty("suppressDragLeaveHidesColumns")
-    private @Nullable Boolean suppressDragLeaveHidesColumns;
-
     @JsonProperty("suppressMoveWhenColumnDragging")
     private @Nullable Boolean suppressMoveWhenColumnDragging;
 
@@ -46,16 +43,14 @@ public class ColumnManagementOptions<J extends ColumnManagementOptions<J>>
     @JsonProperty("suppressCellClickSelection")
     private @Nullable Boolean suppressCellClickSelection;
 
+    @JsonProperty("suppressMenuHide")
+    private @Nullable Boolean suppressMenuHide;
+
     // Getters
 
     public @Nullable Boolean getSuppressColumnMoveAnimation()
     {
         return suppressColumnMoveAnimation;
-    }
-
-    public @Nullable Boolean getSuppressDragLeaveHidesColumns()
-    {
-        return suppressDragLeaveHidesColumns;
     }
 
     public @Nullable Boolean getSuppressMoveWhenColumnDragging()
@@ -98,19 +93,17 @@ public class ColumnManagementOptions<J extends ColumnManagementOptions<J>>
         return suppressCellClickSelection;
     }
 
+    public @Nullable Boolean getSuppressMenuHide()
+    {
+        return suppressMenuHide;
+    }
+
     // Setters with CRTP return type
 
     @SuppressWarnings("unchecked")
     public J setSuppressColumnMoveAnimation(@Nullable Boolean suppressColumnMoveAnimation)
     {
         this.suppressColumnMoveAnimation = suppressColumnMoveAnimation;
-        return (J) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public J setSuppressDragLeaveHidesColumns(@Nullable Boolean suppressDragLeaveHidesColumns)
-    {
-        this.suppressDragLeaveHidesColumns = suppressDragLeaveHidesColumns;
         return (J) this;
     }
 
@@ -167,6 +160,13 @@ public class ColumnManagementOptions<J extends ColumnManagementOptions<J>>
     public J setSuppressCellClickSelection(@Nullable Boolean suppressCellClickSelection)
     {
         this.suppressCellClickSelection = suppressCellClickSelection;
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public J setSuppressMenuHide(@Nullable Boolean suppressMenuHide)
+    {
+        this.suppressMenuHide = suppressMenuHide;
         return (J) this;
     }
 }
