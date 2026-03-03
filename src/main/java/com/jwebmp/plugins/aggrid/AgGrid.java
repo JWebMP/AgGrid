@@ -3,7 +3,7 @@ package com.jwebmp.plugins.aggrid;
 import com.google.common.base.Strings;
 import com.guicedee.client.IGuiceContext;
 import com.guicedee.client.services.websocket.IGuicedWebSocket;
-import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
+import com.guicedee.modules.services.jsonrepresentation.IJsonRepresentation;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.angular.client.annotations.constructors.NgConstructorBody;
