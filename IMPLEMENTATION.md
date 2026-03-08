@@ -348,7 +348,7 @@ public class StatusBadgeRenderer extends DefaultCellRenderer<StatusBadgeRenderer
 <dependencies>
     <dependency>
         <groupId>com.jwebmp.core</groupId>
-        <artifactId>jwebmp-core</artifactId>
+        <artifactId>core</artifactId>
     </dependency>
     <dependency>
         <groupId>com.jwebmp.plugins</groupId>
@@ -356,7 +356,7 @@ public class StatusBadgeRenderer extends DefaultCellRenderer<StatusBadgeRenderer
     </dependency>
     <dependency>
         <groupId>com.jwebmp.core</groupId>
-        <artifactId>jwebmp-testlib</artifactId>
+        <artifactId>testlib</artifactId>
         <scope>test</scope>
     </dependency>
 </dependencies>
