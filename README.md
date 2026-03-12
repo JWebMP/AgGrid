@@ -1,30 +1,68 @@
-# JWebMP AgGrid Plugin
+# JWebMP AG Grid
 
-[![Build Status](https://github.com/JWebMP/JWebMP-AgGrid/actions/workflows/build.yml/badge.svg)](https://github.com/JWebMP/JWebMP-AgGrid/actions)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.jwebmp.plugins/aggrid/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.jwebmp.plugins/aggrid)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Java Version](https://img.shields.io/badge/Java-25%20LTS-brightgreen.svg)](https://www.oracle.com/java/)
+[![Maven Central](https://img.shields.io/maven-central/v/com.jwebmp.plugins/aggrid)](https://central.sonatype.com/artifact/com.jwebmp.plugins/aggrid)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)
 
-> **A comprehensive Java/JWebMP plugin for [AG Grid](https://www.ag-grid.com/) — a feature-rich data grid library supporting Enterprise features, real-time updates, and reactive patterns.**
+![Java 25+](https://img.shields.io/badge/Java-25%2B-green)
+![Modular](https://img.shields.io/badge/Modular-JPMS-green)
+![Angular](https://img.shields.io/badge/Angular-20-DD0031?logo=angular)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
 
----
+<!-- Tech icons row -->
+![AG Grid](https://img.shields.io/badge/AG_Grid-35.0.0-0084FF)
+![JWebMP](https://img.shields.io/badge/JWebMP-2.0-0A7)
 
-## 🎯 What is JWebMP AgGrid?
+Feature-rich data grid integration for JWebMP with Angular 20. Provides server-driven, type-safe Java API for AG Grid 35.0.0 with enterprise features, real-time updates, server-side row model, and reactive patterns.
 
-This plugin provides a **server-driven, type-safe, fluent API** for building reactive AG Grid data grids in Java-based applications using the [JWebMP](https://jwebmp.com/) framework.
+Built on [AG Grid 35.0.0](https://www.ag-grid.com/) · [Angular 20](https://angular.dev/) · [JWebMP Core](https://jwebmp.com/) · JPMS module `com.jwebmp.plugins.aggrid` · Java 25+
 
-### Key Features
+**Version: 35.0.0** — Complete AG Grid Community API with CRTP fluent builders and Angular integration.
 
-✅ **Server-Driven Grid Configuration** — Define grids entirely in Java with CRTP fluent API  
-✅ **Enterprise Features** — Server-Side Row Model, Pivoting, Row Grouping, Excel Export, Charts  
-✅ **Real-Time Updates** — WebSocket integration for live data streaming  
-✅ **Type-Safe** — Leverage Java's type system for column definitions and renderers  
-✅ **Reactive** — Built on Vert.x 5 and GuicedEE for non-blocking async operations  
-✅ **Angular Integration** — Auto-generated Angular components with proper change detection  
-✅ **Module-Based** — Opt-in enterprise features reduce bundle size  
-✅ **Testing** — JUnit 5 with >80% Jacoco coverage, SonarQube quality gates  
+## 📦 Installation
 
----
+```xml
+<dependency>
+  <groupId>com.jwebmp.plugins</groupId>
+  <artifactId>aggrid</artifactId>
+  <version>2.0.0-SNAPSHOT</version>
+</dependency>
+```
+
+<details>
+<summary>Gradle (Kotlin DSL)</summary>
+
+```kotlin
+implementation("com.jwebmp.plugins:aggrid:2.0.0-SNAPSHOT")
+```
+</details>
+
+### NPM Dependencies
+
+The plugin automatically includes AG Grid dependencies:
+
+```json
+{
+  "dependencies": {
+    "ag-grid-community": "^35.0.0",
+    "ag-grid-angular": "^35.0.0"
+  }
+}
+```
+
+## ✨ Features
+
+- **Server-Driven Configuration** — Define grids entirely in Java with CRTP fluent API
+- **Enterprise Features** — Server-Side Row Model, Row Grouping, Pivoting, Excel Export, Charts
+- **Real-Time Updates** — WebSocket integration for live data streaming
+- **Type-Safe Column Definitions** — Leverage Java's type system for column configuration
+- **Reactive Data Binding** — Built on Vert.x 5 for non-blocking async operations
+- **Angular 20 Integration** — Auto-generated Angular components with change detection
+- **Module Registry** — AllCommunityModule auto-registered via PageConfigurator
+- **Cell Renderers** — Custom cell rendering with Java-based renderer classes
+- **Event Handling** — Row selection, cell clicks, custom events with type-safe handlers
+- **Filtering & Sorting** — Client-side and server-side filtering, multi-column sorting
+- **Pagination** — Built-in pagination with configurable page sizes
+- **JPMS Modular** — Full Java Platform Module System support
 
 ## 📋 Quick Start
 
@@ -165,32 +203,15 @@ gridApi.createRangeChart(
 );
 ```
 
-See the [Enterprise Features Guide](./rules/generative/frontend/jwebmp/aggrid/enterprise-features.rules.md) for complete documentation.
-
 ---
 
 ## 📚 Documentation
 
 ### Core Resources
 
-| Resource | Purpose |
-|----------|---------|
-| **[PACT.md](./PACT.md)** | Product architecture & contract |
-| **[RULES.md](./RULES.md)** | Technology rules & standards |
-| **[GUIDES.md](./GUIDES.md)** | How-to guides for common tasks |
-| **[IMPLEMENTATION.md](./IMPLEMENTATION.md)** | Code structure & module layout |
-| **[GLOSSARY.md](./GLOSSARY.md)** | Terminology & LLM alignment |
-
-### Plugin Rules (In `rules/generative/frontend/jwebmp/aggrid/`)
-
-- **[README.md](./rules/generative/frontend/jwebmp/aggrid/README.md)** — Plugin rules index
-- **[grid-configuration.rules.md](./rules/generative/frontend/jwebmp/aggrid/grid-configuration.rules.md)** — CRTP fluent API, themes, selection
-- **[column-definitions.rules.md](./rules/generative/frontend/jwebmp/aggrid/column-definitions.rules.md)** — Column types, filtering, sorting
-- **[data-binding.rules.md](./rules/generative/frontend/jwebmp/aggrid/data-binding.rules.md)** — Server-side data, WebSocket integration
-- **[event-handling.rules.md](./rules/generative/frontend/jwebmp/aggrid/event-handling.rules.md)** — Row selection, cell clicks, custom events
-- **[enterprise-features.rules.md](./rules/generative/frontend/jwebmp/aggrid/enterprise-features.rules.md)** ⭐ — Complete v34.2.0 enterprise feature reference
-- **[testing-strategy.rules.md](./rules/generative/frontend/jwebmp/aggrid/testing-strategy.rules.md)** — JUnit 5, BDD patterns, coverage targets
-- **[QUICK_REFERENCE.md](./rules/generative/frontend/jwebmp/aggrid/QUICK_REFERENCE.md)** — Templates & checklists
+- **[AG Grid Docs](https://www.ag-grid.com/documentation/)** — Official AG Grid documentation
+- **[AG Grid Angular](https://www.ag-grid.com/angular-data-grid/)** — AG Grid Angular integration guide
+- **[JWebMP Home](https://jwebmp.com/)** — JWebMP framework documentation
 
 ---
 
@@ -199,7 +220,7 @@ See the [Enterprise Features Guide](./rules/generative/frontend/jwebmp/aggrid/en
 ### Technology Stack
 
 - **Backend**: Java 25 LTS, Maven, GuicedEE (IoC), Vert.x 5 (reactive), Hibernate (ORM)
-- **Frontend**: Angular 20, TypeScript, AG Grid v34.2.0+
+- **Frontend**: Angular 20, TypeScript, AG Grid v35.0.0+
 - **Integration**: JWebMP Page Configurators, ServiceLoader SPI
 - **Data**: Server-side row model, WebSocket real-time updates, transactions
 - **Testing**: JUnit 5, Jacoco (≥80% coverage), SonarQube
@@ -373,7 +394,7 @@ Contributions are welcome! Please follow these guidelines:
 - **Java**: Follow JWebMP conventions (CRTP fluent APIs, proper null safety with JSpecify)
 - **Tests**: JUnit 5, ≥80% coverage (Jacoco enforced)
 - **Formatting**: Maven Spotless plugin enforced
-- **Documentation**: Markdown, forward-only policy (see RULES.md)
+- **Documentation**: Update README for new features
 
 ### Reporting Issues
 
@@ -390,7 +411,7 @@ Please use [GitHub Issues](https://github.com/JWebMP/JWebMP-AgGrid/issues) with:
 | Aspect | Status |
 |--------|--------|
 | **Version** | 2.0.0-SNAPSHOT |
-| **AG Grid** | v34.2.0+ supported |
+| **AG Grid** | v35.0.0+ supported |
 | **Java** | 25 LTS (required) |
 | **Build** | ✅ Passing |
 | **Coverage** | ≥80% (Jacoco enforced) |
@@ -403,7 +424,6 @@ Please use [GitHub Issues](https://github.com/JWebMP/JWebMP-AgGrid/issues) with:
 
 - **GitHub Repository**: https://github.com/JWebMP/JWebMP-AgGrid
 - **Issue Tracker**: https://github.com/JWebMP/JWebMP-AgGrid/issues
-- **Release Notes**: [RELEASE_NOTES.md](RELEASE_NOTES.md)
 - **Maven Central**: https://mvnrepository.com/artifact/com.jwebmp.plugins/aggrid
 - **AG Grid Docs**: https://www.ag-grid.com/
 - **JWebMP Home**: https://jwebmp.com/

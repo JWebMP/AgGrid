@@ -18,13 +18,11 @@ This section documents the architecture, design patterns, and key flows of the J
 4. **Angular Module Integration**: Automatic `@NgImportReference` annotation processing bridges Java configuration to Angular module imports.
 5. **TDD-First Design**: Grid behavior, renderers, and data bindings are specified in code annotations and validated via Jacoco/SonarQube.
 
-## Key Artifacts
+## Key Resources
 
-- **[PACT.md](../PACT.md)** — Product and Architecture Contract (product intent, non-functional requirements)
-- **[RULES.md](../RULES.md)** — Stack-specific rules and constraints
-- **[GUIDES.md](../GUIDES.md)** — How to apply rules (concrete examples)
-- **[IMPLEMENTATION.md](../IMPLEMENTATION.md)** — Current module layout and code pointers
-- **[GLOSSARY.md](../GLOSSARY.md)** — Unified terminology (topic-first precedence)
+- **[AG Grid Documentation](https://www.ag-grid.com/documentation/)** — Official AG Grid documentation
+- **[JWebMP Home](https://jwebmp.com/)** — JWebMP framework documentation
+- **[Source Code](../../src/main/java/)** — Current implementation
 
 ---
 
@@ -78,4 +76,4 @@ This section documents the architecture, design patterns, and key flows of the J
 1. Review [C4 L1 (Context)](./c4-context.md) and [C4 L2 (Containers)](./c4-container.md)
 2. Deep-dive into [Component Architecture](./c4-component-aggrid.md) for domain details
 3. Study [Sequence Diagrams](./sequence-grid-initialization.md) for operational flows
-4. Cross-reference [IMPLEMENTATION.md](../IMPLEMENTATION.md) for current code layout
+4. Explore [Source Code](../../src/main/java/) for implementation details
