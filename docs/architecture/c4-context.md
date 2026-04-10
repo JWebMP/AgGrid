@@ -4,7 +4,7 @@ This diagram shows the AgGrid Plugin in the context of the broader JWebMP ecosys
 
 ```mermaid
 graph TB
-    Browser["🌐 Web Browser<br/>Angular 20 + AG Grid"]
+    Browser["🌐 Web Browser<br/>Angular 21 + AG Grid"]
     User["👤 End User"]
     
     JWebMPApp["JWebMP Host Application<br/>Backend Services"]
@@ -35,7 +35,7 @@ graph TB
 | Element | Role | Interaction |
 |---------|------|-------------|
 | **End User** | Interacts with grids in the browser | Selects rows, sorts, filters, paginates |
-| **Web Browser** | Angular 20 + AG Grid Community/Enterprise | Renders grid UI, handles user input, WebSocket messages |
+| **Web Browser** | Angular 21 + AG Grid Community/Enterprise | Renders grid UI, handles user input, WebSocket messages |
 | **JWebMP Host App** | Server-side Java application | Hosts AgGrid plugin, provides data, manages WebSocket receivers |
 | **AgGrid Plugin** | This library | Bridges Java grid configuration to Angular via annotations |
 | **GuicedEE Client** | Lightweight IoC container + WebSocket | Enables server-pushed grid updates, dependency injection |

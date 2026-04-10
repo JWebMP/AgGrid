@@ -61,7 +61,7 @@ This section documents the architecture, design patterns, and key flows of the J
 - JVM: Java 25 LTS (parent pom inheritance)
 - Build: Maven (flattened POMs via flatten-maven-plugin)
 - Testing: Jacoco code coverage, JWebMP test harness
-- Frontend build: Angular 20 + typescript transpilation (via JWebMP codegen)
+- Frontend build: Angular 21 + typescript transpilation (via JWebMP codegen)
 
 ### Production
 

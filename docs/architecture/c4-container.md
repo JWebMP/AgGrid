@@ -4,7 +4,7 @@ This diagram details the major containers and internal responsibilities within t
 
 ```mermaid
 graph TB
-    Browser["Browser Container<br/>Angular 20 App"]
+    Browser["Browser Container<br/>Angular 21 App"]
     ServerApp["JWebMP Host Container<br/>Java Backend"]
     
     subgraph "Browser - Client-Side"
@@ -147,7 +147,7 @@ protected static class AgGridFetchDataReceiver extends WebSocketAbstractCallRece
 
 | Layer | Depends On |
 |-------|-----------|
-| **Client** | AG Grid Angular (npm), Angular 20, RxJS (WebSocket subscriptions) |
+| **Client** | AG Grid Angular (npm), Angular 21, RxJS (WebSocket subscriptions) |
 | **AgGrid Plugin** | JWebMP Core, GuicedEE Client, Lombok (optional), JSpecify (nullness) |
 | **Host App** | AgGrid Plugin (Maven dependency), JWebMP BOM, GuicedEE StandaloneBOM |
 

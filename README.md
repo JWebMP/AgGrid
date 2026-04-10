@@ -12,9 +12,9 @@
 ![AG Grid](https://img.shields.io/badge/AG_Grid-35.0.0-0084FF)
 ![JWebMP](https://img.shields.io/badge/JWebMP-2.0-0A7)
 
-Feature-rich data grid integration for JWebMP with Angular 20. Provides server-driven, type-safe Java API for AG Grid 35.0.0 with enterprise features, real-time updates, server-side row model, and reactive patterns.
+Feature-rich data grid integration for JWebMP with Angular 21. Provides server-driven, type-safe Java API for AG Grid 35.0.0 with enterprise features, real-time updates, server-side row model, and reactive patterns.
 
-Built on [AG Grid 35.0.0](https://www.ag-grid.com/) · [Angular 20](https://angular.dev/) · [JWebMP Core](https://jwebmp.com/) · JPMS module `com.jwebmp.plugins.aggrid` · Java 25+
+Built on [AG Grid 35.0.0](https://www.ag-grid.com/) · [Angular 21](https://angular.dev/) · [JWebMP Core](https://jwebmp.com/) · JPMS module `com.jwebmp.plugins.aggrid` · Java 25+
 
 **Version: 35.0.0** — Complete AG Grid Community API with CRTP fluent builders and Angular integration.
 
@@ -24,7 +24,7 @@ Built on [AG Grid 35.0.0](https://www.ag-grid.com/) · [Angular 20](https://angu
 <dependency>
   <groupId>com.jwebmp.plugins</groupId>
   <artifactId>aggrid</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2.0.0-RC1</version>
 </dependency>
 ```
 
@@ -32,7 +32,7 @@ Built on [AG Grid 35.0.0](https://www.ag-grid.com/) · [Angular 20](https://angu
 <summary>Gradle (Kotlin DSL)</summary>
 
 ```kotlin
-implementation("com.jwebmp.plugins:aggrid:2.0.0-SNAPSHOT")
+implementation("com.jwebmp.plugins:aggrid:2.0.0-RC1")
 ```
 </details>
 
@@ -56,7 +56,7 @@ The plugin automatically includes AG Grid dependencies:
 - **Real-Time Updates** — WebSocket integration for live data streaming
 - **Type-Safe Column Definitions** — Leverage Java's type system for column configuration
 - **Reactive Data Binding** — Built on Vert.x 5 for non-blocking async operations
-- **Angular 20 Integration** — Auto-generated Angular components with change detection
+- **Angular 21 Integration** — Auto-generated Angular components with change detection
 - **Module Registry** — AllCommunityModule auto-registered via PageConfigurator
 - **Cell Renderers** — Custom cell rendering with Java-based renderer classes
 - **Event Handling** — Row selection, cell clicks, custom events with type-safe handlers
@@ -71,7 +71,7 @@ The plugin automatically includes AG Grid dependencies:
 - **Java 25 LTS** (required)
 - **Maven 3.8+**
 - **Node.js 18+** (for frontend builds)
-- **Angular 20+** (auto-integrated via JWebMP)
+- **Angular 21+** (auto-integrated via JWebMP)
 
 ### Installation
 
@@ -220,7 +220,7 @@ gridApi.createRangeChart(
 ### Technology Stack
 
 - **Backend**: Java 25 LTS, Maven, GuicedEE (IoC), Vert.x 5 (reactive), Hibernate (ORM)
-- **Frontend**: Angular 20, TypeScript, AG Grid v35.0.0+
+- **Frontend**: Angular 21, TypeScript, AG Grid v35.0.0+
 - **Integration**: JWebMP Page Configurators, ServiceLoader SPI
 - **Data**: Server-side row model, WebSocket real-time updates, transactions
 - **Testing**: JUnit 5, Jacoco (≥80% coverage), SonarQube
@@ -410,7 +410,7 @@ Please use [GitHub Issues](https://github.com/JWebMP/JWebMP-AgGrid/issues) with:
 
 | Aspect | Status |
 |--------|--------|
-| **Version** | 2.0.0-SNAPSHOT |
+| **Version** | 2.0.0-RC1 |
 | **AG Grid** | v35.0.0+ supported |
 | **Java** | 25 LTS (required) |
 | **Build** | ✅ Passing |
