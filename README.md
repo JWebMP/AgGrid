@@ -24,7 +24,7 @@ Built on [AG Grid 35.0.0](https://www.ag-grid.com/) · [Angular 21](https://angu
 <dependency>
   <groupId>com.jwebmp.plugins</groupId>
   <artifactId>aggrid</artifactId>
-  <version>2.0.0-RC1</version>
+  <version>2.0.0-RC2</version>
 </dependency>
 ```
 
@@ -32,7 +32,7 @@ Built on [AG Grid 35.0.0](https://www.ag-grid.com/) · [Angular 21](https://angu
 <summary>Gradle (Kotlin DSL)</summary>
 
 ```kotlin
-implementation("com.jwebmp.plugins:aggrid:2.0.0-RC1")
+implementation("com.jwebmp.plugins:aggrid:2.0.0-RC2")
 ```
 </details>
 
@@ -410,7 +410,7 @@ Please use [GitHub Issues](https://github.com/JWebMP/JWebMP-AgGrid/issues) with:
 
 | Aspect | Status |
 |--------|--------|
-| **Version** | 2.0.0-RC1 |
+| **Version** | 2.0.0-RC2 |
 | **AG Grid** | v35.0.0+ supported |
 | **Java** | 25 LTS (required) |
 | **Build** | ✅ Passing |
