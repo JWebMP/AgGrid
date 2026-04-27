@@ -24,7 +24,7 @@ Built on [AG Grid 35.0.0](https://www.ag-grid.com/) · [Angular 21](https://angu
 <dependency>
   <groupId>com.jwebmp.plugins</groupId>
   <artifactId>aggrid</artifactId>
-  <version>2.0.0-RC11</version>
+  <version>2.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -32,7 +32,7 @@ Built on [AG Grid 35.0.0](https://www.ag-grid.com/) · [Angular 21](https://angu
 <summary>Gradle (Kotlin DSL)</summary>
 
 ```kotlin
-implementation("com.jwebmp.plugins:aggrid:2.0.0-RC11")
+implementation("com.jwebmp.plugins:aggrid:2.0.0-SNAPSHOT")
 ```
 </details>
 
@@ -81,7 +81,7 @@ The plugin automatically includes AG Grid dependencies:
 <dependency>
     <groupId>com.jwebmp.plugins</groupId>
     <artifactId>aggrid</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -93,7 +93,7 @@ Or use the JWebMP BOM for version alignment:
         <dependency>
             <groupId>com.jwebmp</groupId>
             <artifactId>jwebmp-bom</artifactId>
-            <version>2.0.0</version>
+            <version>2.0.0-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -280,7 +280,7 @@ This repository uses GitHub Actions for continuous integration. Workflows includ
 
 ### Publish to Maven Central
 
-**Trigger**: Release tag (e.g., `v2.0.0`)  
+**Trigger**: Release tag (e.g., `v2.0.0-SNAPSHOT`)  
 **Actions**:
 - Maven clean package
 - GPG sign artifacts
@@ -410,7 +410,7 @@ Please use [GitHub Issues](https://github.com/JWebMP/JWebMP-AgGrid/issues) with:
 
 | Aspect | Status |
 |--------|--------|
-| **Version** | 2.0.0-RC11 |
+| **Version** | 2.0.0-SNAPSHOT |
 | **AG Grid** | v35.0.0+ supported |
 | **Java** | 25 LTS (required) |
 | **Build** | ✅ Passing |
