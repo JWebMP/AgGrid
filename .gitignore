@@ -20,3 +20,4 @@ Thumbs.db
 flatter.pom**/*.classpath
 logs/
 /.vscode/
+/dependency-reduced-pom.xml
