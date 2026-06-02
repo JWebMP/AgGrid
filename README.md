@@ -24,7 +24,7 @@ Built on [AG Grid 35.0.0](https://www.ag-grid.com/) · [Angular 21](https://angu
 <dependency>
   <groupId>com.jwebmp.plugins</groupId>
   <artifactId>aggrid</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2.0.3-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -81,7 +81,7 @@ The plugin automatically includes AG Grid dependencies:
 <dependency>
     <groupId>com.jwebmp.plugins</groupId>
     <artifactId>aggrid</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.3-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -93,7 +93,7 @@ Or use the JWebMP BOM for version alignment:
         <dependency>
             <groupId>com.jwebmp</groupId>
             <artifactId>jwebmp-bom</artifactId>
-            <version>2.0.0-SNAPSHOT</version>
+            <version>2.0.3-SNAPSHOT</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
