@@ -1968,7 +1968,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         try
         {
             // Defensive copy: return a new instance so callers cannot mutate internal state
-            com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            tools.jackson.databind.ObjectMapper mapper = new tools.jackson.databind.ObjectMapper();
             byte[] json = mapper.writeValueAsBytes(defaultColDef);
             Object copy = mapper.readValue(json, (Class<?>) defaultColDef.getClass());
             return (com.jwebmp.plugins.aggrid.options.AgGridColumnDef<?>) copy;
