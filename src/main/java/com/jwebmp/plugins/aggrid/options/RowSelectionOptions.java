@@ -3,7 +3,6 @@ package com.jwebmp.plugins.aggrid.options;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.plugins.aggrid.options.enums.CheckboxLocation;
 import com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode;
 
@@ -15,7 +14,7 @@ import com.jwebmp.plugins.aggrid.options.enums.RowSelectionMode;
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RowSelectionOptions<J extends RowSelectionOptions<J>> extends JavaScriptPart<J>
+public class RowSelectionOptions<J extends RowSelectionOptions<J>>
 {
     /**
      * The row selection mode (single or multiple)

@@ -162,23 +162,10 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     @JsonUnwrapped
     private GridStateOptions<?> gridState = new GridStateOptions<>();
     /**
-     * Cell selection mode (NEW v34.2.0).
-     * Determines whether cells or rows are selected.
-     */
-    @JsonProperty("cellSelection")
-    private @Nullable CellSelectionMode cellSelection;
-
-    /**
      * DOM layout type - normal, autoHeight, or print.
      */
     @JsonProperty("domLayout")
     private @Nullable DomLayoutType domLayout;
-
-    /**
-     * Edit mode type - api vs doubleClick.
-     */
-    @JsonProperty("editType")
-    private @Nullable EditType editType;
 
     // Getters
 
@@ -259,7 +246,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public @Nullable CellSelectionMode getCellSelection()
     {
-        return cellSelection;
+        return selectionExpanded == null ? null : CellSelectionMode.fromString(selectionExpanded.getCellSelection());
     }
 
     public @Nullable DomLayoutType getDomLayout()
@@ -269,7 +256,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
 
     public @Nullable EditType getEditType()
     {
-        return editType;
+        return editing == null ? null : EditType.fromString(editing.getEditType());
     }
 
     // Setters with CRTP return type
@@ -382,7 +369,6 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     @SuppressWarnings("unchecked")
     public J setCellSelection(@Nullable CellSelectionMode cellSelection)
     {
-        this.cellSelection = cellSelection;
         if (selectionExpanded != null)
         {
             selectionExpanded.setCellSelection(cellSelection != null ? cellSelection.toString() : null);
@@ -400,7 +386,6 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     @SuppressWarnings("unchecked")
     public J setEditType(@Nullable EditType editType)
     {
-        this.editType = editType;
         if (editing != null)
         {
             editing.setEditType(editType != null ? editType.toString() : null);
@@ -1648,23 +1633,6 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
         return (J) this;
     }
 
-    /**
-     * Set the advanced filter builder params.
-     */
-    public @Nullable String getAdvancedFilterBuilderParams()
-    {
-        return advancedFilter.getAdvancedFilterBuilderParams();
-    }
-
-    /**
-     * Set the advanced filter builder params.
-     */
-    @SuppressWarnings("unchecked")
-    public J setAdvancedFilterBuilderParams(@Nullable String advancedFilterBuilderParams)
-    {
-        this.advancedFilter.setAdvancedFilterBuilderParams(advancedFilterBuilderParams);
-        return (J) this;
-    }
 
     /**
      * Set the advanced filter parent element.

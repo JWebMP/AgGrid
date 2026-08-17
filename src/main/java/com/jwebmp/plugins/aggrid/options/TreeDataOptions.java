@@ -3,7 +3,6 @@ package com.jwebmp.plugins.aggrid.options;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
@@ -16,7 +15,7 @@ import org.jspecify.annotations.Nullable;
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TreeDataOptions<J extends TreeDataOptions<J>> extends JavaScriptPart<J>
+public class TreeDataOptions<J extends TreeDataOptions<J>>
 {
     /**
      * Set to true to enable Tree Data.

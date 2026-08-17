@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRawValue;
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * Row Pivoting and Cross-Tabulation Configuration Options for AG Grid
@@ -17,7 +16,7 @@ import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RowPivotingOptions<J extends RowPivotingOptions<J>> extends JavaScriptPart<J>
+public class RowPivotingOptions<J extends RowPivotingOptions<J>>
 {
     // ===== [1] PIVOT MODE & PANEL =====
 
