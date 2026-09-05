@@ -123,10 +123,20 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
 	
 	  // Adjust column sizes to fit the grid width
 	  onSizeColumnsToFit(): void {
-	    if (this.gridApi) {
+	    const api = this.gridApi;
+	    if (api && !api.isDestroyed?.()) {
 	      // Defer to avoid AG Grid error #252 (calling API during render cycle)
-	      setTimeout(() => this.gridApi?.sizeColumnsToFit(), 0);
+	      setTimeout(() => {
+	        if (this.gridApi === api && !api.isDestroyed?.()) {
+	          api.sizeColumnsToFit();
+	        }
+	      }, 0);
 	    }
+	  }
+
+	  // Do not retain an API after Angular tears down the grid.
+	  onGridPreDestroyed(): void {
+	    this.gridApi = undefined;
 	  }
 	
 	  // Fit columns when first data is rendered
@@ -219,6 +229,7 @@ public abstract class AgGrid<J extends AgGrid<J>> extends DivSimple<J> implement
 				addAttribute("(gridReady)", "onGridReady($event)");
 				addAttribute("(firstDataRendered)", "onFirstDataRendered()");
 				addAttribute("(gridSizeChanged)", "onGridSizeChanged()");
+				addAttribute("(gridPreDestroyed)", "onGridPreDestroyed()");
 				
 				options = new AgGridOptions<>();
 		}
