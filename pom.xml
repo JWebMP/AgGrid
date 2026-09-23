@@ -18,10 +18,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.jwebmp</groupId>
-            <artifactId>jwebmp-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.jwebmp.plugins</groupId>
             <artifactId>angular</artifactId>
         </dependency>
