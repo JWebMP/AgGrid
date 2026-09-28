@@ -428,7 +428,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Convenience method to configure row grouping in a fluent style.
      * Returns the row grouping options object for chaining.
-     * NEW Phase C: Row Grouping & Aggregation support.
+     * NEW Phase C: Row Grouping &amp; Aggregation support.
      */
     @SuppressWarnings("unchecked")
     public <G extends RowGroupingOptions<G>> G configureRowGrouping()
@@ -439,7 +439,7 @@ public class AgGridOptions<J extends AgGridOptions<J>> extends JavaScriptPart<J>
     /**
      * Convenience method to configure row pivoting in a fluent style.
      * Returns the row pivoting options object for chaining.
-     * NEW Phase C: Row Pivoting & Cross-tabulation support.
+     * NEW Phase C: Row Pivoting &amp; Cross-tabulation support.
      */
     @SuppressWarnings("unchecked")
     public <P extends RowPivotingOptions<P>> P configureRowPivoting()

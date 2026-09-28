@@ -2249,7 +2249,7 @@ public class AgGridOptionsLegacy<J extends AgGridOptionsLegacy<J>> extends JavaS
     }
 
     /**
-     * Convenience overload accepting a List<Integer> of page sizes.
+     * Convenience overload accepting a {@code List<Integer>} of page sizes.
      */
     public @org.jspecify.annotations.NonNull J setPaginationPageSizeSelector(java.util.List<Integer> values)
     {
@@ -2955,7 +2955,7 @@ public class AgGridOptionsLegacy<J extends AgGridOptionsLegacy<J>> extends JavaS
     public String getIsRowMaster() {return isRowMaster;}
 
     /**
-     * Set raw JS for isRowMaster, e.g., "params => params.data && params.data.master"
+     * Set raw JS for isRowMaster, e.g., {@code params => params.data && params.data.master}
      */
     public @org.jspecify.annotations.NonNull J setIsRowMasterRaw(String rawJs)
     {
@@ -5147,7 +5147,7 @@ public class AgGridOptionsLegacy<J extends AgGridOptionsLegacy<J>> extends JavaS
     // Icon customization: icon set selection
     /**
      * Icons to use inside the grid instead of the grid's default icons.
-     * Accepts either a Map<String, Object> where values are strings (icon names/svg) or functions,
+     * Accepts either a {@code Map<String, Object>} where values are strings (icon names/svg) or functions,
      * or a raw JavaScript object literal via {@link #setIconsRaw(String)}.
      */
     @JsonProperty("icons")

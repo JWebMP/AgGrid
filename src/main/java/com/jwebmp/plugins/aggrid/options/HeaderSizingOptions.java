@@ -7,7 +7,7 @@ import com.jwebmp.plugins.aggrid.options.enums.AutoSizeStrategy;
 import org.jspecify.annotations.Nullable;
 
 /**
- * AG Grid Header & Sizing Options.
+ * AG Grid Header &amp; Sizing Options.
  * Configures header heights, row heights, and auto-sizing behavior.
  *
  * @author DevSuite
